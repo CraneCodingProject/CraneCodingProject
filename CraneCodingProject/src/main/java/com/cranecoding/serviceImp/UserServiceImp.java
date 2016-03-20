@@ -1,5 +1,8 @@
 package com.cranecoding.serviceImp;
 
-public class UserServiceImp {
+import com.cranecoding.service.UserService;
+
+public class UserServiceImp implements UserService {
+	
 
 }
