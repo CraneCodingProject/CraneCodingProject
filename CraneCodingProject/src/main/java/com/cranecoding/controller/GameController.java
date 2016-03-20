@@ -1,5 +1,29 @@
 package com.cranecoding.controller;
 
-public class GameController {
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cranecoding.dto.calculation.CalculationDTO;
+import com.cranecoding.model.calculation;
+import com.cranecoding.service.GameService;
+
+@Controller
+public class GameController  {
+	@Autowired
+	private GameService gameService;
+	
+	@RequestMapping(value = "api/exercise/getallexercises", method = RequestMethod.GET)
+	public @ResponseBody List<CalculationDTO> getAllExercise(HttpServletRequest request) {
+		return gameService.getAllCaculation();
+	}
+
 
 }

@@ -10,12 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="score")
-@NamedQuery(name="Score.findAll", query="SELECT s FROM Score s")
-public class Score implements Serializable {
+@NamedQuery(name="score.findAll", query="SELECT s FROM score s")
+public class score implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private ScorePK id;
+	private scorePK id;
 
 	@Lob
 	private String block;
@@ -26,24 +26,24 @@ public class Score implements Serializable {
 
 	private int time;
 
-	//bi-directional many-to-one association to Calculation
+	//bi-directional many-to-one association to calculation
 	@ManyToOne
-	@JoinColumn(name="Calculation_idCalculation", nullable=false, insertable=false, updatable=false)
-	private Calculation calculation;
+	@JoinColumn(name="calculation_idcalculation", nullable=false, insertable=false, updatable=false)
+	private calculation calculation;
 
-	//bi-directional many-to-one association to User
+	//bi-directional many-to-one association to user
 	@ManyToOne
-	@JoinColumn(name="User_Username", nullable=false, insertable=false, updatable=false)
-	private User user;
+	@JoinColumn(name="user_username", nullable=false, insertable=false, updatable=false)
+	private user user;
 
-	public Score() {
+	public score() {
 	}
 
-	public ScorePK getId() {
+	public scorePK getId() {
 		return this.id;
 	}
 
-	public void setId(ScorePK id) {
+	public void setId(scorePK id) {
 		this.id = id;
 	}
 
@@ -79,19 +79,19 @@ public class Score implements Serializable {
 		this.time = time;
 	}
 
-	public Calculation getCalculation() {
+	public calculation getCalculation() {
 		return this.calculation;
 	}
 
-	public void setCalculation(Calculation calculation) {
+	public void setCalculation(calculation calculation) {
 		this.calculation = calculation;
 	}
 
-	public User getUser() {
+	public user getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(user user) {
 		this.user = user;
 	}
 

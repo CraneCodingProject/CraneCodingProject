@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="user")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User implements Serializable {
+@NamedQuery(name="user.findAll", query="SELECT u FROM user u")
+public class user implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,9 +23,9 @@ public class User implements Serializable {
 	private String email;
 
 	@Column(length=50)
-	private String facebookID;
+	private String facebookid;
 
-	private int fakeMoney;
+	private int fakemoney;
 
 	@Column(length=30)
 	private String firstname;
@@ -36,11 +36,11 @@ public class User implements Serializable {
 	@Column(length=45)
 	private String password;
 
-	//bi-directional many-to-one association to Score
+	//bi-directional many-to-one association to score
 	@OneToMany(mappedBy="user")
-	private List<Score> scores;
+	private List<score> scores;
 
-	public User() {
+	public user() {
 	}
 
 	public String getUsername() {
@@ -59,20 +59,20 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getFacebookID() {
-		return this.facebookID;
+	public String getFacebookid() {
+		return this.facebookid;
 	}
 
-	public void setFacebookID(String facebookID) {
-		this.facebookID = facebookID;
+	public void setFacebookid(String facebookid) {
+		this.facebookid = facebookid;
 	}
 
-	public int getFakeMoney() {
-		return this.fakeMoney;
+	public int getFakemoney() {
+		return this.fakemoney;
 	}
 
-	public void setFakeMoney(int fakeMoney) {
-		this.fakeMoney = fakeMoney;
+	public void setFakemoney(int fakemoney) {
+		this.fakemoney = fakemoney;
 	}
 
 	public String getFirstname() {
@@ -99,22 +99,22 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public List<Score> getScores() {
+	public List<score> getScores() {
 		return this.scores;
 	}
 
-	public void setScores(List<Score> scores) {
+	public void setScores(List<score> scores) {
 		this.scores = scores;
 	}
 
-	public Score addScore(Score score) {
+	public score addScore(score score) {
 		getScores().add(score);
 		score.setUser(this);
 
 		return score;
 	}
 
-	public Score removeScore(Score score) {
+	public score removeScore(score score) {
 		getScores().remove(score);
 		score.setUser(null);
 
