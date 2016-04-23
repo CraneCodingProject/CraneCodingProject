@@ -10,31 +10,30 @@ import com.cranecoding.dto.exercise.ExerciseDAO;
 import com.cranecoding.dto.exercise.ExerciseDTO;
 import com.cranecoding.model.Exercise;
 import com.cranecoding.service.GameService;
+
 @Service
 public class GameServiceImp implements GameService {
 
 	@Autowired
-	private ExerciseDAO exerciseDao;
+	ExerciseDAO exerciseDAO;
 
 	@Override
-	public List<ExerciseDTO> getAllExercise() {
-		List<ExerciseDTO> exerciseDTOs = new ArrayList<>();
-		for (Exercise exercise : exerciseDao.getAllExercise() ){
-			exerciseDTOs.add(converToDTO(exercise));
+	public List<ExerciseDTO> getAllExercise(int userId) {
+		List<ExerciseDTO> listExerciseDTOs = new ArrayList<>();
+		for (Exercise exercise : exerciseDAO.getAllExerciseByUserName(userId)) {
+			listExerciseDTOs.add(convertToExerciseDTO(exercise));
 		}
-		return  exerciseDTOs;
+		return listExerciseDTOs;
 	}
 
 	@Override
-	public ExerciseDTO getExerciseById(int id) {
-		return converToDTO(exerciseDao.getExerciseById(id));
-	}
-	
-	private ExerciseDTO converToDTO(Exercise exercise){
-		ExerciseDTO caculationDTO = new ExerciseDTO(exercise.getExerciseid(),exercise.getExercisename(),exercise.getPseudocode(),exercise.getExercisecontent());
-		
-		return caculationDTO;
-		
+	public ExerciseDTO getExerciseById(int exerciseid) {
+		return convertToExerciseDTO(exerciseDAO.getExerciseById(exerciseid));
 	}
 
+	private ExerciseDTO convertToExerciseDTO(Exercise exercise) {
+		ExerciseDTO exerciseDto = new ExerciseDTO(exercise.getExerciseid(), exercise.getExercisename(),
+				exercise.getExercisecontent());
+		return exerciseDto;
+	}
 }

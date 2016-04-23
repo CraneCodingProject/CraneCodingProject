@@ -12,8 +12,8 @@ import com.cranecoding.model.Exercise;
 
 public interface ExerciseDAO extends CrudRepository<Exercise, Integer>  {
 	
-	@Query (value = "select * from exercise", nativeQuery = true)
-	List<Exercise> getAllExercise();
+	@Query (value = "select * from exercise where exerciseid IN (select exercise_exerciseid from score where user_userid = :userId);", nativeQuery = true)
+	List<Exercise> getAllExerciseByUserName(@Param("userId") int userId);
 	
 	@Query(value ="select * from exercise where exerciseid = :idExercise", nativeQuery = true)
 	Exercise getExerciseById(@Param("idExercise") int idExercise);

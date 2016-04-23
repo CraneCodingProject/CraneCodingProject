@@ -3,15 +3,13 @@ package com.cranecoding.dto.exercise;
 public class ExerciseDTO {
 	private int idExercise;
 	private String exerciseName;
-	private String pseudocode;
-	private String question;
+	private String exerciseContent;
 
-	public ExerciseDTO(int idExcercise, String exerciseName, String pseudocode, String question) {
+	public ExerciseDTO(int idExcercise, String exerciseName, String exerciseContent) {
 		super();
 		this.idExercise = idExcercise;
 		this.exerciseName = exerciseName;
-		this.pseudocode = pseudocode;
-		this.question = question;
+		this.exerciseContent = exerciseContent;
 	}
 
 	public int getIdExercise() {
@@ -30,19 +28,12 @@ public class ExerciseDTO {
 		this.exerciseName = exerciseName;
 	}
 
-	public String getPseudocode() {
-		return pseudocode;
+	public String getExerciseContent() {
+		return exerciseContent;
 	}
 
-	public void setPseudocode(String pseudocode) {
-		this.pseudocode = pseudocode;
+	public void setExerciseContent(String exerciseContent) {
+		this.exerciseContent = exerciseContent;
 	}
 
-	public String getQuestion() {
-		return question;
-	}
-
-	public void setQuestion(String question) {
-		this.question = question;
-	}
 }
