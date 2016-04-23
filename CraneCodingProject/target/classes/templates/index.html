@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html ng-app="craneCodding" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Capstone</title>
+    <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />-->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="http://blackrockdigital.github.io/startbootstrap-sb-admin/css/sb-admin.css" />-->
+    <link th:href="@{/css/sb-admin.css}" rel="stylesheet" />
+    <link th:href="@{/css/application.css}" rel="stylesheet" />
+    <link th:href="@{/css/custom.css}" rel="stylesheet" />
+    <link th:href="@{/css/font-awesome-4.5.0/css/font-awesome.min.css}" rel="stylesheet" />
+    <style>
+        .btn{
+            background-color:#226968;
+            color:white;
+            padding: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            vertical-align: middle;
+            text-align:center;
+            min-width:7vw;
+            box-shadow: none;
+            border:0px;
+            border-radius:0px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline:none;
+        }
+        .btn:hover{
+            background-color:#31908f;
+            color:white;
+            border:0px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline:none;
+            border-radius:0px;
+        }
+        .btn:focus{
+            background-color:#226968;
+            color:white;
+            border:0px;
+            border-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline:none;
+            border-radius:0px;
+        }
+        .btn-outline:hover{
+            border-bottom:2px solid #fff;
+        }
+        button#btnTest {
+            min-width: auto;
+            border: 0px;
+            height: 28px;
+            background-color:#D05E5E;
+            color:white;
+        }
+        .btn:hover {
+            background-color: #31908f;
+            color: white;
+        }
+        .beginExeciseBtn{
+            background-color:#d05e5e;
+            min-width: 9vw;
+            min-height: 3vw;
+        }
+        .beginExeciseBtn:hover{
+            background-color:#e46262;
+            min-width: 9vw;
+            min-height: 3vw;
+
+        }
+        #btnSubmit{
+            background-color:#D05E5E;
+        }
+        #btnSubmit:hover{
+            background-color:#e46262;
+        }
+        a.list-group-item.ng-binding.chosenExercise {
+            border-left: 3px solid #AFCCDE;
+            border-radius: 0px;
+        }
+        .popover{
+            max-width:160px;
+        }
+        .classAddCaseInSwitchCommand{
+            color:#fff;
+        }
+        .classAddCaseInSwitchCommand:hover{
+            color:#fff;
+            border-bottom:1px solid #fff;
+        }
+    </style>
+</head>
+<body ng-controller="homePageController as homePagecontroller">
+    <div id="getFrame">
+        <iframe id="result"></iframe>
+    </div>
+    <div class="modal fade" id="testModal" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
+                <h4 class="modal-title">Test</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="text-align:center">
+                        <p>Please enter input here:</p>
+                        <div class="input-group">
+  <!--id="inputParameter"--><input type="number" ng-model="inputParameterToTest" class="form-control" style="height: 30px;" placeholder="Ex: number,array,string..." />
+                            <span class="input-group-btn">
+            <!--id="btnTest"--><button class="btn btn-secondary" type="button" ng-click="testCodeBeforeSubmit(inputParameterToTest)" style="max-width: 0px;">
+                                   <i class="fa fa-arrow-right"></i> GO!
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 popupResults">
+                        <p>Your input's result:</p>
+<!--id="actResult"-->       <h2 >{{actuallyResult}}</h2>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 popupResults">
+                        <p>Expect results:</p>
+                        <h2>{{expectResult}}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="submitModal" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>-->
+                <span style="display:inline-flex;">
+                    <h2 class="modal-title" style="padding-right:10px;">Test</h2>
+                    <!--<button type="button" class="btn btn-default" id="btnRun">Submit<i style="padding-left:5px;" class="fa fa-play"></i></button>-->
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Input</th>
+                                <th>Your results</th>
+                                <th>Expect results</th>
+                                <th>Result</th>
+                                <!--<th>Time Performance</th>-->
+                            </tr>
+                        </thead>
+                        <tbody id="testCaseSubmit"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="validateChangeExerciseModel" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
+                <p class="modal-title" style="padding-right:10px;">validateChangeExerciseModel</p>
+            </div>
+            <div class="modal-body" align="center" style="padding-top:2.5vw;">
+                <button data-dismiss="modal" class="btn" style="min-width: 9vw;min-height: 3vw;">Cancle</button>
+                <button data-dismiss="modal" ng-click="directToAnotherExercise(exerciseIdDirect)" class="beginExeciseBtn btn">Yes!</button>
+                
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="startModal" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>-->
+                <p class="modal-title" style="padding-right:10px;">ABC-XYZ</p>
+            </div>
+            <div class="modal-body" align="center" style="padding-top:2.5vw;">
+                <button data-dismiss="modal" ng-click="startRunTime()" id="starttheexercise" class="beginExeciseBtn btn">Start</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="validateGoToHomePageModal" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>-->
+                <p class="modal-title" style="padding-right:10px;">Go to home page</p>
+            </div>
+            <div class="modal-body" align="center" style="padding-top:2.5vw;">
+                <button data-dismiss="modal" class="btn" style="min-width: 9vw;min-height: 3vw;">Cancle</button>
+                <button data-dismiss="modal" style="min-width: 9vw;min-height: 3vw;" ng-click="gotoHomePage()" class="beginExeciseBtn btn">Yes</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="validateGoBack" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>-->
+                <p class="modal-title" style="padding-right:10px;">Go back</p>
+            </div>
+            <div class="modal-body" align="center" style="padding-top:2.5vw;">
+                <button data-dismiss="modal" class="btn" style="min-width: 9vw;min-height: 3vw;">Cancle</button>
+                <button data-dismiss="modal" style="min-width: 9vw;min-height: 3vw;" class="beginExeciseBtn btn">Yes</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="validateSubmitModal" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>-->
+                <p class="modal-title" style="padding-right:10px;">Submit</p>
+            </div>
+            <div class="modal-body" align="center" style="padding-top:2.5vw;">
+                <button data-dismiss="modal" class="btn" style="min-width: 9vw;min-height: 3vw;">Cancle</button>
+                <button data-dismiss="modal" data-toggle="modal" data-target="#submitModal" style="min-width: 9vw;min-height: 3vw;" class="beginExeciseBtn btn" ng-click="submitCODE(homePagecontroller.transferData.NameExercise_dataTransfer.exerciseId)">Yes</button>
+            </div>
+        </div>
+    </div>
+    <div id="popover_content_wrapper" style="display: none;">
+        <div class="list-group" style="margin-bottom:0px;overflow:hidden;">
+            
+            <a href style="color:#354551;padding: 2px;">
+                <i class="fa fa-comment fa-fw"></i> New Comment
+            </a>
+            <a href style="color:#354551;padding: 2px;">
+                <i class="fa fa-comment fa-fw"></i> New Comment
+            </a>
+            <a href style="color:#354551;padding: 2px;">
+                <i class="fa fa-comment fa-fw"></i> New Comment
+            </a>
+        </div>
+    </div>
+    <div class="modal fade" id="rulesModal" role="dialog">
+        <rules-modal></rules-modal>
+    </div>
+    <div id="wrapper">
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <div id="link_craneCodingHomepage" class="nav">
+                <a class="navbar-brand" data-toggle="modal" data-target="#validateGoToHomePageModal" href>
+                    <span>
+                        <img src="src/img/cubeit-squarelogo-1448960418863.png" style="max-width:20%;" />{Crane coding}
+                    </span><!--<h1 class="font-home-exercise">Home</h1>-->
+                </a>
+            </div>
+            <div class="lstExercise nav navbar-nav side-nav">
+                <ul class="nav in">
+                    <li ng-repeat="exercise in lstExercises">
+                        <a  ng-class="{chosenExercise : $index == chosenExerciseNumber}" ng-click="openValidateDirective(exercise.exerciseId,$index)" data-toggle="modal" data-target="#validateChangeExerciseModel" class="list-group-item">
+                            {{exercise.calculationname}}
+                            <!--<i style="float:right" class="fa fa-fw fa-dashboard" ng-class="{iconClass : $index==chosenExerciseNumber}">
+                            </i>-->
+                        </a>
+                    </li>
+                </ul>
+                <!--<a href="#" ng-repeat="exercise in lstExercises" ng-click="openValidateDirective(exercise.userId)" data-toggle="modal" data-target="#validateChangeExerciseModel" class="list-group-item"><i class="fa fa-fw fa-dashboard"></i> {{exercise.userName}}<p>{{exerciseId}}</p></a>-->
+            </div>
+        </div>
+        <!-- diretive -> route  -->
+        <div class="row">
+            <!--<exercise-info info="homePagecontroller"></exercise-info>-->
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <!--<div class="col-md-9 col-sm-9 col-xs-9">
+                    <nav class="navbar">
+                        <div class="navbar-header">
+                            <h1 class="font-home-exercise">/*dataDisplay*/</h1>
+                        </div>
+                        <span class="nav navbar-right top-nav" id="time"> {{ homePagecontroller.timer.time | date:'mm:ss:sss'}}</span>
+                    </nav>
+                </div>-->
+                <exercise-info info="homePagecontroller"></exercise-info>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <nav class="navbar">
+                        <span class="navbar-right">
+                            <!--<span class="dropdown">
+                                <a href="#"><i class="fa fa-envelope"></i></a>
+                            </span>
+                            <span class="dropdown">
+                                <a href="#"><i class="fa fa-bell"></i></a>
+                            </span>
+                            <span class="dropdown">
+                                <a href="#"><i class="fa fa-user"></i></a>
+                            </span>-->
+                            <a href="#" data-toggle="popover" data-placement="left"  class="navbar-brand">
+                                <span class="thumb-sm avatar pull-left">
+                                    <img src="src/img/a0.png" />
+                                    <span>Thanh Phat</span>
+                                </span>
+                            </a>
+                        </span>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+                <div class="alert-info">
+                    <div ng-view></div>
+                </div>
+                <!--<p style="color:#fff;">Is Form Dirty?: {{demoForm.$dirty}}</p>-->
+                <form id="defaultForm" name="demoForm" novalidate="novalidate" unsaved-warning-form>
+                    <input id="testFormRequire" type="text" name="name" ng-model="nbame" resettable style="display:none;">
+                    <ol id="dropArea" class="vertical"></ol>
+
+                    <div class="panel">
+                        <a href class="navbar-brand" data-toggle="modal" data-target="#rulesModal" style="background-color:transparent;">
+                            <i class="fa fa-balance-scale" style="padding-right:10px"></i>Rules
+                        </a>
+                        <div class="panel-body" style="float: right;">
+                            <p>
+                                <button data-toggle="modal" data-target="#testModal" class="btn" type="button">
+                                    <i class="fa fa-check-square-o" style="padding-right:10px"></i>Test
+                                </button>
+                                <button id="btnSubmit" data-toggle="modal" data-target="#validateSubmitModal" class="btn"  type="button" onclick="getElementById('testCaseSubmit').innerHTML = ''">
+                                    <i class="fa fa-terminal" style="padding-right:10px"></i> Run
+                                </button>
+                                
+                            </p>
+                        </div>
+                    </div>
+                </form>
+                <!--<form id="defaultForm" novalidate="novalidate" >
+                    <ol id="dropArea" class="vertical"></ol>
+                </form>-->
+                <!--<div class="panel">
+                    <div class="panel-body">
+                        <p>
+                            <button data-toggle="modal" data-target="#validateSubmitModal" class="btn" type="button" onclick="getElementById('testCaseSubmit').innerHTML = ''">Run</button>
+                            <button data-toggle="modal" data-target="#testModal" class="btn" type="button">Test</button>
+                        </p>
+                    </div>
+                </div>-->
+            </div>
+            <!--<div ng-view></div>-->
+            <div id="lstCommandBlock" class="col-md-3 col-sm-3 col-xs-3">
+                <ol id="dragArea" class="vertical">
+                    <li class="topdown whileClass" name="while" data-command="while" data-pass="false" style="">
+                        <div class="alert">
+                            while
+                            <input data-pass="false" type="text" style="width:60px">
+                        </div>
+                        <ol class="while-ol"></ol>
+                    </li>
+                    <li class="topdown var" data-pass="false" name="var" data-command="var" style="">
+                        <div class="alert">
+                            var
+                            <input data-pass="false" type="text" style="width:30px" />;
+                        </div>
+                    </li>
+                    <li class="topdown int" data-pass="false" name="int" data-command="var" style="">
+                        <div class="alert">
+                            int
+                            <input data-pass="false" type="text" style="width:30px">
+                            =
+                            <input type="number" class="validate" data-pass="false" style="width: 60px" name="intInput" />;
+                        </div>
+                    </li>
+                    <li class="topdown double" data-pass="false" name="double" data-command="var" style="">
+                        <div class="alert">
+                            double
+                            <input data-pass="false" type="text" style="width:30px">
+                            =
+                            <input type="number" class="validate" name="doubleInput" data-pass="false" style="width:60px" />;
+                        </div>
+                    </li>
+                    <li class="topdown string" data-pass="false" name="string" data-command="var" style="">
+                        <div class="alert">
+                            string
+                            <input data-pass="false" type="text" style="width:30px">
+                            = "
+                            <input type="text" name="stringInput" data-pass="false" style="width:60px" />";
+                        </div>
+                    </li>
+                    <li class="topdown array" data-pass="false" name="array" data-command="var" style="">
+                        <div class="alert">
+                            array
+                            <input data-pass="false" type="text" style="width:30px">
+                            = [
+                            <input type="text" name="arrayInput" data-pass="false" type="text" style="width:60px"> ];
+                        </div>
+                    </li>
+                    <li class="topdown if" data-pass="false" name="if" data-command="if" style="">
+                        <div class="alert">
+                            if(
+                            <input data-pass="false" type="text" style="width:30px"> )
+                        </div>
+                        <ol class="if-ol"></ol>
+                    </li>
+                    <li class="topdown" data-pass="false" name="gan" style="">
+                        <div class="alert">
+                            Gan
+                            <input data-pass="false" type="text" style="width:30px">
+                            =
+                            <input data-pass="false" type="text" style="width:30px">;
+                        </div>
+                    </li>
+                    <li class="topdown" data-pass="false" data-command="return" name="return" style="">
+                        <div class="alert">
+                            return
+                            <input data-pass="false" type="text" style="width:30px">
+                        </div>
+                    </li>
+                    <li class="topdown forClass" id="for-command" data-pass="false" data-command="for" name="for" data-droptime="" style="">
+                        <div class="alert">
+                            for (
+                            <input class="for-input" data-pass="false" type="text" style="width:30px">;
+                            <input class="for-input" data-pass="false" type="text" style="width:30px">;
+                            <input class="for-input" data-pass="false" type="text" style="width:30px">)
+                        </div>
+                        <ol class="for-ol"></ol>
+                    </li>
+                    <li class="topdown elseClass" data-pass="false" data-command="else" name="else">
+                        <div class="alert">
+                            else
+                            <ol class="else-ol"></ol>
+                        </div>
+                    </li>
+                    <li class="alert topdown switchcase" data-droptime="" data-pass="false" data-command="switchcase" name="switchcase">
+                        <p>
+                            switch (
+                            <input class="switchInput" type="text" /> )
+                            {
+                            <ul id="addmorecase" class="container-case-ul trunggian">
+                                <li class="in-switch caseClass" data-command="case" name='case' data-pass="false">
+                                    case '<input data-pass="false" type="text" style="width:30px"></input>' :
+                                    <ol class="case-ol"></ol>
+                                </li>
+                                <li class="in-switch defaultClass" data-command="default" name='default' data-pass="false">
+                                    default '<input data-pass="false" type="text" style="width:30px"></input>' :
+                                    <ol class="default-ol"></ol>
+                                </li>
+                            </ul>
+                            <a  id="btnAddCaseInSwitch" type="button" onclick="btnEventAddMoreCaseInSwitchCase(id)" class="classAddCaseInSwitchCommand"><i class="fa fa-plus-square"></i></a>
+                        </p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <script src="/JS/LIB/application.js"></script>
+    <script src="/JS/LIB/bootstrap.min.js"></script>
+    <script src="/JS/validateInputCommand.js"></script>
+    <script type="text/javascript">
+        var minutes = 0;
+        var seconds = -1;
+        var runTime;
+        //OnLoad
+        $(document).ready(function () {
+            //Modal
+            $('#testModal').hide();
+            $('div#submitModal').hide();
+            $('#validateChangeExerciseModel').hide();
+            $('#validateGoToHomePageModal').hide();
+            $('#validateGoBack').hide();
+            $('#startModal').hide();
+            $('#validateSubmitModal').hide();
+            $('#dropArea').empty();
+            $('#showCodeModal').hide();
+            $('#rulesModal').hide();
+            //Popover
+            $('[data-toggle="popover"]').popover({
+                html: true,
+                content: function () {
+                    return $('#popover_content_wrapper').html();
+                }
+
+            });
+            //set height : 203px
+            var h = $(window).height();
+            $('.row').height(h + 'px');
+            $('#dragArea').height(h - 55 + 'px');
+            if (h * 0.67 < 349.74)
+                $('#dropArea').height(h * 0.5 + 'px');
+            else if (h * 0.67 > 485.75)
+                $('#dropArea').height(h * 0.72 + 'px');
+            else
+                $('#dropArea').height(h * 0.685 + 'px');
+        });
+        //run time
+        //$('#starttheexercise').click(function () {
+        //    seconds = -1;
+        //    minutes = 0;
+        //    clearTimeout(runTime);
+        //    displayTime();
+        //});
+        //function checkTime(i) {
+        //    if (i < 10) { i = "0" + i };
+        //    return i;
+        //}
+        //function displayTime() {
+        //    seconds++;
+        //    if (seconds == 60) {
+        //        seconds = 0;
+        //        minutes++;
+        //    }
+        //    $('#time').html(checkTime(minutes) + ':' + checkTime(seconds));
+        //    runTime = setTimeout('displayTime()', 1000);
+        //}
+        //Rezive screen
+        window.onresize = function () {
+            var h = $(window).height();
+            $('.row').height(h + 'px');
+            $('#dragArea').height(h - 55 + 'px');
+            if (h * 0.67 < 349.74)
+                $('#dropArea').height(h * 0.5 + 'px');
+            else if (h * 0.67 > 485.75)
+                $('#dropArea').height(h * 0.72 + 'px');
+            else
+                $('#dropArea').height(h * 0.685 + 'px');
+        }
+        //Add more case in switch
+        function btnEventAddMoreCaseInSwitchCase(id) {
+            $('#addmorecase' + id).prepend(
+				"<li class='in-switch caseClass' data-command='case' name='case' data-pass='false'>"
+	              + "'case <input data-pass='false' type='text' style='width:30px'></input> :'"
+				  + "<ol class='case-ol'>"
+	              + "</ol>"
+	           + "</li>"
+	        );
+        }
+        function abc(id) {
+            $('#itemId' + id).remove();
+        }
+    </script>
+    <script src="/JS/drag-drop.js"></script>
+    <script src="/JS/LIB/jquery.base64.min.js"></script>
+    <script src="/JS/LIB/jquery.validate.min.js"></script>
+    <script src="/JS/LIB/additional-methods.min.js"></script>
+    <script src="/JS/convert-to-code.js"></script>
+    <script src="/JS/test-code-after-submit.js"></script>
+    <script src="/JS/LIB/additional-methods.min.js"></script>
+    <script src="/JS/convert-to-code.js"></script>
+    <script src="/Library/AngularJSLIB/angular-1.2.25.js"></script>
+    <script src="/Library/AngularJSLIB/angular-route-1.2.25.js"></script>
+    <script src="/Library/AngularJSLIB/src/unsavedChanges.js"></script>
+    <script src="/JS/LIB/beauty.js"></script>
+    <script src="/JS/script.js"></script>
+    
+    <script type="text/javascript"
+			src="/JS/LIB/bootstrap.min.js"></script>
+
+                   	
+</body>
+</html>
