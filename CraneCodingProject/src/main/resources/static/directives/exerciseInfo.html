@@ -2,23 +2,24 @@
     <div class="col-md-9 col-sm-9 col-xs-9">
         <nav class="navbar">
             <div class="navbar-header">
-                <h1 class="font-home-exercise">{{info.transferData.NameExercise_dataTransfer.exerciseName}}</h1>
+                <!--<h1 class="font-home-exercise">{{info.transferData.NameExercise_dataTransfer.exerciseName}}</h1>-->
+                <h1 class="font-home-exercise">{{info.exerciseData.exerciseName}}</h1>
             </div>
             <!--data-popover-content="#showCodePopover"-->
-            <span class="nav navbar-right top-nav">
+            <sspan class="nav navbar-right top-nav">
                 <span class="dropdown">
                     <a href onclick="getCodeToDisplay()" data-toggle="modal" data-target="#showCodeModal" class="navbar-brand" style="margin: 0px;height:100%">
                         <i class="fa fa-file-code-o"></i>
                     </a>
                 </span>
                 <span class="" id="time"> {{ info.timer.time | date:'mm:ss:sss'}}</span>
-                  
-                </span>
+                </sspan>
         </nav>
     </div>
 <div class="modal fade" id="showCodeModal" role="dialog" style="display:none;">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
                 <fieldset id="optionField" style="display:none">
                     <h2>Options</h2>
                     <ul>

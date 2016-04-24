@@ -227,21 +227,66 @@ div#rulesModal {
     padding: 0px !important;
     border: 0px !important;
     display: table;
-    left: 20%;
+    left: 15%;
     top: 10%;
     margin: 0px;
-    max-width: 10vw;
+    max-width: 15vw;
     position: fixed;
 }
 
 div#rulesModal .modal-body {
     height: 25vw;
-    width: 50vw;
+    width: 70vw;
 }
 
 div#rulesModal h2 {
     padding: 0px;
 }
+
+
+/*userHistoryModal*/
+div#userHistoryModal {
+    padding-right: 0px;
+    padding: 0px !important;
+    border: 0px !important;
+    display: table;
+    left: 35%;
+    top: 10%;
+    margin: 0px;
+    max-width: 15vw;
+    position: fixed;
+}
+
+div#userHistoryModal .modal-body {
+    height: 40vw;
+    width: 30vw;
+}
+
+div#userHistoryModal h2 {
+    padding: 0px;
+}
+
+/*loginForm*/
+div#loginForm {
+    padding-right: 0px;
+    padding: 0px !important;
+    border: 0px !important;
+    display: table;
+    margin: 0px;
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    max-width: 30vw;
+}
+
+div#loginForm .modal-body {
+    height: auto;
+}
+
+div#loginForm h2 {
+    padding: 0px;
+}
+
 
 /**/
 .close:hover {

@@ -2607,7 +2607,9 @@ button.close {
   border: 1px solid transparent;
   -webkit-border-radius: 4px 4px 0 0;
   -moz-border-radius: 4px 4px 0 0;
-  border-radius: 4px 4px 0 0; }
+  border-radius: 4px 4px 0 0; 
+  min-width: 24vw;
+}
   /* line 117, /Users/jonasvonandrian/.rvm/gems/ruby-1.9.3-p484/bundler/gems/sass-twitter-bootstrap-06795315e047/lib/bootstrap/_navs.scss */
   .nav-tabs > li > a:hover {
     border-color: #eeeeee #eeeeee #dddddd; }

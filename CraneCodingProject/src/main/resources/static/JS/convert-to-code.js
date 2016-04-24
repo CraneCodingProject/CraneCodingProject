@@ -248,7 +248,7 @@ function btnEventAddMoreCaseInSwitchCase(id){
 	//alert('#addmorecase'+id);
 	$('#addmorecase'+id).prepend(
 		"<li class='in-switch caseClass' data-command='case' name='case' data-pass='false'>"
-          +"'case <input data-pass='false' type='text' style='width:30px'></input> :'"
+          +"case '<input data-pass='false' type='text' style='width:30px'></input>' :"
 		  +"<ol class='case-ol'>"
           +"</ol>"
        +"</li>"
