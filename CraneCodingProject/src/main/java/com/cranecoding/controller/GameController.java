@@ -24,16 +24,16 @@ public class GameController {
 	private UserService userService;
 	
 
-	@RequestMapping(value = "/api/exercise/getallexercise", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/exercise/getallexercises", method = RequestMethod.GET)
 	public @ResponseBody List<ExerciseDTO> getAllExercise(HttpServletRequest request,
 			@RequestParam("username") String userName) {
 		int userId = userService.getUserId(userName);
 		return gameService.getAllExercise(userId);
 	}
 	
-	@RequestMapping(value = "/api/exercise/getexercisebyid", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/exercise/getexercisesById", method = RequestMethod.GET)
 	public @ResponseBody ExerciseDTO getExerciseById(HttpServletRequest request,
-			@RequestParam("exerciseid") int exerciseid){
+			@RequestParam("exerciseId") int exerciseid){
 		
 		return gameService.getExerciseById(exerciseid);
 	}

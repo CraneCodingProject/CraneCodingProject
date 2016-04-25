@@ -1,30 +1,4 @@
 ﻿
-
-<style>
-    .form-group {
-        margin-bottom:0px;
-    }
-    /*.form-control.ng-dirty.ng-valid.ng-valid-required{
-        background-color:#fff;
-        height:30px;
-    }
-    ng-pristine {
-        height:30px;
-    
-    }*/
-    #input-form{
- background-color:#fff;
-        height:30px;
-    }
-   .modal-backdrop, .modal-backdrop.fade.in{opacity:0;}
-   .alert-danger,.alert-success{height:30px;padding:8px;margin-bottom:5px;border-radius:4px;}
-   i.fa-check{
-       color:#00ff21;
-   }
-   i.fa-times{
-       color:#ff0000;
-   }
-</style>
 <div class="modal fade" id="loginForm" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -37,14 +11,15 @@
             <form name="form" role="form" ng-show="!showForm">
                 <h3 class="modal-title"></h3>
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">User name</label>
                     <input id="input-form" type="text" name="username" id="username" class="form-control" ng-model="username" required />
-                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">User name is required</span>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input id="input-form" type="password" name="password" id="password" class="form-control" ng-model="password" required />
+                    <label for="password">User password</label>
+                    <input id="input-form" type="password" name="password" ng-minlength="6" id=" password" class="form-control" ng-model="password" required />
                     <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                    <span ng-show="form.password.$error.minlength" class="help-block">Password is more than 8.</span>
                 </div>
                 <div ng-show="error" class="alert-danger">{{error}}</div>
                 <div class="form-group" style="float:right;">
@@ -59,24 +34,49 @@
                 
                 <div class="form-group">
                     <label for="username">User name</label>
-                    <input id="input-form" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" type="email" name="username" id="username" class="form-control" ng-model="username" required />
-                    <span ng-show="(formRegist.username.$dirty && formRegist.username.$error.required ) || formRegist.username.$error.email" class="help-block">Username is email and required</span>
+                    <input id="input-form" type="text" name="username" ng-minlength="8" id="username" class="form-control" ng-model="username" required />
+                    <span ng-show="formRegist.username.$error.minlength" class="help-block">User name is more than 8.</span>
+                    <span ng-show="(formRegist.username.$dirty && formRegist.username.$error.required )" class="help-block">User name is required</span>
                 </div>
+
+                <div class="form-group">
+                    <label for="username">First name</label>
+                    <input id="input-form" type="text" name="firstname" id="fisrtname" class="form-control" ng-model="firstname" required />
+                    <span ng-show="(formRegist.firstname.$dirty && formRegist.firstname.$error.required )" class="help-block">First name is required</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Last name</label>
+                    <input id="input-form" type="text" name="lastname" id="lastname" class="form-control" ng-model="lastname" required />
+                    <span ng-show="(formRegist.lastname.$dirty && formRegist.lastname.$error.required )" class="help-block">Last name is required</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="usermail">User email</label>
+                    <input id="input-form" type="email" name="usermail" id="usermail" class="form-control" ng-model="usermail" required />
+                    <span ng-show="(formRegist.usermail.$dirty && formRegist.usermail.$error.required )" class="help-block">User email is required</span>
+                    <span ng-show="formRegist.usermail.$error.email" class="help-block">Required email!</span>
+                </div>
+
                 <div class="form-group">
                     <label for="username">Password
                         <i ng-show="rePassword == password && password !=null" class="fa fa-check" aria-hidden="true"></i>
                     </label>
-                    <input id="input-form" type="text" name="password" id="password" class="form-control" ng-model="password" required />
+                    <input id="input-form" ng-minlength="6" type="text" name="password" id="password" class="form-control" ng-model="password" required />
+                    <span ng-show="formRegist.password.$error.minlength" class="help-block">Password is more than 8.</span>
                     <span ng-show="formRegist.password.$dirty && formRegist.password.$error.required" class="help-block">Password is required</span>
                 </div>
+
                 <div class="form-group">
-                    <label for="password">Re-enter password
+                    <label for="password">Enter password again
                         <i ng-show="rePassword == password && rePassword!=null" class="fa fa-check" aria-hidden="true"></i>
-                        <i ng-show="rePassword != password || (formRegist.rePassword.$dirty && formRegist.rePassword.$error.required)" class="fa fa-times" aria-hidden="true"></i>
                     </label>
-                    <input id="input-form" type="password" name="rePassword" id="rePassword" class="form-control" ng-model="rePassword" required />
-                    <span ng-show="formRegist.rePassword.$dirty && formRegist.rePassword.$error.required" class="help-block">RE-Password is required</span>
+                    <input id="input-form" type="password" ng-minlength="6" name="rePassword" id="rePassword" class="form-control" ng-model="rePassword" required />
+                    <span ng-show="formRegist.rePassword.$error.minlength" class="help-block">Password is more than 8.</span>
+                    <span ng-show="rePassword != password" class="help-block">Password is not match!</span>
+                    <span ng-show="formRegist.rePassword.$dirty && formRegist.rePassword.$error.required" class="help-block">Password is required</span>
                 </div>
+
                 <div ng-show="registerSuccess" class="alert-success">{{registerSuccess}}</div>
                 <div class="form-group" style="float:right;">
                     <a href="" ng-click="showForm = !showForm">Already have account!</a>
@@ -87,8 +87,293 @@
         </div>
     </div>
 </div>
-<a data-toggle="modal" data-target="#loginForm" href="">click</a>
+<div class="modal fade" id="commandBlockModal" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
+    </div>
+    <div class="modal-body">
+        <img class="img_homepage" ng-src="{{commandSrc}}">
+    </div>
+</div>
+<div class="modal fade" id="videoTutorialModal" role="dialog" style="display:block; padding-right:0px;">
+    <div class="modal-header">
+        <button type="button" onclick="stopTutorialVideo()" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
+    </div>
+    <div class="modal-body" style="height:100%;">
+        <iframe id="videoTutorial" src="https://www.youtube.com/embed/3X4W3v_G7IM?autoplay=0" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" role="dialog">
+    <div class="modal-header">
+        <button type="button" onclick="stopTutorialVideo()" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
+    </div>
+    <div class="modal-body" style="height:100%;">
+        <button data-dismiss="modal" class="btn" style="min-width: 9vw;min-height: 3vw;">Cancel</button>
+        <button data-dismiss="modal" ng-click="logoutAct()" class="beginExeciseBtn btn">Yes!</button>
+    </div>
+</div>
+<header>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-right">
+                <li>
+                    <a id="nav-right-login" data-toggle="modal" data-target="#loginForm" href="">Login</a>
+                </li>
+                <li ng-show="logout">
+                    <a style="stroke:#202e51;" id="nav-right-login" data-toggle="modal" data-target="#logoutModal" href="">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<section>
+
+    <div class="container">
+        <div class="row" align="center">
+            <img src="/cranecoding/src/img/banner.png" class="img_homepage" style="width:100%;max-width:none;border-radius:0px;" />
+            <button data-toggle="modal" onclick="playTutorialVideo()" data-target="#videoTutorialModal" class="btn">Tutorial</button>
+            <button class="btn" ng-click="goToMainPage()">Join now</button>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <img src="/cranecoding/src/img/a0.png" class="img_homepage" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <article class="contentFeature">
+                    <h2>Take your docs anywhere</h2>
+                    Save files on your computer, then access them on your phone from the road. Everything you keep in Dropbox is synced automatically to all your devices.
+                </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <article class="contentFeature">
+                    <h2>Take your docs anywhere</h2>
+                    Save files on your computer, then access them on your phone from the road. Everything you keep in Dropbox is synced automatically to all your devices.
+                </article>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <img src="/cranecoding/src/img/a0.png" class="img_homepage" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <img src="/cranecoding/src/img/a0.png" class="img_homepage" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <article class="contentFeature">
+                    <h2>Take your docs anywhere</h2>
+                    Save files on your computer, then access them on your phone from the road. Everything you keep in Dropbox is synced automatically to all your devices.
+                </article>
+            </div>
+        </div>
+        <div class="row" align="center">
+            <article><h1 style="border-bottom:1px solid #fff;">Basic commands</h1></article>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <img class="commandBlock" data-toggle="modal" data-target="#commandBlockModal" ng-click="commandSrc = '/cranecoding/src/img/a0.png'" src="/cranecoding/src/img/a0.png" style="width:100%;max-width:none;border-radius:0px;" />
+                <img class="commandBlock" data-toggle="modal" data-target="#commandBlockModal" ng-click="commandSrc = '/cranecoding/src/img/a0.png'" src="/cranecoding/src/img/a0.png" style="width:100%;max-width:none;border-radius:0px;" />
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <img class="commandBlock" data-toggle="modal" data-target="#commandBlockModal" ng-click="commandSrc = '/cranecoding/src/img/a0.png'" src="/cranecoding/src/img/a0.png" style="width:100%;max-width:none;border-radius:0px;" />
+                <img class="commandBlock" data-toggle="modal" data-target="#commandBlockModal" ng-click="commandSrc = '/cranecoding/src/img/a0.png'" src="/cranecoding/src/img/a0.png" style="width:100%;max-width:none;border-radius:0px;" />
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <img class="commandBlock" data-toggle="modal" data-target="#commandBlockModal" ng-click="commandSrc = '/cranecoding/src/img/a0.png'" src="/cranecoding/src/img/a0.png" style="width:100%;max-width:none;border-radius:0px;" />
+                <img class="commandBlock" data-toggle="modal" data-target="#commandBlockModal" ng-click="commandSrc = '/cranecoding/src/img/a0.png'" src="/cranecoding/src/img/a0.png" style="width:100%;max-width:none;border-radius:0px;" />
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="text-center">
+    <div class="footer-above">
+        <div class="container">
+            <div class="footer-row row">
+                <div class="footer-col col-md-4">
+                    <article>
+                        <h2>Location</h2>
+                        <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                    </article>
+                </div>
+                <div class="footer-col col-md-4">
+                    <article>
+                        <h2>Around the Web</h2>
+                    </article>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col col-md-4">
+                    <article>
+                        <h2>About Freelancer</h2>
+                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    $(document).ready(function () {
+        $('#loginForm').hide();
+        $('#commandBlockModal').hide();
+        $('#videoTutorialModal').hide();
+        $('#logoutModal').hide();
 
 
+        
+    });
+    var video = 'http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0';
+    function stopTutorialVideo () {
+         //= $("#videoTutorial").attr("src");
+        //console.log(video);
+        var videoURL = $('#videoTutorial').prop('src');
+        videoURL = videoURL.replace("&autoplay=1", "");
+        $('#videoTutorial').prop('src', '');
+        $('#videoTutorial').prop('src', videoURL);
+        //$("#playerid").attr("src", video);
+    }
+    function playTutorialVideo() {
+        var videoURL = $('#videoTutorial').prop('src');
+        videoURL += "&autoplay=1";
+        $('#videoTutorial').prop('src', videoURL);
+    }
 
+</script>
+<style>
+    .form-group {
+        margin-bottom: 0px;
+    }
 
+    #input-form {
+        background-color: #fff;
+        height: 30px;
+    }
+    
+
+    .modal-backdrop, .modal-backdrop.fade.in {
+        opacity: 0;
+    }
+
+    .alert-danger, .alert-success {
+        height: 30px;
+        padding: 8px;
+        margin-bottom: 5px;
+        border-radius: 4px;
+    }
+
+    i.fa-check {
+        color: #00ff21;
+    }
+
+    i.fa-times {
+        color: #ff0000;
+    }
+
+    .help-block {
+        color: red;
+    }
+
+    ul.nav.navbar-right {
+        margin: 10px;
+    }
+
+    body {
+        overflow-y: scroll;
+        background-color:#fff;
+    }
+
+    .col-lg-6.col-md-6.col-sm-6 {
+        color: #fff;
+    }
+
+    .row {
+        margin-top: 10vw;
+        background-color:#fff;
+    }
+    .footer-row{
+        margin-top:3vw;
+        background-color:#EAEAEA;
+        margin-bottom:3vw;
+    }
+
+    .text-center {
+        background-color: #EAEAEA;
+        color: #fff;
+    }
+
+    article {
+        font-size: 21px;
+        line-height: 36px;
+        font-weight: lighter;
+        color: #202e51;
+    }
+    .commandBlock{padding:1vw;}
+    .commandBlock:hover {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    .img_homepage{
+        width:100%;
+        max-width:none;
+        border-radius:0px;
+    }
+    #commandBlockModal.modal.fade.in {
+        top: 50%;
+        max-height: 41vw;
+        overflow: hidden;
+    }
+    #commandBlockModal.modal-body {
+        overflow-y: auto;
+        padding: 15px;
+        max-height: none;
+        min-height: 40vw;
+    }
+    #videoTutorialModal.modal.fade.in {
+        top: 50%;
+        max-height: 30vw;
+        overflow: hidden;
+    }
+    #videoTutorialModal.modal-body {
+        overflow-y: auto;
+        padding: 15px;
+        max-height: none;
+        /*min-height: 41vw;*/
+        width:100%;
+    }
+    #videoTutorialModal{
+        padding:0px;
+    }
+    .fa-fw {
+        font-size: x-large;
+    }
+    #videoTutorial{
+        width: 100%;
+        height:95%;
+    }
+    #videoTutorial.modal-body{
+        width: 100%;
+    }
+    #nav-right-login{
+        color: #203481;
+        text-shadow: none;
+    }
+</style>

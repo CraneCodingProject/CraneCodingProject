@@ -1,4 +1,4 @@
-﻿ <title>Capstone</title>
+ <title>Capstone</title>
 <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link href="css/bootstrap.min.css" rel="stylesheet" />
 <!--<link rel="stylesheet" href="http://blackrockdigital.github.io/startbootstrap-sb-admin/css/sb-admin.css" />
@@ -6,6 +6,12 @@
 <link href="css/application.css" rel="stylesheet" />
 <link href="css/custom.css" rel="stylesheet" />
 <link href="css/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />-->
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+
+<link href="css/sb-admin.css" rel="stylesheet" />
+<link href="css/application.css" rel="stylesheet" />
+<link href="css/custom.css" rel="stylesheet" />
+<link href="css/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 <style>
     .btn {
         background-color: #226968;
@@ -204,7 +210,7 @@
             <p class="modal-title" style="padding-right:10px;">validateChangeExerciseModel</p>
         </div>
         <div class="modal-body" align="center" style="padding-top:2.5vw;">
-            <button data-dismiss="modal" class="btn" style="min-width: 9vw;min-height: 3vw;">Cancle</button>
+            <button data-dismiss="modal" class="btn" style="min-width: 9vw;min-height: 3vw;">Cancel</button>
             <!--<button data-dismiss="modal" ng-click="directToAnotherExercise(exerciseIdDirect)" class="beginExeciseBtn btn">Yes!</button>-->
             <button data-dismiss="modal"  ng-click="directToAnotherExercise(exerciseIdDirect)" class="beginExeciseBtn btn">Yes!</button>
         </div>
@@ -310,7 +316,7 @@
         <div class="lstExercise nav navbar-nav side-nav">
             <ul class="nav in">
                 <li ng-repeat="exercise in lstExercises">
-                    <a ng-class="{chosenExercise : $index == chosenExerciseNumber}" data-toggle="modal" data-target="#validateChangeExerciseModel" ng-click="openValidateDirective(exercise.exerciseId,$index)" class="list-group-item">
+                    <a ng-class="{chosenExercise : $index == chosenExerciseNumber}" data-toggle="modal" data-target="#validateChangeExerciseModel" ng-click="openValidateDirective(exercise.idExercise,$index)" class="list-group-item">
                         <!--data-toggle="modal" data-target="#validateChangeExerciseModel"-->
                         {{exercise.exerciseName}}
                     </a>
@@ -340,7 +346,7 @@
                         <a href class="navbar-brand" data-toggle="modal" ng-click="showUserHistory(username)" data-target="#userHistoryModal">
                             <span class="thumb-sm avatar pull-left">
                                 <img src="src/img/a0.png" />
-                                <span id="idUserName">Thanh Phat</span>
+                                <span id="idUserName">{{userName}}</span>
                             </span>
                         </a>
                     </span>
@@ -350,7 +356,7 @@
         <div class="col-md-9 col-sm-9 col-xs-9">
             <div class="alert-info">
                 <!--<div ng-view></div>-->
-                {{homePagecontroller.exerciseData.exerciseName}}
+                {{homePagecontroller.exerciseData.exerciseContent}}
             </div>
             <!--<p style="color:#fff;">Is Form Dirty?: {{demoForm.$dirty}}</p>-->
             <form id="defaultForm" name="demoForm" novalidate="novalidate" unsaved-warning-form>

@@ -274,19 +274,39 @@ div#loginForm {
     display: table;
     margin: 0px;
     position: absolute;
-    top: 25%;
+    top: 15%;
     left: 35%;
     max-width: 30vw;
 }
 
 div#loginForm .modal-body {
     height: auto;
+    max-height:none;    
 }
 
 div#loginForm h2 {
     padding: 0px;
 }
+/*logoutModal*/
+div#logoutModal {
+    padding-right: 0px;
+    padding: 0px !important;
+    border: 0px !important;
+    display: table;
+    margin: 0px;
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    max-width: 30vw;
+}
 
+div#logoutModal .modal-body {
+    height: 8vw;
+}
+
+div#logoutModal h2 {
+    padding: 0px;
+}
 
 /**/
 .close:hover {

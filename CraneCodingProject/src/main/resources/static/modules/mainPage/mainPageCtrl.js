@@ -8,8 +8,14 @@ angular.module('MainPage')
     function ($rootScope, $scope, $routeParams, $route, $window, $location, $interval, $cookieStore, $http, lstExercisesApi, testCodeApi, getTestCaseApi, lstCommandsApi, submitRecordApi, userHistoryApi, exerciseApi, transferData) {
         console.log('chay lai controller');
         // set username
-        //$scope.username = $('#idUserName').html();
+        
 
+        lstExercisesApi.getAllexerciseByUserName($rootScope.globals.currentUser.username)
+        .success(
+            function (data) {
+                $scope.lstExercises = data;
+            }
+        );
         /**
         *   Get userName then get getAllexerciseByUserName(userName)
         
@@ -24,13 +30,7 @@ angular.module('MainPage')
         /**
         *   Load list user's exercise 
         */
-        lstExercisesApi.getAllexerciseByUserName($rootScope.globals.currentUser.username)
-        .success(
-            function (data) {
-                $scope.lstExercises = data;
-            }
-        );
-        //lstExercisesApi.success(function (data) { $scope.lstExercises = data });
+       // lstExercisesApi.success(function (data) { $scope.lstExercises = data });
 
         var trung_gian = 0;
         var trung_gian_tam = 0;
@@ -374,7 +374,8 @@ angular.module('MainPage')
         //get cookie. 
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        	$scope.userName = $rootScope.globals.currentUser.username;
+        	$http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
         }
         $scope.$on('$routeChangeStart', function (event, next, current) {
             console.log('hidellllllll');
@@ -404,6 +405,7 @@ angular.module('MainPage')
                 }
                 else {
                     var res = $location.path().split("/");
+                    console.log('kasdbahjsdjagsvagsd'+res);
                     exerciseApi.getAExerciseById(res[2])
                     .then(
                         function (response) {
@@ -462,22 +464,25 @@ angular.module('MainPage')
 
 
 .factory('lstExercisesApi', ['$http',
-//        function ($http) {
-//            return $http.get('/api/exercise/getallexercises')
-//                .success(function (data) { return data; })
-//                .error(function (err) { return err; });
-//        }
+        function ($http) {
+			$http.getAllexerciseByUserName = function (userName) {
+                return $http({
+                   url: '/api/exercise/getallexercises?username=' + userName
+               })
+           }
+           return $http;
+        }
 
         //sercive get all exercise by username
 
-        function ($http) {
-            $http.getAllexerciseByUserName = function (userName) {
-                return $http({
-                    url: '/api/exercise/getallexercise?username=' + userName
-                })
-            }
-            return $http;
-        }
+        //function ($http) {
+        //    $http.getAllexerciseByUserName = function (userName) {
+        //        return $http({
+        //            url: '/api/exercise/getallexercise?username=' + userName
+        //        })
+        //    }
+        //    return $http;
+        //}
 ])
     .factory('exerciseApi', ['$http',
         function ($http) {
