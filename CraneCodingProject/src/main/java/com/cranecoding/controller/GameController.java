@@ -37,5 +37,28 @@ public class GameController {
 		
 		return gameService.getExerciseById(exerciseid);
 	}
+	
+	// mới lấy exercise truyền parameter để ấn test.
+		@RequestMapping(value = "/api/exercise/testcode", method = RequestMethod.GET)
+		public @ResponseBody int testcode(@RequestParam("parameter") String parameter, @RequestParam("exerciseid") String exerciseId){
+			//System.out.println("__B__"+exerciseid);
+			//System.out.println("__B__"+parameter);
+			System.out.println("__B__"+exerciseId);
+			if(Integer.parseInt( exerciseId ) == 1) return tinhtong(Integer.parseInt( parameter ));
+			return 1;
+			
+		}
+//		@RequestMapping(value = "/api/exercise/submitcode",method = RequestMethod.GET)
+//		public @ResponseBody 
+
+		
+		
+		public int tinhtong(int n){
+			int S = 0;
+			for ( int i = 0; i < n ; i++ ){
+				S = S + i ;
+			}
+			return S;
+		}
 
 }

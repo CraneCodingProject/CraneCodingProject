@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cranecoding.dto.user.UserDAO;
 import com.cranecoding.dto.user.UserDTO;
+import com.cranecoding.model.User;
 import com.cranecoding.service.UserService;
 
 @Service
@@ -33,6 +34,28 @@ public class UserServiceImp implements UserService {
 	@Override
 	public int getUserId(String username) {
 		return userDao.getUserIdByUserName(username).getUserid();
+	}
+
+	@Override
+	public boolean checkIsUserNameExsit(UserDTO userRegister) {
+		if (userDao.getUserListByUserNameAndEmail(userRegister.getUsername(), userRegister.getUsermail()).isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public User createNewUser(UserDTO userRegister) {
+		User user = new User();
+		user.setUsername(userRegister.getUsername());
+		user.setPassword(userRegister.getPassword());
+		user.setFirstname(userRegister.getFirstname());
+		user.setLastname(userRegister.getLastname());
+		user.setEmail(userRegister.getUsermail());
+		user.setFakemoney(0);
+		user.setFacebookid("");
+		userDao.save(user);
+		return user;
 	}
 
 }

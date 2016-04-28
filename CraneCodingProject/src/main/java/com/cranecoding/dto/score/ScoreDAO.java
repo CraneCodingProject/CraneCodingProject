@@ -1,5 +1,9 @@
 package com.cranecoding.dto.score;
 
-public class ScoreDAO {
+import org.springframework.data.repository.CrudRepository;
+
+import com.cranecoding.model.Score;
+
+public interface ScoreDAO extends CrudRepository<Score, Integer> {
 
 }

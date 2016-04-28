@@ -26,6 +26,9 @@ angular.module('HomePage')
                 .success(function (response) {
                     console.log('success');
                     callback(response);
+                })
+                .error(function(response){
+                	console.log('fali');
                 });
 
         };

@@ -20,6 +20,7 @@ angular.module('HomePage')
             AuthenticationService.Login($scope.username, $scope.password, function (response) {
                 if (response) {
                     // sự kiện ở đây
+                	console.log('sự kiện ở đây '+response);
                     AuthenticationService.SetCredentials($scope.username, $scope.password); // gọi service để lưu cookie
                    // $location.path('/');
                     $scope.dataLoading = true;
@@ -27,7 +28,8 @@ angular.module('HomePage')
                     $scope.logout = true;
                 } else {
                     console.log('fail');
-                    $scope.error = 'sai account ';
+                    console.log('sự kiện ở sasas fgaliđây  '+response);
+                    $scope.error = 'Account is not exist';
                     $scope.dataLoading = false;
                     $scope.logout = false;
                 }
@@ -47,31 +49,37 @@ angular.module('HomePage')
         $scope.register = function () {
             $scope.dataLoading = true;
 
-            registerAccApi.registerNewAcc($scope.username,$scope.firstname,$scope.lastname,$scope.usermail, $scope.password,$scope.rePassword)
+            registerAccApi.registerNewAcc($scope.username,$scope.firstname,$scope.lastname,$scope.usermail, $scope.password)
             .then(
                 function (response) {
-                    if (response.data.success) {
+                	console.log('__AA___'+response.data.success);
+                	console.log('__AA___'+response.data.message);
+                    if (response.data.success==true) {
                         $scope.dataLoading = false;
-                        console.log('success : '  + response.data.message);
-                        $scope.registerSuccess = response.data.message;
+                        console.log(response.data+'___dang ky thanh cong');
+                        //console.log('success : '  + response.data.message);
+                        //$scope.registerSuccess = response.data.message;
+                    }
+                    else{
+                    	console.log(' callback true_dang ky fail con me no');
                     }
                 },
                 function(response){
+                	console.log('callback fail _ dang ky fail con me no');
                 }
             );
         };
     }])
 .factory('registerAccApi', ['$http',
     function ($http) {
-        $http.registerNewAcc = function (username,firstname,lastname,usermail, password, repassword) {
+        $http.registerNewAcc = function (username,firstname,lastname,usermail, password) {
             console.log(password + ' username : ' + username);
             var userAcc = {
                 username: username,
                 firstname:firstname,
                 lastname:lastname,
                 usermail:usermail,
-                password: password,
-                repassword: repassword
+                password: password
             };
             var config = { params: userAcc };
             return $http.post('/api/exercise/register', userAcc);

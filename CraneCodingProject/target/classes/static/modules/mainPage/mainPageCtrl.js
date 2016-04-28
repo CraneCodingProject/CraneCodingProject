@@ -10,12 +10,12 @@ angular.module('MainPage')
         // set username
         
 
-        lstExercisesApi.getAllexerciseByUserName($rootScope.globals.currentUser.username)
+        /*lstExercisesApi.getAllexerciseByUserName($rootScope.globals.currentUser.username)
         .success(
             function (data) {
                 $scope.lstExercises = data;
             }
-        );
+        );*/
         /**
         *   Get userName then get getAllexerciseByUserName(userName)
         
@@ -130,15 +130,19 @@ angular.module('MainPage')
         *   GetCode(parameter) --> run code and get user's code result ---> request to server (exerciseId,parameter)
         *   --> get expect result --> display result to compare
         */
-        $scope.testCodeBeforeSubmit = function (inputParameterToTest) {
+        $scope.testCodeBeforeSubmit = function (inputParameterToTest,exerciseId) {
             // print adtually result
             $scope.actuallyResult = getCODE(inputParameterToTest);
             // transfer data <inputParameterToTest> to server to get expect result then print expert result 
             // get expect result form server and set $scope.expectResult = expect result;
-            testCodeApi.getExpectResult(inputParameterToTest)
+            testCodeApi.getExpectResult(inputParameterToTest,exerciseId)
                 .then(function (response) {
+                	
                     $scope.expectResult = response.data;
-                });
+                },function(response){
+                	$scope.expectResult = 'NaN';
+                }
+                );
         }
         /*----------------------------------------------------------*/
 
@@ -148,7 +152,7 @@ angular.module('MainPage')
         function getCODE(inputParameterToTest) {
             //inputParameterToTest = abc.inp;
             $('#result').removeAttr('src');
-            var CODE = "<script>function MATH (n) { try{ ";
+            var CODE = "<script>function MATH (input) { try{ ";
             demRunFor = 0;
             $('#dropArea .topdown').map(function () {
                 switch ($(this).attr('name')) {
@@ -378,7 +382,7 @@ angular.module('MainPage')
         	$http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
         }
         $scope.$on('$routeChangeStart', function (event, next, current) {
-            console.log('hidellllllll');
+            console.log('hidelldgdgdgllllll');
             $('body').find('.modal-backdrop').each(function () {
                 //$(this).hide();
                 $(this).remove();
@@ -386,7 +390,7 @@ angular.module('MainPage')
             })
         });
         $scope.$on('$routeChangeSuccess', function (event, next, current) {
-            console.log('hidellllllll');
+            console.log('hidelllldgdgdgdgxxxxllll');
             $('body').find('.modal-backdrop').each(function () {
                 $(this).remove();
                 console.log('hide');
@@ -396,6 +400,12 @@ angular.module('MainPage')
                
             }
             else {
+            	lstExercisesApi.getAllexerciseByUserName($rootScope.globals.currentUser.username)
+                .success(
+                    function (data) {
+                        $scope.lstExercises = data;
+                    }
+                );
                 console.log('phat depo : ' + $rootScope.globals.currentUser.username);
                 $('#dropArea').empty();
                 if ($location.path() == '/' ){
@@ -405,7 +415,6 @@ angular.module('MainPage')
                 }
                 else {
                     var res = $location.path().split("/");
-                    console.log('kasdbahjsdjagsvagsd'+res);
                     exerciseApi.getAExerciseById(res[2])
                     .then(
                         function (response) {
@@ -450,6 +459,7 @@ angular.module('MainPage')
             //$("#validateChangeExerciseModel").modal({ backdrop: "false" });
             $scope.demoForm.$setPristine();
             /* Stop time */
+            console.log('directToAnotherExercise');
             if (homePagecontroller.timerProcess) {
                 $interval.cancel(homePagecontroller.timerProcess);
             }
@@ -497,10 +507,10 @@ angular.module('MainPage')
     ])
     .factory('testCodeApi', ['$http',
         function ($http) {
-            $http.getExpectResult = function (inputParameter) {
-                var parameter = { parameter: inputParameter };
+            $http.getExpectResult = function (inputParameter,exerciseId) {
+                var parameter = { parameter: inputParameter,exerciseid: exerciseId};
                 var config = { params: parameter };
-                return $http.get('/api/exercise/testcode', config)
+                return $http.get('/api/exercise/testcode', config);
                 //.then(function (response) { console.log("chay qua day ne!!!" + response.data); response.data; });
             }
             return $http;
@@ -520,7 +530,7 @@ angular.module('MainPage')
     .factory('lstCommandsApi', ['$http',
         function ($http) {
             $http.getLstCommands = function () {
-                return $http.get('text.js')//api/command/getallcommands //api/exercise/getallexercises
+                return $http.get('/modules/mainPage/text.js')//api/command/getallcommands //api/exercise/getallexercises
             }
             return $http;
         }

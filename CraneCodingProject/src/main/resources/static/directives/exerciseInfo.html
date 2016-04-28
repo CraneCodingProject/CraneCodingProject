@@ -196,7 +196,7 @@
         // get code
         function getCODE() {
             $('#result').removeAttr('src');
-            var CODE = "var S;";
+            var CODE = "function Math(input){";
             console.log('topdown');
             demRunFor = 0;
             $('#dropArea .topdown').map(function () {
@@ -222,7 +222,7 @@
             $('input').map(function () {
                 $(this).data('pass', false);
             });
-            CODE = CODE + "return S;";
+            CODE = CODE + "}";
 
             return CODE;
         };

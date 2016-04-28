@@ -12,6 +12,17 @@
 <link href="css/application.css" rel="stylesheet" />
 <link href="css/custom.css" rel="stylesheet" />
 <link href="css/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<!--     <script>
+function resizeInput() {
+    $(this).attr('size', $(this).val().length);
+}
+
+$('#dropArea input')
+    // event handler
+    .keyup(resizeInput)
+    // resize on page load
+    .each(resizeInput);
+</script> -->
 <style>
     .btn {
         background-color: #226968;
@@ -133,6 +144,14 @@
         background: url('src/img/urlBackground.png') no-repeat 0 0 scroll;
         background-size: cover;
     }
+    #lstCommandBlock input{
+    	display : none;
+    }
+    #dropArea input{
+    	min-height: 30px;
+    	min-width: 10vw;
+    
+    }
 </style>
 <div id="getFrame">
     <iframe id="result"></iframe>
@@ -151,11 +170,13 @@
                         <!--id="inputParameter"--><input type="number" ng-model="inputParameterToTest" class="form-control" style="height: 30px;" placeholder="Ex: number,array,string..." />
                         <span class="input-group-btn">
                             <!--id="btnTest"-->
-                            <button id="btnTest" type="button" ng-click="testCodeBeforeSubmit(inputParameterToTest)">
+                            <button id="btnTest" type="button" ng-click="testCodeBeforeSubmit(inputParameterToTest,homePagecontroller.exerciseData.idExercise)">
                                 <i class="fa fa-arrow-right"></i>
                             </button>
                         </span>
                     </div>
+                    </br>
+                    <h4 style='float:left;'>function Math({{inputParameterToTest}})<h4>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 popupResults">
                     <p>Your input's result:</p>
@@ -289,7 +310,7 @@
         </div>
         <div class="modal-body" align="center" style="padding-top:2.5vw;">
             <button data-dismiss="modal" class="btn" style="min-width: 9vw;min-height: 3vw;">Cancle</button>
-            <button data-dismiss="modal" data-toggle="modal" data-target="#submitModal" style="min-width: 9vw;min-height: 3vw;" class="beginExeciseBtn btn" ng-click="submitCODE(homePagecontroller.exerciseData.exerciseId)">Yes</button>
+            <button data-dismiss="modal" data-toggle="modal" data-target="#submitModal" style="min-width: 9vw;min-height: 3vw;" class="beginExeciseBtn btn" ng-click="submitCODE(homePagecontroller.exerciseData.idExercise)">Yes</button>
         </div>
     </div>
 </div>
@@ -397,75 +418,75 @@
                 <li class="topdown whileClass" name="while" data-command="while" data-pass="false" style="">
                     <div class="alert">
                         while
-                        <input data-pass="false" type="text" style="width:60px">
+                        <input data-pass="false" type="text" size="" >
                     </div>
                     <ol class="while-ol"></ol>
                 </li>
                 <li class="topdown var" data-pass="false" name="var" data-command="var" style="">
                     <div class="alert">
                         var
-                        <input data-pass="false" type="text" style="width:30px" />;
+                        <input data-pass="false" type="text"  />;
                     </div>
                 </li>
                 <li class="topdown int" data-pass="false" name="int" data-command="var" style="">
                     <div class="alert">
                         int
-                        <input data-pass="false" type="text" style="width:30px">
+                        <input data-pass="false" type="text"  >
                         =
-                        <input type="number" class="validate" data-pass="false" style="width: 60px" name="intInput" />;
+                        <input type="number" class="validate" data-pass="false"  name="intInput" />;
                     </div>
                 </li>
                 <li class="topdown double" data-pass="false" name="double" data-command="var" style="">
                     <div class="alert">
                         double
-                        <input data-pass="false" type="text" style="width:30px">
+                        <input data-pass="false" type="text"  >
                         =
-                        <input type="number" class="validate" name="doubleInput" data-pass="false" style="width:60px" />;
+                        <input type="number" class="validate" name="doubleInput" data-pass="false"   />;
                     </div>
                 </li>
                 <li class="topdown string" data-pass="false" name="string" data-command="var" style="">
                     <div class="alert">
                         string
-                        <input data-pass="false" type="text" style="width:30px">
+                        <input data-pass="false" type="text"  >
                         = "
-                        <input type="text" name="stringInput" data-pass="false" style="width:60px" />";
+                        <input type="text" name="stringInput" data-pass="false"   />";
                     </div>
                 </li>
                 <li class="topdown array" data-pass="false" name="array" data-command="var" style="">
                     <div class="alert">
                         array
-                        <input data-pass="false" type="text" style="width:30px">
+                        <input data-pass="false" type="text"  >
                         = [
-                        <input type="text" name="arrayInput" data-pass="false" type="text" style="width:60px"> ];
+                        <input type="text" name="arrayInput" data-pass="false" type="text"  > ];
                     </div>
                 </li>
                 <li class="topdown if" data-pass="false" name="if" data-command="if" style="">
                     <div class="alert">
                         if(
-                        <input data-pass="false" type="text" style="width:30px"> )
+                        <input data-pass="false" type="text"  > )
                     </div>
                     <ol class="if-ol"></ol>
                 </li>
                 <li class="topdown" data-pass="false" name="gan" style="">
                     <div class="alert">
                         Gan
-                        <input data-pass="false" type="text" style="width:30px">
+                        <input data-pass="false" type="text"  >
                         =
-                        <input data-pass="false" type="text" style="width:30px">;
+                        <input data-pass="false" type="text"  >;
                     </div>
                 </li>
                 <li class="topdown" data-pass="false" data-command="return" name="return" style="">
                     <div class="alert">
                         return
-                        <input data-pass="false" type="text" style="width:30px">
+                        <input data-pass="false" type="text"  >
                     </div>
                 </li>
                 <li class="topdown forClass" id="for-command" data-pass="false" data-command="for" name="for" data-droptime="" style="">
                     <div class="alert">
                         for (
-                        <input class="for-input" data-pass="false" type="text" style="width:30px">;
-                        <input class="for-input" data-pass="false" type="text" style="width:30px">;
-                        <input class="for-input" data-pass="false" type="text" style="width:30px">)
+                        <input class="for-input" data-pass="false" type="text"  >;
+                        <input class="for-input" data-pass="false" type="text"  >;
+                        <input class="for-input" data-pass="false" type="text"  >)
                     </div>
                     <ol class="for-ol"></ol>
                 </li>
@@ -482,11 +503,11 @@
                         {
                         <ul id="addmorecase" class="container-case-ul trunggian">
                             <li class="in-switch caseClass" data-command="case" name='case' data-pass="false">
-                                case '<input data-pass="false" type="text" style="width:30px"></input>' :
+                                case '<input data-pass="false" type="text"  ></input>' :
                                 <ol class="case-ol"></ol>
                             </li>
                             <li class="in-switch defaultClass" data-command="default" name='default' data-pass="false">
-                                default '<input data-pass="false" type="text" style="width:30px"></input>' :
+                                default '<input data-pass="false" type="text"  ></input>' :
                                 <ol class="default-ol"></ol>
                             </li>
                         </ul>
@@ -497,6 +518,7 @@
         </div>
     </div>
 </div>
+
 <script src="JS/LIB/application.js"></script>
 <script src="JS/LIB/bootstrap.min.js"></script>
 <script src="JS/validateInputCommand.js"></script>
@@ -510,4 +532,5 @@
 <script src="JS/LIB/additional-methods.min.js"></script>
 <script src="JS/convert-to-code.js"></script>
 <script src="JS/LIB/beauty.js"></script>
+
 

@@ -10,8 +10,7 @@ import com.cranecoding.dto.exercise.ExerciseDTO;
 public interface GameService {
 	
 	List<ExerciseDTO> getAllExercise(int userId);
-
 	ExerciseDTO getExerciseById(int exerciseid);
-	
+	void openExerciseNewUser(int userId);
 	
 }
