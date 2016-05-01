@@ -1,5 +1,6 @@
 package com.cranecoding.controller;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cranecoding.dto.exercise.ExerciseDTO;
-import com.cranecoding.dto.user.UserDTO;
+import com.cranecoding.model.TestCase;
 import com.cranecoding.service.GameService;
 import com.cranecoding.service.UserService;
 
@@ -22,7 +23,6 @@ public class GameController {
 	private GameService gameService;
 	@Autowired
 	private UserService userService;
-	
 
 	@RequestMapping(value = "/api/exercise/getallexercises", method = RequestMethod.GET)
 	public @ResponseBody List<ExerciseDTO> getAllExercise(HttpServletRequest request,
@@ -30,35 +30,34 @@ public class GameController {
 		int userId = userService.getUserId(userName);
 		return gameService.getAllExercise(userId);
 	}
-	
+
 	@RequestMapping(value = "/api/exercise/getexercisesById", method = RequestMethod.GET)
 	public @ResponseBody ExerciseDTO getExerciseById(HttpServletRequest request,
-			@RequestParam("exerciseId") int exerciseid){
-		
+			@RequestParam("exerciseId") int exerciseid) {
+
 		return gameService.getExerciseById(exerciseid);
 	}
-	
-	// mới lấy exercise truyền parameter để ấn test.
-		@RequestMapping(value = "/api/exercise/testcode", method = RequestMethod.GET)
-		public @ResponseBody int testcode(@RequestParam("parameter") String parameter, @RequestParam("exerciseid") String exerciseId){
-			//System.out.println("__B__"+exerciseid);
-			//System.out.println("__B__"+parameter);
-			System.out.println("__B__"+exerciseId);
-			if(Integer.parseInt( exerciseId ) == 1) return tinhtong(Integer.parseInt( parameter ));
-			return 1;
-			
-		}
-//		@RequestMapping(value = "/api/exercise/submitcode",method = RequestMethod.GET)
-//		public @ResponseBody 
 
-		
-		
-		public int tinhtong(int n){
-			int S = 0;
-			for ( int i = 0; i < n ; i++ ){
-				S = S + i ;
-			}
-			return S;
+	@RequestMapping(value = "/api/exercise/gettestcases", method = RequestMethod.GET)
+	public @ResponseBody List<TestCase> getTestCase(HttpServletRequest request,
+			@RequestParam("exerciseId") int exerciseid) {
+		return gameService.getTestCaseByExerciseId(exerciseid);
+	}
+
+	@RequestMapping(value = "/api/exercise/submit", method = RequestMethod.GET)
+	public @ResponseBody Hashtable<String, Comparable> submitExercise(HttpServletRequest request,
+			@RequestParam("exerciseId") int exerciseid, @RequestParam("username") String username,
+			@RequestParam("star") int star, @RequestParam("time") int time) {
+		Hashtable informationToReturn = new Hashtable();
+		if (star > 5) {
+			gameService.saveScore(exerciseid,username,star,time);
+			informationToReturn.put("result", true);
+			informationToReturn.put("exerciseId", gameService.openNextExercise(exerciseid + 1, username));
+		} else {
+			informationToReturn.put("result", false);
+			informationToReturn.put("message", "Sorry, you fail! Please try again!");
 		}
+		return informationToReturn;
+	}
 
 }

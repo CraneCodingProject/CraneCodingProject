@@ -5,13 +5,13 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the case database table.
+ * The persistent class for the test_case database table.
  * 
  */
 @Entity
-@Table(name="case")
-@NamedQuery(name="Case.findAll", query="SELECT c FROM Case c")
-public class Case implements Serializable {
+@Table(name="test_case")
+@NamedQuery(name="TestCase.findAll", query="SELECT t FROM TestCase t")
+public class TestCase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -30,7 +30,7 @@ public class Case implements Serializable {
 	@JoinColumn(name="exercise_exerciseid", nullable=false)
 	private Exercise exercise;
 
-	public Case() {
+	public TestCase() {
 	}
 
 	public int getIdcase() {

@@ -32,13 +32,13 @@ public class Exercise implements Serializable {
 	@Lob
 	private String pseudocode;
 
-	//bi-directional many-to-one association to Case
-	@OneToMany(mappedBy="exercise")
-	private List<Case> cases;
-
 	//bi-directional many-to-one association to Score
 	@OneToMany(mappedBy="exercise")
 	private List<Score> scores;
+
+	//bi-directional many-to-one association to TestCase
+	@OneToMany(mappedBy="exercise")
+	private List<TestCase> testCases;
 
 	public Exercise() {
 	}
@@ -83,28 +83,6 @@ public class Exercise implements Serializable {
 		this.pseudocode = pseudocode;
 	}
 
-	public List<Case> getCases() {
-		return this.cases;
-	}
-
-	public void setCases(List<Case> cases) {
-		this.cases = cases;
-	}
-
-	public Case addCas(Case cas) {
-		getCases().add(cas);
-		cas.setExercise(this);
-
-		return cas;
-	}
-
-	public Case removeCas(Case cas) {
-		getCases().remove(cas);
-		cas.setExercise(null);
-
-		return cas;
-	}
-
 	public List<Score> getScores() {
 		return this.scores;
 	}
@@ -125,6 +103,28 @@ public class Exercise implements Serializable {
 		score.setExercise(null);
 
 		return score;
+	}
+
+	public List<TestCase> getTestCases() {
+		return this.testCases;
+	}
+
+	public void setTestCases(List<TestCase> testCases) {
+		this.testCases = testCases;
+	}
+
+	public TestCase addTestCas(TestCase testCas) {
+		getTestCases().add(testCas);
+		testCas.setExercise(this);
+
+		return testCas;
+	}
+
+	public TestCase removeTestCas(TestCase testCas) {
+		getTestCases().remove(testCas);
+		testCas.setExercise(null);
+
+		return testCas;
 	}
 
 }

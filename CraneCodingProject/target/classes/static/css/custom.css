@@ -274,7 +274,7 @@ div#loginForm {
     display: table;
     margin: 0px;
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 35%;
     max-width: 30vw;
 }
@@ -368,6 +368,7 @@ body {
     margin: 0px;
     overflow: hidden;
     background-color: #152B39;
+    padding-right : 0px;
 }
 
 .side-nav {
@@ -732,3 +733,143 @@ pre#result {
 ol.vertical li {
     color: #fff;
 }
+
+
+
+
+
+/* main page */
+
+
+
+
+    .btn {
+        background-color: #226968;
+        color: white;
+        padding: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        vertical-align: middle;
+        text-align: center;
+        min-width: 7vw;
+        box-shadow: none;
+        border: 0px;
+        border-radius: 0px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        outline: none;
+    }
+
+        .btn:hover {
+            background-color: #31908f;
+            color: white;
+            border: 0px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+            border-radius: 0px;
+        }
+
+        .btn:focus {
+            background-color: #226968;
+            color: white;
+            border: 0px;
+            border-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+            border-radius: 0px;
+        }
+
+    .btn-outline:hover {
+        border-bottom: 2px solid #fff;
+    }
+
+    .btn:hover {
+        background-color: #31908f;
+        color: white;
+    }
+
+    .beginExeciseBtn {
+        background-color: #d05e5e;
+        min-width: 9vw;
+        min-height: 3vw;
+    }
+
+        .beginExeciseBtn:hover {
+            background-color: #e46262;
+            min-width: 9vw;
+            min-height: 3vw;
+        }
+
+    #btnSubmit {
+        background-color: #D05E5E;
+    }
+
+        #btnSubmit:hover {
+            background-color: #e46262;
+        }
+
+    a.list-group-item.ng-binding.chosenExercise {
+        border-left: 3px solid #AFCCDE;
+        border-radius: 0px;
+    }
+
+    .popover {
+        max-width: 160px;
+    }
+
+    .classAddCaseInSwitchCommand {
+        color: #fff;
+    }
+
+        .classAddCaseInSwitchCommand:hover {
+            color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+    .modal-content {
+        border: 0px;
+    }
+
+    .nav > li > a:hover {
+        border-right: 1px solid #226968;
+    }
+
+    .active {
+        border-right: 3px solid #226968;
+    }
+
+    .tab-pane {
+        border: 0px;
+    }
+
+    #home.active {
+        border: 0px;
+    }
+
+    #userRecord {
+        float: left;
+    }
+
+    #btnTest {
+        height: 30px;
+        border: 0px;
+        color: white;
+        background-color: #D05E5E;
+    }
+
+    .modal-backdrop, .modal-backdrop.fade.in {
+        background: url('src/img/urlBackground.png') no-repeat 0 0 scroll;
+        background-size: cover;
+    }
+    #lstCommandBlock input{
+    	display : none;
+    }
+    #dropArea input{
+    	min-height: 30px;
+    	min-width: 10vw;
+    
+    }
+
+

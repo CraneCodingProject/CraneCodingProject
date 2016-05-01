@@ -17,8 +17,9 @@ angular.module('HomePage')
         }
         $scope.login = function () {
             $scope.dataLoading = true;
+            
             AuthenticationService.Login($scope.username, $scope.password, function (response) {
-                if (response) {
+            	if (response) {
                     // sự kiện ở đây
                 	console.log('sự kiện ở đây '+response);
                     AuthenticationService.SetCredentials($scope.username, $scope.password); // gọi service để lưu cookie

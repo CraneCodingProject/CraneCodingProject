@@ -24,7 +24,7 @@ public class AuthenticationController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	GameService gameService;
 
@@ -33,21 +33,23 @@ public class AuthenticationController {
 		return "index";
 	}
 
-	@RequestMapping(value ="/api/exercise/authentication", method = RequestMethod.POST)
-	public @ResponseBody boolean checkValidUser(HttpServletRequest request, @RequestBody String jsonUserInfor) throws JsonParseException, JsonMappingException, IOException{
+	@RequestMapping(value = "/api/exercise/authentication", method = RequestMethod.POST)
+	public @ResponseBody boolean checkValidUser(HttpServletRequest request, @RequestBody String jsonUserInfor)
+			throws JsonParseException, JsonMappingException, IOException {
+		System.out.println("authen " + userService.checkIfValidUser(jsonUserInfor));
 		return userService.checkIfValidUser(jsonUserInfor);
 	}
 
-	@RequestMapping(value = "/api/exercise/register",method = RequestMethod.POST)
-	public @ResponseBody  Hashtable<String, Comparable>  registerUserAccount (@RequestBody UserDTO userRegister){
+	@RequestMapping(value = "/api/exercise/register", method = RequestMethod.POST)
+	public @ResponseBody Hashtable<String, Comparable> registerUserAccount(@RequestBody UserDTO userRegister) {
 		Hashtable user;
 		user = new Hashtable();
-		if(userService.checkIsUserNameExsit(userRegister)){
+		if (userService.checkIsUserNameExsit(userRegister)) {
 			user.put("message", "Your new account have been created");
 			user.put("success", true);
 			User after = userService.createNewUser(userRegister);
 			gameService.openExerciseNewUser(after.getUserid());
-		}else{
+		} else {
 			user.put("message", "Your user name or email is already exsit");
 			user.put("success", false);
 		}
