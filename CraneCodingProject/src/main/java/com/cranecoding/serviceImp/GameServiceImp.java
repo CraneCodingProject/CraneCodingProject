@@ -48,7 +48,7 @@ public class GameServiceImp implements GameService {
 
 	@Override
 	public void openExerciseNewUser(int userId) {
-		Exercise exercise = exerciseDAO.getExerciseById(22);
+		Exercise exercise = exerciseDAO.getExerciseById(1);
 		Score score = new Score();
 		score.setUser(userDAO.getUserById(userId));
 		score.setExercise(exercise);
