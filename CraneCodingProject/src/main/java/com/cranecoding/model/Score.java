@@ -26,7 +26,7 @@ public class Score implements Serializable {
 
 	private int status;
 
-	private int time;
+	private double time;
 
 	//bi-directional many-to-one association to Exercise
 	@ManyToOne
@@ -73,11 +73,11 @@ public class Score implements Serializable {
 		this.status = status;
 	}
 
-	public int getTime() {
+	public double getTime() {
 		return this.time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(double time) {
 		this.time = time;
 	}
 

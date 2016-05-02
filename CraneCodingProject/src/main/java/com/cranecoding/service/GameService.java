@@ -15,5 +15,5 @@ public interface GameService {
 	void openExerciseNewUser(int userId);
 	List<TestCase> getTestCaseByExerciseId(int exerciseId);
 	int openNextExercise(int exerciseId,String username);
-	void saveScore(int exerciseid, String username, int star, int time);
+	void saveScore(int exerciseid, String username, int star, String time);
 }

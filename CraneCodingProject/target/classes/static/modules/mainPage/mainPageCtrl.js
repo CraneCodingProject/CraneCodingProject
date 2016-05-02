@@ -150,7 +150,7 @@ angular.module('MainPage')
             *   Get code
             */
             function getCODE(inputParameterToTest) {
-                //inputParameterToTest = abc.inp;
+                //inputParameterToTest = jsonResult.inp;
                 $('#result').removeAttr('src');
                 var CODE = "<script>function MATH (input) { try{ ";
                 demRunFor = 0;
@@ -211,6 +211,7 @@ angular.module('MainPage')
                             //success
                             function (response) {
                                 var dataNumberToNumber = response.data;
+                                console.log(response.data);
                                 //dataNumberToNumber = "[{"inp":"1", "outp":"1"},{"inp":"4", "outp":"2"},{"inp":"3", "outp":"3"}]";
                                 //var a="[{'inp":"1", "outp":"1"},{"inp":"4", "outp":"2"},{"inp":"3", "outp":"3"}]";
                                 $('#testCaseSubmit').empty();
@@ -220,24 +221,24 @@ angular.module('MainPage')
                                 var sumTestCases = 0;
                                 var falseTestCase = 0;
                                 var timePerformance = 0;
-                                $.each(dataNumberToNumber, function (index, abc) {
+                                $.each(dataNumberToNumber, function (index, jsonResult) {
                                     sumTestCases++;
-                                    var getCodeJsToTest = getCODE(abc.inp);
+                                    var getCodeJsToTest = getCODE(jsonResult[1]);
                                     var start = new Date().getMilliseconds();
-                                    var getCodeJsToTest = getCODE(abc.inp);
+                                    var getCodeJsToTest = getCODE(jsonResult[1]);
 
                                     timePerformance = timePerformance + (new Date().getMilliseconds() - start);
 
                                     var statusCase = "<i style='color:#2BC430;font-size: xx-large;' class='fa fa-check'></i>";
 
-                                    if (getCodeJsToTest != abc.outp) {
+                                    if (getCodeJsToTest != jsonResult[2]) {
                                         test = false;
                                         falseTestCase++;
                                         statusCase = "<i style='color:#C42B2B;font-size: xx-large;' class='fa fa-times'></i>";
                                     }
 
                                     setTimeout(function () {
-                                        $('#testCaseSubmit').append('<tr><td>' + abc.inp + '</td><td>' + getCodeJsToTest + '</td><td>' + abc.outp + '</td><td>' + statusCase + '</td></tr>');//<td>' + timePerformance + '</td>
+                                        $('#testCaseSubmit').append('<tr><td>' + jsonResult[1] + '</td><td>' + getCodeJsToTest + '</td><td>' + jsonResult[2] + '</td><td>' + statusCase + '</td></tr>');//<td>' + timePerformance + '</td>
                                     }, 200 * sumTestCases);
 
                                 });
@@ -248,16 +249,16 @@ angular.module('MainPage')
 
                                 // submit to server : 
                                 // exerciseId, userName, passCase, Exercisestatus, time
-                                submitRecordApi.submitRecord(Exerciseid, 1, (sumTestCases - falseTestCase), $scope.time)
+                                submitRecordApi.submitRecord(Exerciseid,$rootScope.globals.currentUser.username, (sumTestCases - falseTestCase), $scope.time)
                                     .then(
                                     function (response) {
-                                        console.log('phat_submitRecordApi: ' + response.data.isPass);
+                                        console.log('phat_submitRecordApi: ' + response.data.result);
                                         $scope.submitResult = response.data;
-                                        if (response.data.isPass == true) {
-                                            $('#btnPassExerciseSubmitModal').html('Do next.');
+                                        if (response.data.result == true) {
+                                            $('#btnPassExerciseSubmitModal').html('Do next');
                                         }
                                         else {
-                                            $('#btnPassExerciseSubmitModal').html('Retry.');
+                                            $('#btnPassExerciseSubmitModal').html('Retry');
                                         }
                                     }
                                     )
@@ -300,8 +301,8 @@ angular.module('MainPage')
             */
             $scope.doNextorReTryExercise = function () {
                 $scope.demoForm.$setPristine();
-                if ($scope.submitResult.isPass) {
-                    console.log("pass: " + $scope.submitResult.isPass + ' ' + $scope.submitResult.exerciseId);
+                if ($scope.submitResult.result) {
+                    console.log("pass: " + $scope.submitResult.result + ' ' + $scope.submitResult.exerciseId);
                     //load list allexercise...
 
                     //directive to next exercise
@@ -309,7 +310,7 @@ angular.module('MainPage')
                 }
                 else {
                     $route.reload();
-                    console.log($scope.submitResult.isPass + ' ' + $scope.submitResult.exerciseId);
+                    console.log($scope.submitResult.result + ' ' + $scope.submitResult.exerciseId);
                 }
             }
             /*----------------------------------------------------------*/

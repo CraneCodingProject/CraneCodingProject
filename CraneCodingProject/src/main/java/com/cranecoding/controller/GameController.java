@@ -40,16 +40,16 @@ public class GameController {
 
 	@RequestMapping(value = "/api/exercise/gettestcases", method = RequestMethod.GET)
 	public @ResponseBody List<TestCase> getTestCase(HttpServletRequest request,
-			@RequestParam("exerciseId") int exerciseid) {
+			@RequestParam("exerciseid") int exerciseid) {
 		return gameService.getTestCaseByExerciseId(exerciseid);
 	}
 
 	@RequestMapping(value = "/api/exercise/submit", method = RequestMethod.GET)
 	public @ResponseBody Hashtable<String, Comparable> submitExercise(HttpServletRequest request,
-			@RequestParam("exerciseId") int exerciseid, @RequestParam("username") String username,
-			@RequestParam("star") int star, @RequestParam("time") int time) {
+			@RequestParam("exerciseid") int exerciseid, @RequestParam("username") String username,
+			@RequestParam("star") int star, @RequestParam("time") String time) {
 		Hashtable informationToReturn = new Hashtable();
-		if (star > 5) {
+		if (star > 2) {
 			gameService.saveScore(exerciseid,username,star,time);
 			informationToReturn.put("result", true);
 			informationToReturn.put("exerciseId", gameService.openNextExercise(exerciseid + 1, username));

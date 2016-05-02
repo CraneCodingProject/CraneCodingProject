@@ -61,7 +61,7 @@ public class GameServiceImp implements GameService {
 
 	@Override
 	public List<TestCase> getTestCaseByExerciseId(int exerciseId) {
-		List<TestCaseDTO> listTestCaseToReturn = new ArrayList<>();
+		// List<TestCaseDTO> listTestCaseToReturn = new ArrayList<>();
 		// for (TestCase caseResult :
 		// testCaseDao.getListCaseByExerciseId(exerciseId))
 		// listTestCaseToReturn.add(converToTestCaseDTO(caseResult));
@@ -70,24 +70,28 @@ public class GameServiceImp implements GameService {
 
 	@Override
 	public int openNextExercise(int exerciseId, String username) {
-		Score newExercise = new Score();
-		newExercise.setExercise(exerciseDAO.getExerciseById(exerciseId));
-		newExercise.setUser(userDAO.getUserById(userDAO.getUserIdByUserName(username).getUserid()));
-		newExercise.setBlock("");
-		newExercise.setScoreid(0);
-		newExercise.setTime(0);
-		newExercise.setStatus(0);
-		newExercise.setStar(0);
-		scoreDAO.save(newExercise);
+		if (scoreDAO.getScoreByUserIdAndExerciseId(userDAO.getUserIdByUserName(username).getUserid(),
+				exerciseId) == null) {
+			Score newExercise = new Score();
+			newExercise.setExercise(exerciseDAO.getExerciseById(exerciseId));
+			newExercise.setUser(userDAO.getUserById(userDAO.getUserIdByUserName(username).getUserid()));
+			newExercise.setBlock("");
+			newExercise.setScoreid(0);
+			newExercise.setTime(0);
+			newExercise.setStatus(0);
+			newExercise.setStar(0);
+			scoreDAO.save(newExercise);
+		}
 		return exerciseId;
 	}
 
 	@Override
-	public void saveScore(int exerciseid, String username, int star, int time) {
-		Score currentExercise = scoreDAO.getScoreByUserIdAndExerciseId(userDAO.getUserIdByUserName(username).getUserid(),
-				exerciseid);
+	public void saveScore(int exerciseid, String username, int star, String time) {
+		Score currentExercise = scoreDAO
+				.getScoreByUserIdAndExerciseId(userDAO.getUserIdByUserName(username).getUserid(), exerciseid);
 		currentExercise.setStar(star);
-		currentExercise.setTime(time);
+		double timeToSave = Double.parseDouble(time);
+		currentExercise.setTime(timeToSave);
 		scoreDAO.save(currentExercise);
 	}
 
