@@ -75,8 +75,10 @@
                     <span ng-show="rePassword != password" class="help-block">Password is not match!</span>
                     <span ng-show="formRegist.rePassword.$dirty && formRegist.rePassword.$error.required" class="help-block">Password is required</span>
                 </div>
-
+                
                 <div ng-show="registerSuccess" class="alert-success">{{registerSuccess}}</div>
+                <div ng-show="registerFalse" class="alert-danger">{{registerFalse}}</div>
+                
                 <div class="form-group" style="float:right;">
                     <a href="" ng-click="showForm = !showForm">Already have account!</a>
                     <button type="submit" ng-click="register()" data-dismiss="modal" ng-disabled="formRegist.$invalid || dataLoading || rePassword != password " class="btn btn-danger beginExeciseBtn">Register</button>

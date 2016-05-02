@@ -3,9 +3,11 @@
 angular.module('HomePage')
 
 .controller('HomePageController',
-    ['$scope', '$rootScope', '$location', '$cookieStore', 'AuthenticationService', 'registerAccApi',
-    function ($scope, $rootScope, $location, $cookieStore, AuthenticationService, registerAccApi) {
+    ['$scope', '$rootScope', '$location', '$cookieStore', 'AuthenticationService', 'registerAccApi', '$timeout',
+    function ($scope, $rootScope, $location, $cookieStore, AuthenticationService, registerAccApi,$timeout) {
         // reset login status
+        $scope.registerSuccess=false;
+        $scope.registerFalse=false;
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
             $scope.logout = true;
@@ -26,7 +28,7 @@ angular.module('HomePage')
                    // $location.path('/');
                     $scope.dataLoading = true;
                     $('#loginForm').modal('hide');
-                    $scope.logout = true;
+                    $scope.logout = true;                 
                 } else {
                     console.log('fail');
                     console.log('sự kiện ở sasas fgaliđây  '+response);
@@ -58,11 +60,19 @@ angular.module('HomePage')
                     if (response.data.success==true) {
                         $scope.dataLoading = false;
                         console.log(response.data+'___dang ky thanh cong');
+                        $scope.registerFalse=false;
                         //console.log('success : '  + response.data.message);
-                        //$scope.registerSuccess = response.data.message;
+                        $scope.registerSuccess = response.data.message;
+                        $timeout(function(){
+                            $scope.showForm= true;
+                            $('#loginForm').modal('hide');
+                        },2000);
                     }
                     else{
                     	console.log(' callback true_dang ky fail con me no');
+                        $scope.registerFalse = response.data.message;
+                        $scope.registerSuccess=false;
+                        $scope.dataLoading = false;
                     }
                 },
                 function(response){
