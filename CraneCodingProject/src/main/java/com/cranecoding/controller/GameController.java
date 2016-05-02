@@ -49,7 +49,7 @@ public class GameController {
 			@RequestParam("exerciseid") int exerciseid, @RequestParam("username") String username,
 			@RequestParam("star") int star, @RequestParam("time") String time) {
 		Hashtable informationToReturn = new Hashtable();
-		if (star > 2) {
+		if (star > 5) {
 			gameService.saveScore(exerciseid,username,star,time);
 			informationToReturn.put("result", true);
 			informationToReturn.put("exerciseId", gameService.openNextExercise(exerciseid + 1, username));
