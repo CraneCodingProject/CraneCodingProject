@@ -8,23 +8,22 @@
   <script src="JS/vendor/magnific-popup.min.js"></script>
   <script src="JS/vendor/owl.carousel.min.js"></script>
   <script src="JS/scripts.js"></script>
-  
   <style>
-  #loginForm{
-  	position : absolute;
-  	top : 20%;
-  	left : 25%;
-  	padding-right: 0px;
+#loginForm {
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    padding-right: 0px;
     padding: 0px !important;
     border: 0px !important;
     display: table;
     margin: 0px;
-    
-    width: 50%;
-    background-color : #fff;
-    
-    z-index : 10;
-}  
+    width: 40%;
+    background-color: #fff;
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0px 0px 30px;
+}
 #registedForm input{
 	margin-bottom : 1vw;
 	height: 30px;
@@ -47,32 +46,38 @@
 
 div#loginForm .modal-body {
     height: auto;
-    max-height:none;    
+    padding: 0px 5px;
+    max-height: none;
 }
 
 div#loginForm h2 {
-    padding: 0px;
+    padding-left: 5px;
+}
+div#loginForm label{
+  font-size: 15px;
 }
 
   
   
   
-#logoutModal{
-  	position : absolute;
-  	top : 20%;
-  	left : 25%;
-  	padding-right: 0px;
+#logoutModal {
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    padding-right: 0px;
     padding: 0px !important;
     border: 0px !important;
     display: table;
     margin: 0px;
-    
-    width: 50%;
-    background-color : #fff;
-    
-    z-index : 10;
-}  
-
+    width: 30%;
+    background-color: #fff;
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0px 0px 30px;
+}
+.btn-icon-left.btn-sm {
+   padding:0px 30px;
+}
 /*  
   
   
@@ -94,7 +99,7 @@ div#logoutModal .modal-body {
 }
 
 div#logoutModal h2 {
-    padding: 0px;
+    padding-left: 10px;
 }
 .close{
 float:right;
@@ -103,11 +108,15 @@ font-size: 24px;
 border : none;
     text-decoration: blink;
     padding : 5px;
+        background: transparent;
 }
-  
+
+.tile.tile-with-icon {
+    text-align: center;
+    text-align: -webkit-center;
+}
+.help-block{color: red; font-size: 14px;}
   </style>
-  
-  
   <script>
   $(document).ready(function () {
       $('#loginForm').hide();
@@ -125,7 +134,13 @@ border : none;
 		console.log('khfdahjfbdafbdbf');
 	}); 
   $('.close').click(function(){
-	  $('#loginForm').hide();
+    $('#loginForm').hide();
+      $('#commandBlockModal').hide();
+      $('#videoTutorialModal').hide();
+      $('#logoutModal').hide();
+  });
+  $('#closeModal').click(function(){
+    $('#loginForm').hide();
       $('#commandBlockModal').hide();
       $('#videoTutorialModal').hide();
       $('#logoutModal').hide();
@@ -159,8 +174,8 @@ border : none;
     <div class="modal-content">
         <div class="modal-header">
             <a href class="close"  style="color:#202e51">&times;</a>
-            <h3 class="modal-title" ng-show="showForm">Register form</h3>
-            <h3 class="modal-title" ng-show="!showForm">Login form</h3>
+            <h2 class="modal-title" ng-show="showForm">Register form</h2>
+            <h2 class="modal-title" ng-show="!showForm">Login form</h2>
         </div>
         <div class="modal-body">
                 
@@ -173,14 +188,14 @@ border : none;
                 </div>
                 <div class="form-group">
                     <label for="password">User password</label>
-                    <input id="input-form" type="password" name="password" ng-minlength="6" id=" password" class="form-control" ng-model="password" required />
+                    <input id="input-form" type="password" name="password" ng-minlength="8" id=" password" class="form-control" ng-model="password" required />
                     <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
                     <span ng-show="form.password.$error.minlength" class="help-block">Password is more than 8.</span>
                 </div>
                 <div ng-show="error" class="alert-danger">{{error}}</div>
                 <div class="form-group" style="float:right;">
                     <a href type="button" ng-click="showForm = !showForm">Register</a>
-                    <button id="btnLogin" type="submit" ng-click="login()" data-dismiss="modal" ng-disabled="form.$invalid || dataLoading" class="btn btn-danger beginExeciseBtn">
+                    <button id="btnLogin" type="submit" ng-click="login()" data-dismiss="modal" ng-disabled="form.$invalid || dataLoading" class="btn btn-sm btn-primary btn-icon-left">
                     	Login
                     </button>
                     
@@ -220,7 +235,7 @@ border : none;
                     <label for="username">Password
                         <i ng-show="rePassword == password && password !=null" class="fa fa-check" aria-hidden="true"></i>
                     </label>
-                    <input id="input-form" ng-minlength="6" type="text" name="password" id="password" class="form-control" ng-model="password" required />
+                    <input id="input-form" ng-minlength="8" type="password" name="password" id="password" class="form-control" ng-model="password" required />
                     <span ng-show="formRegist.password.$error.minlength" class="help-block">Password is more than 8.</span>
                     <span ng-show="formRegist.password.$dirty && formRegist.password.$error.required" class="help-block">Password is required</span>
                 </div>
@@ -229,7 +244,7 @@ border : none;
                     <label for="password">Enter password again
                         <i ng-show="rePassword == password && rePassword!=null" class="fa fa-check" aria-hidden="true"></i>
                     </label>
-                    <input id="input-form" type="password" ng-minlength="6" name="rePassword" id="rePassword" class="form-control" ng-model="rePassword" required />
+                    <input id="input-form" type="password" ng-minlength="8" name="rePassword" id="rePassword" class="form-control" ng-model="rePassword" required />
                     <span ng-show="formRegist.rePassword.$error.minlength" class="help-block">Password is more than 8.</span>
                     <span ng-show="rePassword != password" class="help-block">Password is not match!</span>
                     <span ng-show="formRegist.rePassword.$dirty && formRegist.rePassword.$error.required" class="help-block">Password is required</span>
@@ -239,7 +254,7 @@ border : none;
                 <div ng-show="registerFalse" class="alert-danger">{{registerFalse}}</div>
                 <div class="form-group" style="float:right;">
                     <a href="" ng-click="showForm = !showForm">Already have account!</a>
-                    <button type="submit" ng-click="register()" data-dismiss="modal" ng-disabled="formRegist.$invalid || dataLoading || rePassword != password " class="btn btn-danger beginExeciseBtn">Register</button>
+                    <button type="submit" ng-click="register()" data-dismiss="modal" ng-disabled="formRegist.$invalid || dataLoading || rePassword != password " class="btn btn-sm btn-primary btn-icon-left">Register</button>
                 </div>
             </form>
         </div>
@@ -264,12 +279,12 @@ border : none;
 <div class="modal fade" id="logoutModal" role="dialog">
     <div class="modal-content">
     	<div class="modal-header">
-        	<button type="button" onclick="stopTutorialVideo()" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
+        	
     		<h2>Log out?</h2>
     	</div>
     	<div class="modal-body" style="height:100%;" align="center">
-        	<button data-dismiss="modal" class="btn close" style="min-width: 9vw;min-height: 3vw;">Cancel</button>
-        	<button data-dismiss="modal" ng-click="logoutAct()" class="beginExeciseBtn btn close">Yes!</button>
+        	<button data-dismiss="modal" id = "closeModal" class="btn btn-sm btn-primary btn-icon-left" style="float : right" >Cancel</button>
+        	<button data-dismiss="modal" id = "closeModal" ng-click="logoutAct()" class="btn btn-sm btn-primary btn-icon-left" style="float : right">Yes!</button>
     	</div>
     </div>
 </div>
@@ -453,8 +468,8 @@ border : none;
       <span class="overlay" style="opacity: .78;"></span>
       <div class="container padding-top-3x padding-bottom-3x">
         <!-- Remove ".light-skin" class to alter appearance. -->
-        <a href="https://vimeo.com/33984473" class="video-popup-btn light-skin space-top-3x space-bottom">
-          <img src="img/home/intro/ic_video.png"/>
+        <a href="https://vimeo.com/33984473" class="video-popup-btn light-skin space-top-3x space-bottom" style="text-align: -webkit-center;vertical-align: middle;">
+          <img style="padding: 23px;" src="img/home/intro/ic_video.png"/>
         </a>
         <p class="text-lg text-light space-bottom-2x">Watch tutorial to have a quick overview about the app</p>
       </div><!-- .container -->

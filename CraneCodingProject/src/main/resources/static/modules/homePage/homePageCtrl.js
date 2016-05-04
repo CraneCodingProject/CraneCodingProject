@@ -14,6 +14,7 @@ angular.module('HomePage')
         $scope.logoutAct = function () {
             AuthenticationService.ClearCredentials();
             $scope.logout = false;
+            $('#logoutModal').hide();
         }
         $scope.login = function () {
             
