@@ -3,22 +3,19 @@
 angular.module('HomePage')
 
 .controller('HomePageController',
-    ['$scope', '$rootScope', '$location', '$cookieStore', 'AuthenticationService', 'registerAccApi', '$timeout',
-    function ($scope, $rootScope, $location, $cookieStore, AuthenticationService, registerAccApi,$timeout) {
+    ['$scope', '$rootScope', '$location', '$cookieStore', 'AuthenticationService', 'registerAccApi','$timeout',
+    function ($scope, $rootScope, $location, $cookieStore, AuthenticationService, registerAccApi, $timeout) {
         // reset login status
-        $scope.registerSuccess=false;
-        $scope.registerFalse=false;
+       // $scope.logout = false;
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
             $scope.logout = true;
         }
         $scope.logoutAct = function () {
             AuthenticationService.ClearCredentials();
-            $scope.dataLoading = false;
             $scope.logout = false;
         }
         $scope.login = function () {
-            $scope.dataLoading = true;
             
             AuthenticationService.Login($scope.username, $scope.password, function (response) {
             	if (response == 'true') {
@@ -26,14 +23,13 @@ angular.module('HomePage')
                 	console.log('sự kiện ở đây '+response);
                     AuthenticationService.SetCredentials($scope.username, $scope.password); // gọi service để lưu cookie
                    // $location.path('/');
-                    $scope.dataLoading = true;
-                    $('#loginForm').modal('hide');
-                    $scope.logout = true;                 
+                    //$('#loginForm').modal('hide');
+                    $('#loginForm').hide();
+                    $scope.logout = true;
                 } else {
                     console.log('fail');
                     console.log('sự kiện ở sasas fgaliđây  '+response);
                     $scope.error = 'Account is not exist';
-                    $scope.dataLoading = false;
                     $scope.logout = false;
                 }
             });
@@ -46,11 +42,10 @@ angular.module('HomePage')
                 $location.path('/');
             }
             else {
-                $('#loginForm').modal('show');
+                $('#loginForm').show();
             }
         }
         $scope.register = function () {
-            $scope.dataLoading = true;
 
             registerAccApi.registerNewAcc($scope.username,$scope.firstname,$scope.lastname,$scope.usermail, $scope.password)
             .then(
@@ -58,14 +53,13 @@ angular.module('HomePage')
                 	console.log('__AA___'+response.data.success);
                 	console.log('__AA___'+response.data.message);
                     if (response.data.success==true) {
-                        $scope.dataLoading = false;
                         console.log(response.data+'___dang ky thanh cong');
                         $scope.registerFalse=false;
                         //console.log('success : '  + response.data.message);
                         $scope.registerSuccess = response.data.message;
                         $timeout(function(){
                             $scope.showForm= true;
-                            $('#loginForm').modal('hide');
+                            $('#loginForm').hide();
                         },2000);
                     }
                     else{
