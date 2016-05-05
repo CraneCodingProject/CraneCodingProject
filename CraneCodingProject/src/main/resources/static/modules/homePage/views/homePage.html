@@ -1,14 +1,15 @@
-  <link href="css/styles.min.css" rel="stylesheet" media="screen">
-  <script src="JS/vendor/jquery-2.1.4.min.js"></script>
-  <script src="JS/vendor/bootstrap.min.js"></script>
-  <script src="JS/vendor/smoothscroll.js"></script>
-  <script src="JS/vendor/jquery.stellar.min.js"></script>
-  <script src="JS/vendor/velocity.min.js"></script>
-  <script src="JS/vendor/jquery.parallax.min.js"></script>
-  <script src="JS/vendor/magnific-popup.min.js"></script>
-  <script src="JS/vendor/owl.carousel.min.js"></script>
-  <script src="JS/scripts.js"></script>
-  <style>
+<link href="css/font-awesome-4.5.0/css/font-awesome.min.css" rel ="stylesheet">
+<link href="css/styles.min.css" rel="stylesheet" media="screen">
+<script src="JS/vendor/jquery-2.1.4.min.js"></script>
+<script src="JS/vendor/bootstrap.min.js"></script>
+<script src="JS/vendor/smoothscroll.js"></script>
+<script src="JS/vendor/jquery.stellar.min.js"></script>
+<script src="JS/vendor/velocity.min.js"></script>
+<script src="JS/vendor/jquery.parallax.min.js"></script>
+<script src="JS/vendor/magnific-popup.min.js"></script>
+<script src="JS/vendor/owl.carousel.min.js"></script>
+<script src="JS/scripts.js"></script>
+<style>
 #loginForm {
     position: fixed;
     top: 20%;
@@ -127,7 +128,7 @@ border : none;
 }
 .help-block{color: red; font-size: 14px;}
   </style>
-  <script>
+<script>
   $(document).ready(function () {
       $('#loginForm').hide();
       $('#commandBlockModal').hide();
@@ -180,7 +181,7 @@ border : none;
   </script>
 
  
-  <div id="loginForm" role="dialog">
+<div id="loginForm" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
             <a href class="close" style="color:#202e51">&times;</a>
@@ -297,12 +298,8 @@ border : none;
     	</div>
     </div>
 </div>
-  
-  
-  
-
 <!-- Page Wrapper -->
-  <div class="page-wrapper">
+<div class="page-wrapper">
     <!-- Navbar -->
     <!-- Remove ".navbar-fixed" class to make navigation bar scrollable with the page. Another modifier calss is ".submenu-dark" to alter submenu appearance. -->
     <header class="navbar navbar-fixed">
@@ -666,162 +663,4 @@ border : none;
       </div><!-- .container -->
     </footer><!-- .footer -->
   </div><!-- .page-wrapper -->
-<!-- <style>
-    .form-group {
-        margin-bottom: 0px;
-    }
 
-    #input-form {
-        background-color: #fff;
-        height: 30px;
-    }
-    
-
-    .modal-backdrop, .modal-backdrop.fade.in {
-        opacity: 0;
-    }
-
-    .alert-danger, .alert-success {
-        height: 30px;
-        padding: 8px;
-        margin-bottom: 5px;
-        border-radius: 4px;
-    }
-
-    i.fa-check {
-        color: #00ff21;
-    }
-
-    i.fa-times {
-        color: #ff0000;
-    }
-
-    .help-block {
-        color: red;
-    }
-
-    ul.nav.navbar-right {
-        margin: 10px;
-    }
-
-    body {
-        overflow-y: scroll;
-        background-color:#fff;
-    }
-
-    .col-lg-6.col-md-6.col-sm-6 {
-        color: #fff;
-    }
-
-    .row-popup {
-        margin-top: 10vw;
-        background-color:#fff;
-    }
-    .footer-row{
-        margin-top:3vw;
-        background-color:#EAEAEA;
-        margin-bottom:3vw;
-    }
-
-    .text-center-popup {
-        rgba(136, 47, 47, 0);
-        color: #fff;
-    }
-
-    article {
-        font-size: 21px;
-        line-height: 36px;
-        font-weight: lighter;
-        color: #202e51;
-    }
-    .commandBlock{padding:1vw;}
-    .commandBlock:hover {
-        opacity: 1;
-        -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-        transform: scale(1.1);
-    }
-    .img_homepage{
-        width:100%;
-        max-width:none;
-        border-radius:0px;
-    }
-    #commandBlockModal.modal.fade.in {
-        top: 50%;
-        max-height: 41vw;
-        overflow: hidden;
-    }
-    #commandBlockModal.modal-body {
-        overflow-y: auto;
-        padding: 15px;
-        max-height: none;
-        min-height: 40vw;
-    }
-    #videoTutorialModal.modal.fade.in {
-        top: 50%;
-        max-height: 30vw;
-        overflow: hidden;
-    }
-    #videoTutorialModal.modal-body {
-        overflow-y: auto;
-        padding: 15px;
-        max-height: none;
-        /*min-height: 41vw;*/
-        width:100%;
-    }
-    #videoTutorialModal{
-        padding:0px;
-    }
-    .fa-fw {
-        font-size: x-large;
-    }
-    #videoTutorial{
-        width: 100%;
-        height:95%;
-    }
-    #videoTutorial.modal-body{
-        width: 100%;
-    }
-    #nav-right-login{
-        color: #203481;
-        text-shadow: none;
-    }
-    .btnAction{
-    	min-width: 20vw;
-    	padding: 1vw;
-    }
-
-@-webkit-keyframes glowing {
-  0% { background-color: #226968; }
-  50% { background-color: #269C9B;  }
-  100% { background-color: #226968;  }
-}
- 
-@-moz-keyframes glowing {
-  0% { background-color: #226968; }
-  50% { background-color: #269C9B;  }
-  100% { background-color: #226968;  }
-}
- 
-@-o-keyframes glowing {
-  0% { background-color: #226968;  }
-  50% { background-color: #269C9B;  }
-  100% { background-color: #226968;  }
-}
- 
-@keyframes glowing {
-  0% { background-color: #226968; }
-  50% { background-color: #269C9B; }
-  100% { background-color: #226968;}
-} 
-.btnAnimation {
-  -webkit-animation: glowing 1500ms infinite;
-  -moz-animation: glowing 1500ms infinite;
-  -o-animation: glowing 1500ms infinite;
-  animation: glowing 1500ms infinite;
-}
-.nav > li > a:hover {
-	border:none;
-    border-bottom: 1px solid #226968;
-}
-</style> -->
