@@ -24,11 +24,26 @@
     border-radius: 4px;
     box-shadow: 0px 0px 30px;
 }
-#registedForm input{
-	margin-bottom : 1vw;
-	height: 30px;
+#registedForm input {
+    margin-bottom: 0px;
+    height: 3vw;
 }
-.form-group{margin-bottom : 5px;}
+#registedForm label {
+	margin-bottom : 0px;
+}
+.form-group{
+	margin-bottom : 0px;
+}
+#loginForm{
+	margin-bottom: 0px;
+    height: 3vw;
+}
+.form-group input {
+	margin-bottom: 0px;
+	height: 3vw;
+}
+
+
 /*  
   
   
@@ -54,11 +69,8 @@ div#loginForm h2 {
     padding-left: 5px;
 }
 div#loginForm label{
-  font-size: 15px;
+  font-size: 12px;
 }
-
-  
-  
   
 #logoutModal {
     position: fixed;
@@ -79,8 +91,6 @@ div#loginForm label{
    padding:0px 30px;
 }
 /*  
-  
-  
   div#loginForm {
     padding-right: 0px;
     padding: 0px !important;
@@ -173,14 +183,13 @@ border : none;
   <div id="loginForm" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <a href class="close"  style="color:#202e51">&times;</a>
+            <a href class="close" style="color:#202e51">&times;</a>
             <h2 class="modal-title" ng-show="showForm">Register form</h2>
             <h2 class="modal-title" ng-show="!showForm">Login form</h2>
         </div>
         <div class="modal-body">
                 
             <form name="form" role="form" ng-show="!showForm">
-                <h3 class="modal-title"></h3>
                 <div class="form-group">
                     <label for="username">User name</label>
                     <input id="input-form" type="text" name="username" id="username" class="form-control" ng-model="username" required />
@@ -204,7 +213,6 @@ border : none;
             </form>
 
             <form name="formRegist" ng-show="showForm" id="registedForm" role="form">
-                
                 <div class="form-group">
                     <label for="username">User name</label>
                     <input id="input-form" type="text" name="username" ng-minlength="8" id="username" class="form-control" ng-model="username" required />
@@ -246,6 +254,7 @@ border : none;
                     </label>
                     <input id="input-form" type="password" ng-minlength="8" name="rePassword" id="rePassword" class="form-control" ng-model="rePassword" required />
                     <span ng-show="formRegist.rePassword.$error.minlength" class="help-block">Password is more than 8.</span>
+                    </br>
                     <span ng-show="rePassword != password" class="help-block">Password is not match!</span>
                     <span ng-show="formRegist.rePassword.$dirty && formRegist.rePassword.$error.required" class="help-block">Password is required</span>
                 </div>
