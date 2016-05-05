@@ -4,12 +4,22 @@ public class ExerciseDTO {
 	private int idExercise;
 	private String exerciseName;
 	private String exerciseContent;
+	private String exerciseAnswer;
 
-	public ExerciseDTO(int idExcercise, String exerciseName, String exerciseContent) {
+	public String getExerciseAnswer() {
+		return exerciseAnswer;
+	}
+
+	public void setExerciseAnswer(String exerciseAnswer) {
+		this.exerciseAnswer = exerciseAnswer;
+	}
+
+	public ExerciseDTO(int idExcercise, String exerciseName, String exerciseContent, String exerciseAnswer) {
 		super();
 		this.idExercise = idExcercise;
 		this.exerciseName = exerciseName;
 		this.exerciseContent = exerciseContent;
+		this.exerciseAnswer = exerciseAnswer;
 	}
 
 	public int getIdExercise() {

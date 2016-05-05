@@ -1,5 +1,6 @@
 package com.cranecoding.service;
 
+import java.util.Hashtable;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -16,4 +17,6 @@ public interface GameService {
 	List<TestCase> getTestCaseByExerciseId(int exerciseId);
 	int openNextExercise(int exerciseId,String username);
 	void saveScore(int exerciseid, String username, int star, String time);
+	String returnBaseOnExIdAndParam(int exerciseid, Hashtable param) ;
+	Hashtable<String, Comparable> getRecordByUserId(int userId);
 }

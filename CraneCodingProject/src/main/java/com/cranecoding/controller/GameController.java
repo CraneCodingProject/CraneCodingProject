@@ -59,5 +59,15 @@ public class GameController {
 		}
 		return informationToReturn;
 	}
-
+	@RequestMapping(value = "/api/exercise/testcode", method = RequestMethod.GET)
+	public @ResponseBody String testCode(HttpServletRequest request, 
+			@RequestParam("exerciseid") int exerciseid, @RequestParam("param") Hashtable param) {
+		
+		return gameService.returnBaseOnExIdAndParam(exerciseid, param);
+	}
+	
+	@RequestMapping(value = "/api/exercise/record", method = RequestMethod.GET)
+	public @ResponseBody Hashtable<String, Comparable> record(@RequestParam("userId")int userId){
+		return gameService.getRecordByUserId(userId);
+	}
 }
