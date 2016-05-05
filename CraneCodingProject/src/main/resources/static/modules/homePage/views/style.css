@@ -1,0 +1,117 @@
+#loginForm {
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    padding-right: 0px;
+    padding: 0px !important;
+    border: 0px !important;
+    display: table;
+    margin: 0px;
+    width: 40%;
+    background-color: #fff;
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0px 0px 30px;
+}
+#registedForm input {
+    margin-bottom: 0px;
+    height: 3vw;
+}
+#registedForm label {
+	margin-bottom : 0px;
+}
+.form-group{
+	margin-bottom : 0px;
+}
+#loginForm{
+	margin-bottom: 0px;
+    height: 3vw;
+}
+.form-group input {
+	margin-bottom: 0px;
+	height: 3vw;
+}
+
+
+/*  
+  
+  
+  div#loginForm {
+    padding-right: 0px;
+    padding: 0px !important;
+    border: 0px !important;
+    display: table;
+    margin: 0px;
+    position: absolute;
+    top: 10%;
+    left: 35%;
+    max-width: 30vw;
+} */
+
+div#loginForm .modal-body {
+    height: auto;
+    padding: 0px 5px;
+    max-height: none;
+}
+
+div#loginForm h2 {
+    padding-left: 5px;
+}
+div#loginForm label{
+  font-size: 12px;
+}
+  
+#logoutModal {
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    padding-right: 0px;
+    padding: 0px !important;
+    border: 0px !important;
+    display: table;
+    margin: 0px;
+    width: 30%;
+    background-color: #fff;
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0px 0px 30px;
+}
+.btn-icon-left.btn-sm {
+   padding:0px 30px;
+}
+/*  
+  div#loginForm {
+    padding-right: 0px;
+    padding: 0px !important;
+    border: 0px !important;
+    display: table;
+    margin: 0px;
+    position: absolute;
+    top: 10%;
+    left: 35%;
+    max-width: 30vw;
+} */
+
+div#logoutModal .modal-body {
+    height: auto;
+    max-height:none;    
+}
+
+div#logoutModal h2 {
+    padding-left: 10px;
+}
+.close{
+float:right;
+color : black;
+font-size: 24px;
+border : none;
+    text-decoration: blink;
+    padding : 5px;
+        background: transparent;
+}
+
+.tile.tile-with-icon {
+    text-align: center;
+    text-align: -webkit-center;
+}
+.help-block{color: red; font-size: 14px;}
