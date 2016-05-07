@@ -34,8 +34,8 @@
 
 /*  CommandDetailModal   */
 #CommandDetailModal {
-    position: absolute;
-    top: 240%;
+    position: fixed;
+    top: 23%;
     left: 24%;
     padding-right: 0px;
     padding: 0px !important;
