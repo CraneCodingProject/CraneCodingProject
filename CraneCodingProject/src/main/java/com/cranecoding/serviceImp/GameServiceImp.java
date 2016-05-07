@@ -126,7 +126,7 @@ public class GameServiceImp implements GameService {
 	}
 
 	@Override
-	public String returnBaseOnExIdAndParam(int exerciseid, Hashtable param)  {
+	public String returnBaseOnExIdAndParam(int exerciseid, String param)  {
 
 		Exercise exerciseTemp = exerciseDAO.getExerciseById(exerciseid);
 		ExerciseDTO exerciseToProcess = convertToExerciseDTO(exerciseTemp);
@@ -142,9 +142,9 @@ public class GameServiceImp implements GameService {
 	}
 
 
-	private String returnResult(String methodContain, Hashtable param) throws IOException{
+	private String returnResult(String methodContain, String param) throws IOException{
 
-		String method = methodContain.replace("placeToPutValue", "5");
+		String method = methodContain.replace("placeToPutValue", param);
 
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();

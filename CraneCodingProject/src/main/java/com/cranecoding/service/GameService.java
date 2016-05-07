@@ -17,6 +17,6 @@ public interface GameService {
 	List<TestCase> getTestCaseByExerciseId(int exerciseId);
 	int openNextExercise(int exerciseId,String username);
 	void saveScore(int exerciseid, String username, int star, String time);
-	String returnBaseOnExIdAndParam(int exerciseid, Hashtable param) ;
+	String returnBaseOnExIdAndParam(int exerciseid, String param) ;
 	Hashtable<String, Comparable> getRecordByUserId(int userId);
 }

@@ -15,6 +15,7 @@ $(document).ready(function () {
     $('#showCodeModal').hide();
     $('#rulesModal').hide();
     $('#userHistoryModal').hide();
+    $('#showHintModal').hide();
     //Popover
     //$('[data-toggle="popover"]').popover({
     //    html: true,

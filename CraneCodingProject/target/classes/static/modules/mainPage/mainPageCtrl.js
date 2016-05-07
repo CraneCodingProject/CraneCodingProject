@@ -499,7 +499,7 @@ angular.module('MainPage')
     .factory('testCodeApi', ['$http',
         function ($http) {
             $http.getExpectResult = function (inputParameter, exerciseId) {
-                var parameter = { parameter: inputParameter, exerciseid: exerciseId };
+                var parameter = { param: inputParameter, exerciseid: exerciseId };
                 var config = { params: parameter };
                 return $http.get('/api/exercise/testcode', config);
                 //.then(function (response) { console.log("chay qua day ne!!!" + response.data); response.data; });
@@ -551,7 +551,7 @@ angular.module('MainPage')
             return $http;
         }
     ])
-    .directive('exerciseInfo', function () {
+ /*   .directive('exerciseInfo', function () {
         return {
             restrict: 'E',
             scope: {
@@ -562,7 +562,49 @@ angular.module('MainPage')
             function (info, element, attrs) {
             }
         }
-    })
+    })*/
+    
+    
+    .factory('exerciseHintImgApi',['$http',
+        function ($http){
+            $http.getExerciseHintImg = function (exerciseId){
+                var parameter = { exerciseid: exerciseId };
+                var config = { params: parameter };
+                return $http.get('/api/exercise/hint', config);
+            }
+            return $http;
+        }
+    ])
+    
+    
+    .directive('exerciseInfo',['exerciseHintImgApi', function (exerciseHintImgApi) {
+        return {
+            restrict: 'AECM',
+            scope: {
+                info: '='
+            },
+            templateUrl: 'directives/exerciseInfo.html',
+            link:
+            function (info, element, attrs) {
+                info.getHint = function (params) {
+                    console.log("log : "+params);
+                    exerciseHintImgApi.getExerciseHintImg(params)
+                    .then(
+                        function(response){
+                            console.log("log1 : "+response.data.result);
+                            info.hintCodeImg = response.data.result;
+                        },
+                        function(response){
+                            alert("Can't connect to server. Check your connection.");
+                        }
+                    );
+                }
+                
+            }
+        }
+    }])
+    
+    
 
     .directive('rulesModal', function () {
         return {

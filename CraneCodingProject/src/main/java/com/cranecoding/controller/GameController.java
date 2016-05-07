@@ -61,13 +61,26 @@ public class GameController {
 	}
 	@RequestMapping(value = "/api/exercise/testcode", method = RequestMethod.GET)
 	public @ResponseBody String testCode(HttpServletRequest request, 
-			@RequestParam("exerciseid") int exerciseid, @RequestParam("param") Hashtable param) {
+			@RequestParam("exerciseid") int exerciseid, @RequestParam("param") String param) {
 		
 		return gameService.returnBaseOnExIdAndParam(exerciseid, param);
 	}
-	
+
 	@RequestMapping(value = "/api/exercise/record", method = RequestMethod.GET)
 	public @ResponseBody Hashtable<String, Comparable> record(@RequestParam("userId")int userId){
 		return gameService.getRecordByUserId(userId);
 	}
+
+	@RequestMapping(value = "/api/exercise/hint", method = RequestMethod.GET)
+	public @ResponseBody Hashtable<String, Comparable> hintImg(@RequestParam("exerciseid")int exerciseid){
+		//return gameService.getRecordByUserId(userId);
+		System.out.println("exerciseid:"+exerciseid);
+		Hashtable informationToReturn = new Hashtable();
+		informationToReturn.put("result","http://thuvienanhdep.net/wp-content/uploads/2015/09/bo-suu-tap-nhung-hinh-anh-de-thuong-dang-yeu-cua-hot-girl-anh-the-14.jpg");
+		informationToReturn.put("message",":))");
+		return informationToReturn;
+
+	}
+	
+	
 }

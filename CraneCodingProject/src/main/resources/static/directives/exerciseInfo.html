@@ -8,6 +8,10 @@
             <!--data-popover-content="#showCodePopover"-->
             <sspan class="nav navbar-right top-nav">
                 <span class="dropdown">
+	                <a href ng-click="getHint(info.exerciseData.idExercise)"  data-toggle="modal" data-target="#showHintModal" class="navbar-brand" style="margin: 0px;height:100%;padding-right: 10px">
+	                    Hint!
+	                     <!-- data-toggle="modal" data-target="#showHintModal"  -->
+	                </a>
                     <a href onclick="getCodeToDisplay()" data-toggle="modal" data-target="#showCodeModal" class="navbar-brand" style="margin: 0px;height:100%">
                         <i class="fa fa-file-code-o"></i>
                     </a>
@@ -16,6 +20,25 @@
                 </sspan>
         </nav>
     </div>
+    
+    <div class="modal fade" id="showHintModal" role="dialog" style="display:none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
+            <h3 class="modal-title">Hint : {{info.exerciseData.exerciseName}}</h3>
+        </div>
+        <div class="modal-body" align ="center">
+            <img height="400px" width="400px" style="max-width : none;border-radius : 0px;" ng-src = "{{hintCodeImg}}"/>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+    
+    
+    
+    
 <div class="modal fade" id="showCodeModal" role="dialog" style="display:none;">
         <div class="modal-content">
             <div class="modal-header">
@@ -55,113 +78,7 @@
     </div>
 
     
-    <!--popover
-        <div id="showCodePopover" class="hide">
-        <div class="panel">
-            <div class="panel-heading">
-                Default Panel
-            </div>
-            <div class="panel-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-            </div>
-        </div>
-    </div>
-<script>
-    $(function () {
-        $('[data-toggle="showCodePopover"]').popover({
-            container: 'body',
-            html: true,
-            //content: function () {
-            //    var clone = $($(this).data('popover-content')).clone(true).removeClass('hide');
-            //    return clone;
-            //},
-            content: function() {
-                return $('#showCodePopover').html();
-        }
-        }).click(function (e) {
-            e.preventDefault();
-        });
-    });
-</script>
-<style>
-    .hide{
-        display:none;
-    }
-</style>-->
-
-<!--<script type="text/javascript">
-    var __optimizations = {
-        colorizeBraces: true,
-        colorizeOperators: true
-    };
-
-
-    function hasClass(ele, cls) {
-        return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
-    }
-
-    function addClass(ele, cls) {
-        if (!this.hasClass(ele, cls)) ele.className += " " + cls;
-    }
-
-    function removeClass(ele, cls) {
-        if (hasClass(ele, cls)) {
-            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-            ele.className = ele.className.replace(reg, ' ');
-        }
-    }
-
-
-    function trim_leading_comments(str) {
-        str = str.replace(/^(\s*\/\/[^\n]*\n)+/, '');
-        str = str.replace(/^\s+/, '');
-        return str;
-    }
-
-    function makeTheBeauty() {
-        var js_source = $w('#content')[0].value.replace(/^\s+/, ''),
-            indent_size = $w('#tabsize')[0].value,
-            indent_char = ' ',
-            preserve_newlines = $w('#preserve-newlines')[0].checked,
-            keep_array_indentation = $w('#keep-array-indentation')[0].checked,
-            braces_on_own_line = $w('#braces-on-own-line')[0].checked;
-
-        indent_char = (indent_size == 1) ? '<z>\t</z>' : ' ';
-
-        $w('#beautify')[0].disabled = true;
-        $w('#wait').show();
-
-
-        __optimizations.colorizeBraces = js_source.length > 50000 ? false : true;
-        __optimizations.colorizeOperators = js_source.length > 100000 ? false : true;
-
-        setTimeout(function () {
-            var ss = js_beautify(trim_leading_comments(js_source), {
-                indent_size: indent_size,
-                indent_char: indent_char,
-                preserve_newlines: preserve_newlines,
-                braces_on_own_line: braces_on_own_line,
-                keep_array_indentation: keep_array_indentation,
-                space_after_anon_function: false
-            });
-            console.log(ss);
-            $('pre#result').html(ss);
-            $w('#result').html('<code>' + ss + '</code>');
-            //colorize.make('code');
-            $w('#beautify')[0].disabled = false;
-            $w('#wait').hide();
-        }, 30);
-
-        return false;
-    }
-
-    function resetFields() {
-        $w('#content')[0].value = '';
-        $w('#result').html(' ');
-        removeClass($w('#result')[0], 'js');
-        $w('#beautify')[0].disabled = false;
-    }
-</script>-->
+ 
 <script type="text/javascript">
     // don't Angular because --> don't know why use angular bug alert in Library<BeautyCode> --> don't know how to fix :) 
     // setup code beauty use JS 

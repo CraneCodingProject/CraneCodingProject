@@ -221,6 +221,33 @@ div#showCodeModal .modal-body {
 div#showCodeModal h2 {
     padding: 0px;
 }
+
+/* #showHintModal */
+div#showHintModal {
+    padding-right: 0px;
+    padding: 0px !important;
+    border: 0px !important;
+    display: table;
+    left: 25%;
+    top: 10%;
+    margin: 0px;
+    max-width: 10vw;
+    position: fixed;
+}
+
+div#showHintModal .modal-body {
+    /*height: auto;*/
+    width: 50vw;
+    /*max-height: none;*/
+}
+
+div#showHintModal h2 {
+    padding: 0px;
+}
+
+
+
+
 /*rulesModal*/
 div#rulesModal {
     padding-right: 0px;
