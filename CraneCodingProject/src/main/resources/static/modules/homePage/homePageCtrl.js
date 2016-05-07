@@ -3,8 +3,8 @@
 angular.module('HomePage')
 
 .controller('HomePageController',
-    ['$scope', '$rootScope', '$location', '$cookieStore', 'AuthenticationService', 'registerAccApi','$timeout',
-    function ($scope, $rootScope, $location, $cookieStore, AuthenticationService, registerAccApi, $timeout) {
+    ['$scope', '$rootScope', '$location', '$cookieStore', 'AuthenticationService', 'registerAccApi','$timeout','lstCommandsApi',
+    function ($scope, $rootScope, $location, $cookieStore, AuthenticationService, registerAccApi, $timeout,lstCommandsApi) {
         // reset login status
        // $scope.logout = false;
         $rootScope.globals = $cookieStore.get('globals') || {};
@@ -74,7 +74,29 @@ angular.module('HomePage')
                 	console.log('callback fail _ dang ky fail con me no');
                 }
             );
-        };
+        }
+        $scope.getDetailCommand = function(element){
+        	$('#commandContentId_Homepage').empty();
+        	console.log(element);
+        	lstCommandsApi.getLstCommands()
+        	.then(
+        		function(response){
+        			var lst_command = response.data;
+        			lst_command.forEach(
+        				function(item){
+        					if(item.exerciseName==element){
+        						$('#commandContentId_Homepage').html(item.exerciseNumber);
+        						$scope.commandName = item.exerciseName||'';
+        					}
+        				}
+        			)
+        		},
+        		function(response){
+        			alert('Some errors happent.');
+        		}
+        	);
+        }
+        
     }])
 .factory('registerAccApi', ['$http',
     function ($http) {
@@ -92,6 +114,15 @@ angular.module('HomePage')
         }
         return $http;
     }
+])
+
+.factory('lstCommandsApi', ['$http',
+     function($http) {
+		$http.getLstCommands = function() {
+			return $http.get('/modules/mainPage/text.js')//api/command/getallcommands //api/exercise/getallexercises
+		}
+		return $http;
+	}
 ])
 
 ;

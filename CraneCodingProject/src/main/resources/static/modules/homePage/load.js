@@ -3,7 +3,16 @@
       $('#commandBlockModal').hide();
       $('#videoTutorialModal').hide();
       $('#logoutModal').hide();
+      $('#CommandDetailModal').hide();
   });
+  $('.box-with-icon.text-center').click(function(){
+	  $('#CommandDetailModal').show();
+	  console.log("$(this).data('commandId'):"+$(this).data('commandtype'));
+  });
+ 
+ 
+ 
+ 
   $('#btn-sign-in').click(function(){
 		$('#loginForm').show();
 		console.log('khfdahjfbdafbdbf');
@@ -18,6 +27,7 @@
       $('#commandBlockModal').hide();
       $('#videoTutorialModal').hide();
       $('#logoutModal').hide();
+      $('#CommandDetailModal').hide();
   });
   $('#closeModal').click(function(){
     $('#loginForm').hide();
