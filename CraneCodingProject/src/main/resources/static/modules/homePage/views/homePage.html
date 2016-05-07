@@ -121,7 +121,6 @@
 <div class="modal fade" id="logoutModal" role="dialog">
     <div class="modal-content">
     	<div class="modal-header">
-        	
     		<h2>Log out?</h2>
     	</div>
     	<div class="modal-body" style="height:100%;" align="center">
@@ -130,6 +129,24 @@
     	</div>
     </div>
 </div>
+
+<div class="modal fade" id="CommandDetailModal" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <a href class="close" style="color:#202e51">&times;</a>
+            <h2 class="modal-title">{{commandName}}</h2>
+        </div>
+        <div class="modal-body" id="commandContentId_Homepage">
+			
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>
+
 <!-- Page Wrapper -->
 <div class="page-wrapper">
     <!-- Navbar -->
@@ -237,7 +254,7 @@
         <div class="row">
           <div class="col-sm-4">
             <!-- Use ".light-skin" class to alter appearance. -->
-            <div class="box-with-icon text-center">
+            <div ng-click = "getDetailCommand(commandtype1)" ng-init="commandtype1='Data-Type'" class="box-with-icon text-center">
               <div class="box-with-icon-icon">
                <img src="/img/home/intro/lesson1.png"/>
               </div>
@@ -247,7 +264,7 @@
           </div><!-- .col-sm-4 -->
           <div class="col-sm-4">
             <!-- Use ".light-skin" class to alter appearance. -->
-            <div class="box-with-icon text-center">
+            <div ng-click = "getDetailCommand(commandtype2)" ng-init="commandtype2='If - Else'" class="box-with-icon text-center">
               <div class="box-with-icon-icon">
                  <img src="/img/home/intro/lesson2.png"/>
               </div>
@@ -257,7 +274,7 @@
           </div><!-- .col-sm-4 -->
           <div class="col-sm-4">
             <!-- Use ".light-skin" class to alter appearance. -->
-            <div class="box-with-icon text-center">
+            <div ng-click = "getDetailCommand(commandtype3)" ng-init="commandtype3='Looping'"  class="box-with-icon text-center">
               <div class="box-with-icon-icon">
                  <img src="/img/home/intro/lesson3.png"/>
               </div>
@@ -269,7 +286,7 @@
         <div class="row">
           <div class="col-sm-4">
             <!-- Use ".light-skin" class to alter appearance. -->
-            <div class="box-with-icon text-center">
+            <div ng-click = "getDetailCommand(commandtype4)" ng-init="commandtype4='Switch - case'"  class="box-with-icon text-center">
               <div class="box-with-icon-icon">
                  <img src="/img/home/intro/lesson4.png"/>
               </div>
@@ -279,7 +296,7 @@
           </div><!-- .col-sm-4 -->
           <div class="col-sm-4">
             <!-- Use ".light-skin" class to alter appearance. -->
-            <div class="box-with-icon text-center">
+            <div ng-click = "getDetailCommand(commandtype5)" ng-init="commandtype5='Return'" class="box-with-icon text-center">
               <div class="box-with-icon-icon">
                  <img src="/img/home/intro/lesson5.png"/>
               </div>
@@ -289,7 +306,7 @@
           </div><!-- .col-sm-4 -->
           <div class="col-sm-4">
             <!-- Use ".light-skin" class to alter appearance. -->
-            <div class="box-with-icon text-center">
+            <div ng-click = "getDetailCommand(commandtype6)" ng-init="commandtype6='Assign'" class="box-with-icon text-center">
               <div class="box-with-icon-icon">
                  <img src="/img/home/intro/lesson6.png"/>
               </div>
