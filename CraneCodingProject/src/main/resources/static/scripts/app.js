@@ -4,10 +4,12 @@
 // declare modules
 angular.module('HomePage', []);
 angular.module('MainPage', []);
+angular.module('AdminPage', []);
 
 angular.module('CrainCoding', [
     'HomePage',
     'MainPage',
+    'AdminPage',
     'unsavedChanges',
     'ngRoute',
     'ngCookies'
@@ -27,6 +29,10 @@ angular.module('CrainCoding', [
             controller: 'MainPageController as homePagecontroller',
             templateUrl: 'modules/mainPage/views/mainPage.html',
             reloadOnSearch: false
+        })
+        .when('/admin/developer/cranecodingteam',{
+            controller: 'AdminPageController',
+            templateUrl: 'modules/adminPage/views/adminPage.html'
         })
         .otherwise({ redirectTo: '/' });
     unsavedWarningsConfigProvider.useTranslateService = false;

@@ -249,7 +249,7 @@ angular.module('MainPage')
 
                                 // submit to server : 
                                 // exerciseId, userName, passCase, Exercisestatus, time
-                                submitRecordApi.submitRecord(Exerciseid,$rootScope.globals.currentUser.username, (sumTestCases - falseTestCase), $scope.time)
+                                submitRecordApi.submitRecord(Exerciseid, $rootScope.globals.currentUser.username, (sumTestCases - falseTestCase), $scope.time)
                                     .then(
                                     function (response) {
                                         console.log('phat_submitRecordApi: ' + response.data.result);
@@ -386,59 +386,63 @@ angular.module('MainPage')
                     $(this).remove();
                     console.log('hide');
                 })
-                if (!$rootScope.globals.currentUser) {
-                    $location.path('/home');
-
+                if ($location.path() == '/admin/developer/cranecodingteam') {
+                    $location.path('/admin/developer/cranecodingteam');
                 }
                 else {
-                    lstExercisesApi.getAllexerciseByUserName($rootScope.globals.currentUser.username)
-                        .success(
-                        function (data) {
-                            $scope.lstExercises = data;
-                        }
-                        );
-                    console.log('phat depo : ' + $rootScope.globals.currentUser.username);
-                    $('#dropArea').empty();
-                    if ($location.path() == '/') {
-                        homePagecontroller.transferData = '';
-                        homePagecontroller.timerReset();
-                        $interval.cancel(homePagecontroller.timerProcess);
+                    if (!$rootScope.globals.currentUser) {
+                        $location.path('/home');
                     }
                     else {
-                        var res = $location.path().split("/");
-                        exerciseApi.getAExerciseById(res[2])
-                            .then(
-                            function (response) {
-                                if (response.data == 'null') {
-                                    console.log('null data : ' + response.data);
-                                    $location.path('/');
-                                }
-                                else {
-                                    $('#startModal').modal('show');
-                                    $scope.chosenExerciseNumber = res[3];
-                                    trung_gian = res[3];
-                                    $('.chosenExercise').find('i').remove();
-                                    /*-------- 
-                                        set timOut boi vi append chay truoc  "$scope.chosenExerciseNumber = trung_gian;"
-                                        Luong chay :
-                                        append --> $scope.chosenExerciseNumber ----> setTimeOut cho append
-                                    --------*/
-                                    setTimeout(function () { $('.chosenExercise').append('<i style="float:right" class="fa fa-arrow-right"></i>') }, 50);
-                                    console.log('response data success data1 : ' + response.data.exerciseId);
-                                    homePagecontroller.exerciseData = response.data;
-                                    //homePagecontroller.transferData = transferData;
-                                }
+                        lstExercisesApi.getAllexerciseByUserName($rootScope.globals.currentUser.username)
+                            .success(
+                            function (data) {
+                                $scope.lstExercises = data;
                             }
                             );
+                        console.log('phat depo : ' + $rootScope.globals.currentUser.username);
+                        $('#dropArea').empty();
+                        if ($location.path() == '/') {
+                            homePagecontroller.transferData = '';
+                            homePagecontroller.timerReset();
+                            $interval.cancel(homePagecontroller.timerProcess);
+                        }
+                        else {
+                            var res = $location.path().split("/");
+                            exerciseApi.getAExerciseById(res[2])
+                                .then(
+                                function (response) {
+                                    if (response.data == 'null') {
+                                        console.log('null data : ' + response.data);
+                                        $location.path('/');
+                                    }
+                                    else {
+                                        $('#startModal').modal('show');
+                                        $scope.chosenExerciseNumber = res[3];
+                                        trung_gian = res[3];
+                                        $('.chosenExercise').find('i').remove();
+                                        /*-------- 
+                                            set timOut boi vi append chay truoc  "$scope.chosenExerciseNumber = trung_gian;"
+                                            Luong chay :
+                                            append --> $scope.chosenExerciseNumber ----> setTimeOut cho append
+                                        --------*/
+                                        setTimeout(function () { $('.chosenExercise').append('<i style="float:right" class="fa fa-arrow-right"></i>') }, 50);
+                                        console.log('response data success data1 : ' + response.data.exerciseId);
+                                        homePagecontroller.exerciseData = response.data;
+                                        //homePagecontroller.transferData = transferData;
+                                    }
+                                }
+                                );
 
-                        //$('.chosenExercise').append('<i style="float:right" class="fa fa-arrow-right"></i>');
-                        //homePagecontroller.transferData = transferData;
-                        //show start after change route
-                        //$("#validateChangeExerciseModel").modal('hide');
-                        // $('#startModal').show();
+                            //$('.chosenExercise').append('<i style="float:right" class="fa fa-arrow-right"></i>');
+                            //homePagecontroller.transferData = transferData;
+                            //show start after change route
+                            //$("#validateChangeExerciseModel").modal('hide');
+                            // $('#startModal').show();
+                        }
+                        //newer: set dirty form = false
+                        setTimeout(function () { $scope.demoForm.$setPristine(); }, 0);
                     }
-                    //newer: set dirty form = false
-                    setTimeout(function () { $scope.demoForm.$setPristine(); }, 0);
                 }
             });
             /**
@@ -551,23 +555,23 @@ angular.module('MainPage')
             return $http;
         }
     ])
- /*   .directive('exerciseInfo', function () {
-        return {
-            restrict: 'E',
-            scope: {
-                info: '='
-            },
-            templateUrl: 'directives/exerciseInfo.html',
-            link:
-            function (info, element, attrs) {
-            }
-        }
-    })*/
-    
-    
-    .factory('exerciseHintImgApi',['$http',
-        function ($http){
-            $http.getExerciseHintImg = function (exerciseId){
+    /*   .directive('exerciseInfo', function () {
+           return {
+               restrict: 'E',
+               scope: {
+                   info: '='
+               },
+               templateUrl: 'directives/exerciseInfo.html',
+               link:
+               function (info, element, attrs) {
+               }
+           }
+       })*/
+
+
+    .factory('exerciseHintImgApi', ['$http',
+        function ($http) {
+            $http.getExerciseHintImg = function (exerciseId) {
                 var parameter = { exerciseid: exerciseId };
                 var config = { params: parameter };
                 return $http.get('/api/exercise/hint', config);
@@ -575,9 +579,9 @@ angular.module('MainPage')
             return $http;
         }
     ])
-    
-    
-    .directive('exerciseInfo',['exerciseHintImgApi', function (exerciseHintImgApi) {
+
+
+    .directive('exerciseInfo', ['exerciseHintImgApi', function (exerciseHintImgApi) {
         return {
             restrict: 'AECM',
             scope: {
@@ -587,24 +591,24 @@ angular.module('MainPage')
             link:
             function (info, element, attrs) {
                 info.getHint = function (params) {
-                    console.log("log : "+params);
+                    console.log("log : " + params);
                     exerciseHintImgApi.getExerciseHintImg(params)
-                    .then(
-                        function(response){
-                            console.log("log1 : "+response.data.result);
+                        .then(
+                        function (response) {
+                            console.log("log1 : " + response.data.result);
                             info.hintCodeImg = response.data.result;
                         },
-                        function(response){
+                        function (response) {
                             alert("Can't connect to server. Check your connection.");
                         }
-                    );
+                        );
                 }
-                
+
             }
         }
     }])
-    
-    
+
+
 
     .directive('rulesModal', function () {
         return {
