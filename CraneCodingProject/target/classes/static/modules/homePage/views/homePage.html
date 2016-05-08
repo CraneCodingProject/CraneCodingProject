@@ -12,6 +12,7 @@
 <script src="JS/vendor/owl.carousel.min.js"></script>
 <script src="JS/scripts.js"></script>
 <script src="modules/homePage/load.js"></script>
+
 <div id="loginForm" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -34,16 +35,20 @@
                     <span ng-show="form.password.$error.minlength" class="help-block">Password is more than 8.</span>
                 </div>
                 <div ng-show="error" class="alert-danger">{{error}}</div>
-                <div class="form-group" style="float:right;">
-                    <a href type="button" ng-click="showForm = !showForm">Register</a>
-                    <button id="btnLogin" type="submit" ng-click="login()" data-dismiss="modal" ng-disabled="form.$invalid || dataLoading" class="btn btn-sm btn-primary btn-icon-left">
-                    	Login
-                    </button>
+                <div class="form-group">
                     
+                   <button  type= "button" id="loginFacebook" >
+                    	<i class="fa fa-facebook" aria-hidden="true"></i>
+                    	Log in.
+                    </button>
+                    <div style="float:right;">
+                    	<a href type="button" ng-click="showForm = !showForm" >Register</a>
+                    	<button id="btnLogin" type="submit" ng-click="login()" data-dismiss="modal" ng-disabled="form.$invalid || dataLoading" class="btn btn-sm btn-primary btn-icon-left">
+                    		Login
+                    	</button>
+                    </div>
                 </div>
-                
             </form>
-
             <form name="formRegist" ng-show="showForm" id="registedForm" role="form">
                 <div class="form-group">
                     <label for="username">User name</label>

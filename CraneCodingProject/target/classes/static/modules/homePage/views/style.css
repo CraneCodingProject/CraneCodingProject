@@ -145,3 +145,16 @@ border : none;
     text-align: -webkit-center;
 }
 .help-block{color: red; font-size: 14px;}
+#loginFacebook {
+	border: 0px;
+    color: #fff;
+    background-color: #337AB7;
+    float: left;
+    padding: 5px;
+    margin-top: 1vw;
+    border-radius: 4px;
+}
+#loginFacebook i {
+    padding-right: 5px;
+    border-right: 1px solid #fff;
+}
