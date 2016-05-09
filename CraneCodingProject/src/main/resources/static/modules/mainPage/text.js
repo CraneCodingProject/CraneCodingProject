@@ -31,40 +31,5 @@
     "exerciseName":"Switch - case",
     "exerciseId":"IDBAI_7",
     "exerciseNumber":"NOI_DUNG_BAI_7"
-},
-{
-"exerciseName":"TEN_BAI_8",
-"exerciseId":"IDBAI_8",
-"exerciseNumber":"NOI_DUNG_BAI_8"
-},
-{
-    "exerciseName":"TEN_BAI_9",
-    "exerciseId":"IDBAI_9",
-    "exerciseNumber":"NOI_DUNG_BAI_9"
-},
-{
-"exerciseName":"TEN_BAI_10",
-"exerciseId":"IDBAI_10",
-"exerciseNumber":"NOI_DUNG_BAI_10"
-},
-{
-    "exerciseName":"TEN_BAI_11",
-    "exerciseId":"IDBAI_11",
-    "exerciseNumber":"NOI_DUNG_BAI_11"
-},
-{
-"exerciseName":"TEN_BAI_12",
-"exerciseId":"IDBAI_12",
-"exerciseNumber":"NOI_DUNG_BAI_12"
-},
-{
-    "exerciseName":"TEN_BAI_13",
-    "exerciseId":"IDBAI_13",
-    "exerciseNumber":"NOI_DUNG_BAI_13"
-},
-{
-"exerciseName":"TEN_BAI_14",
-"exerciseId":"IDBAI_14",
-"exerciseNumber":"NOI_DUNG_BAI_14"
 }
 ]
