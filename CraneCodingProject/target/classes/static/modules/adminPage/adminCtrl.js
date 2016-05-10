@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('AdminPage')
-
+//demo VSC
     .controller('AdminPageController',
     ['$scope', '$rootScope', '$location', '$timeout', '$window', 'createUpdateExercise', 'getAllExercises', 'deleteExercise',
         function ($scope, $rootScope, $location, $timeout, $window, createUpdateExercise, getAllExercises, deleteExercise) {
