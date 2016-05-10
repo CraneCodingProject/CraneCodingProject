@@ -8,7 +8,6 @@ angular.module('AdminPage')
             $scope.loginSuccess = false;
             $scope.checkAdmin = false;
             $scope.idExercise = null;
-            
             $scope.adminLogin = function (acc, pass) {
                 if (acc = "admin" && pass == "admin") {
                     $scope.loginSuccess = true;
@@ -16,6 +15,7 @@ angular.module('AdminPage')
                 else {
                     $scope.checkAdmin = true;
                 }
+                /*
                 // $http.post('/api/admin/authentication', { username: acc, password: pass })
                 //     .success(function (response) {
                 //         $scope.loginSuccess = true;
@@ -25,6 +25,7 @@ angular.module('AdminPage')
                 //     $scope.checkAdmin = true;
                 //     $scope.loginSuccess = false;
                 // });
+                */
             }
             getAllExercises.getAllExercises().then(
                 function (response) {
@@ -35,10 +36,10 @@ angular.module('AdminPage')
                 });
             $scope.exerciseDetails = function (idExercise, exerciseName, exerciseContent, exerciseAnswer, exercisePseudocode) {
                 $scope.idExercise = idExercise || '';
-                $('#Exercise-name').empty().val(exerciseName);
-                $('#Exercise-content').empty().val(exerciseContent);
-                $('#Exercise-answer').empty().val(exerciseAnswer);
-                $('#Exercise-pseducode').empty().val(exercisePseudocode);
+                $scope.exerciseName = exerciseName || '';
+                $scope.exerciseContent = exerciseContent || ''; 
+                $scope.exerciseAnswer =exerciseAnswer || '';
+                $scope.exercisePseducode = exercisePseudocode || ''; 
             }
             $scope.createExercise = function () {
                 createUpdateExercise.createOrUpdateExercise($scope.idExercise, $scope.exerciseName, $scope.exerciseContent, $scope.exerciseAnswer, $scope.exercisePseducode)
@@ -65,10 +66,11 @@ angular.module('AdminPage')
             }
             $scope.addNewExercise = function () {
                 $scope.idExercise = null;
-                $('#Exercise-name').val('');
-                $('#Exercise-content').val('');
-                $('#Exercise-answer').val('');
-                $('#Exercise-pseducode').val('');
+                //$scope.exerciseForm.$dirty = false;
+                $scope.exerciseName = null;
+                $scope.exerciseContent = null; 
+                $scope.exerciseAnswer = null;
+                $scope.exercisePseducode = null; 
             }
             $scope.deleteExercise = function (exerciseId) {
                 var answer = confirm("Are you sure delete this exercise ?")
@@ -84,11 +86,11 @@ angular.module('AdminPage')
                 var answer = confirm("Are you sure cancel this process ?")
                 if (answer) {
                     $scope.idExercise = null;
-                    $('#Exercise-name').val('');
-                    $('#Exercise-content').val('');
-                    $('#Exercise-answer').val('');
-                    $('#Exercise-pseducode').val('');
-                    // $window.location.reload();
+                    $scope.exerciseForm.$invalid = true;
+                    $scope.exerciseName = null;
+                    $scope.exerciseContent = null; 
+                    $scope.exerciseAnswer = null;
+                    $scope.exercisePseducode = null; 
                 }
             }
         }]

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/font-awesome-4.5.0/css/font-awesome.min.css" rel ="stylesheet">
 <style>
 #adminLoginForm{
@@ -6,8 +6,8 @@
     position: absolute;
     top: 20%;
     left: 25%;
-    background: #F7C4C4;
-    border: 1px solid #EA9393;
+    background: #D4CBCB;
+    border: 1px solid #ADA8A8;
     border-radius: 4px;
 }
 /*#exerciseForm{
@@ -45,7 +45,7 @@
     <div class="row" align="center">
         <form id="adminLoginForm" name="adminLoginForm" class="form-horizontal" role="form">
             <div class="form-group">
-                <label class="control-label">Login with admin's account:</label>
+                <label class="control-label">Login with admin's account</label>
                 <input required name="AdminAcc" ng-model="AdminAcc" type="text" class="form-control" id="Admin-Acc" placeholder="Admin">
                 <span ng-show="adminLoginForm.AdminAcc.$dirty && adminLoginForm.AdminAcc.$error.required">This field is required.</span>
             </div>
@@ -105,8 +105,8 @@
                     <span ng-show="exerciseForm.exercisePseducode.$dirty && exerciseForm.exercisePseducode.$error.required">This field is required.</span>
                 </div>
                 <div class="form-group">
-                    <button ng-disabled="exerciseForm.$invalid" ng-hide="idExercise" type="button" ng-click="createExercise()" class="btn btn-danger">Create</button>
-                    <button ng-show="idExercise" type="button" class="btn btn-danger">Update</button>
+                    <button ng-click="createExercise()" ng-disabled="exerciseForm.$invalid" ng-hide="idExercise" type="button"  class="btn btn-danger">Create</button>
+                    <button ng-disabled	="!exerciseForm.$dirty" ng-show="idExercise" type="button" class="btn btn-danger">Update</button>
                     <button type="button" ng-click="cancel()" class="btn btn-default">Cancel</button>
                 </div>
             </form>
