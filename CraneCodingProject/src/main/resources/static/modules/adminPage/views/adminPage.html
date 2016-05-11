@@ -1,14 +1,18 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/font-awesome-4.5.0/css/font-awesome.min.css" rel ="stylesheet">
 <style>
-#adminLoginForm{
-    width: 50%;
+#adminLoginForm {
+    width: 30%;
     position: absolute;
     top: 20%;
-    left: 25%;
-    background: #D4CBCB;
-    border: 1px solid #ADA8A8;
+    left: 35%;
+    background: #31708F;
+    border: 1px solid #337AB7;
     border-radius: 4px;
+    color: #fff;
+}
+label.control-label {
+    padding-bottom: 1vw; 
 }
 /*#exerciseForm{
     background: #F7C4C4;
@@ -37,6 +41,12 @@
 	color : #0088FF;
 	cursor : pointer;
 }
+.messageRequiredForm {
+    color : red;
+}
+#exerciseForm .form-group {
+    margin-bottom: 0px; 
+}
 </style>
 <div class="container" ng-hide="loginSuccess">
     <div class="row">
@@ -55,7 +65,7 @@
                 <span ng-show="checkAdmin">Wrong account.</span>
             </div>
             <div class="form-group">
-                <button ng-disabled="adminLoginForm.$invalid" type="button" ng-click="adminLogin(AdminAcc,AdminPass)" class="btn btn-default">Login</button>
+                <button ng-disabled="adminLoginForm.$invalid" type="button" ng-click="adminLogin(AdminAcc,AdminPass)" class="btn btn-success">Login</button>
             </div>
         </form>
     </div>
@@ -85,26 +95,26 @@
                 <div class="form-group">
                     <label class="control-label">Exercise's name:</label>
                     <input required name="exerciseName" ng-model="exerciseName" type="text" class="form-control" id="Exercise-name" placeholder="Exercise-name">
-                    <span ng-show="exerciseForm.exerciseName.$dirty && exerciseForm.exerciseName.$error.required">This field is required.</span>
+                    <span class="messageRequiredForm" ng-show="exerciseForm.exerciseName.$dirty && exerciseForm.exerciseName.$error.required">This field is required.</span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Exercise's content:</label>
                     <textarea required name="exerciseContent" ng-model="exerciseContent" class="form-control" rows="5" id="Exercise-content"
                         placeholder="Exercise-content"></textarea>
-                    <span ng-show="exerciseForm.exerciseContent.$dirty && exerciseForm.exerciseContent.$error.required">This field is required.</span>
+                    <span class="messageRequiredForm" ng-show="exerciseForm.exerciseContent.$dirty && exerciseForm.exerciseContent.$error.required">This field is required.</span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Exercise's code:</label>
                     <textarea required name="exerciseAnswer" ng-model="exerciseAnswer" class="form-control" rows="5" id="Exercise-answer" placeholder="Exercise-answer"></textarea>
-                    <span ng-show="exerciseForm.exerciseAnswer.$dirty && exerciseForm.exerciseAnswer.$error.required">This field is required.</span>
+                    <span class="messageRequiredForm" ng-show="exerciseForm.exerciseAnswer.$dirty && exerciseForm.exerciseAnswer.$error.required">This field is required.</span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 10px;">
                     <label class="control-label">Exercise's pseducode:</label>
                     <input required name="exercisePseducode" ng-model="exercisePseducode" type="text" class="form-control" id="Exercise-pseducode"
                         placeholder="Exercise-pseducode"></input>
-                    <span ng-show="exerciseForm.exercisePseducode.$dirty && exerciseForm.exercisePseducode.$error.required">This field is required.</span>
+                    <span class="messageRequiredForm" ng-show="exerciseForm.exercisePseducode.$dirty && exerciseForm.exercisePseducode.$error.required">This field is required.</span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="float: right;">
                     <button ng-click="createExercise()" ng-disabled="exerciseForm.$invalid" ng-hide="idExercise" type="button"  class="btn btn-danger">Create</button>
                     <button ng-disabled	="!exerciseForm.$dirty" ng-show="idExercise" type="button" class="btn btn-danger">Update</button>
                     <button type="button" ng-click="cancel()" class="btn btn-default">Cancel</button>
