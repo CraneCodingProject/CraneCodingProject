@@ -53,6 +53,7 @@ angular.module('AdminPage')
                         //     function (response) {
                         //         console.log('fail');
                         //     });
+                        console.log("Response: "+response.data);
                     },
                     function (response) {
                         console.log($scope.idExercise);
@@ -114,13 +115,14 @@ angular.module('AdminPage')
         function ($http) {
             $http.createOrUpdateExercise = function (exerciseId, exerciseName, exerciseContent, exerciseAnswer, exercisePseudocode) {
                 var exerciseInfo = {
-                    exerciseid: exerciseId,
-                    exercisename: exerciseName,
-                    exercisecontent: exerciseContent,
-                    exerciseanswer: exerciseAnswer,
-                    exercisepseudocode: exercisePseudocode
+                    idExercise: 1,
+                    exerciseName: exerciseName,
+                    exerciseContent: exerciseContent,
+                    exerciseAnswer: exerciseAnswer,
+                    pseudoCode: exercisePseudocode
                 };
-                return $http.post('/api/admin/createupdate', exerciseInfo);
+                console.log(exerciseInfo);
+                return $http.post('/api/admin/createOrUpdate', exerciseInfo);
             }
             return $http;
         }]
