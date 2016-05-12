@@ -22,7 +22,9 @@ public class ExerciseDTO {
 	public void setExerciseAnswer(String exerciseAnswer) {
 		this.exerciseAnswer = exerciseAnswer;
 	}
-
+	public ExerciseDTO(){
+		
+	}
 	public ExerciseDTO(int idExcercise, String exerciseName, String exerciseContent, String exerciseAnswer, String pseudoCode) {
 		super();
 		this.idExercise = idExcercise;

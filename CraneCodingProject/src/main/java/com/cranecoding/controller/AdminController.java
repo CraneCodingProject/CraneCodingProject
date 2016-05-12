@@ -3,9 +3,9 @@ package com.cranecoding.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.neo4j.cypher.internal.compiler.v2_1.perty.docbuilders.toStringDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,19 +21,19 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
-	
 	@RequestMapping(value = "/api/admin/createOrUpdate", method = RequestMethod.POST)
-	public @ResponseBody boolean createExercise(@RequestParam ExerciseDTO exerciseInfo){
-		String exId = String.valueOf(exerciseInfo.getIdExercise());
-		if(exId == null){
-			return adminService.createExercise(exerciseInfo);
-		}else{
+	public @ResponseBody boolean createExercise(@RequestBody ExerciseDTO exerciseInfo){
+		try{
+			String exId = String.valueOf(exerciseInfo.getIdExercise());
 			return adminService.updateExercise(exerciseInfo);
 		}
+		catch(Exception E){
+			return adminService.createExercise(exerciseInfo);
+		}
 	}
-	
+	//chua lam dc
 	@RequestMapping(value = "/api/admin/delete", method = RequestMethod.GET)
-	public @ResponseBody boolean deleteExercise(@RequestParam int exerciseId){
+	public @ResponseBody boolean deleteExercise(@RequestParam("exerciseid") int exerciseId){
 		return adminService.deleteExercise(exerciseId);
 	}
 	
