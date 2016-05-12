@@ -5,6 +5,15 @@ public class ExerciseDTO {
 	private String exerciseName;
 	private String exerciseContent;
 	private String exerciseAnswer;
+	private String pseudoCode;
+
+	public String getPseudoCode() {
+		return pseudoCode;
+	}
+
+	public void setPseudoCode(String pseudoCode) {
+		this.pseudoCode = pseudoCode;
+	}
 
 	public String getExerciseAnswer() {
 		return exerciseAnswer;

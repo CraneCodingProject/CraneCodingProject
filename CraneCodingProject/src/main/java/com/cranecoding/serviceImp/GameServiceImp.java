@@ -33,6 +33,7 @@ import com.cranecoding.dto.user.UserDAO;
 import com.cranecoding.model.Exercise;
 import com.cranecoding.model.Score;
 import com.cranecoding.model.TestCase;
+import com.cranecoding.model.User;
 import com.cranecoding.service.GameService;
 
 @Service
@@ -203,7 +204,7 @@ public class GameServiceImp implements GameService {
 	}
 
 	@Override
-	public Hashtable<String, Comparable> getRecordByUserId(int userId) {
+	public Hashtable getRecordByUserId(int userId) {
 		Hashtable hashTable = new Hashtable<>();
 		List<Score> a = scoreDAO.getRecordByUserId(userId);
 		for (int i = 0 ; i < a.size() ; i++) {
@@ -213,6 +214,12 @@ public class GameServiceImp implements GameService {
 			hashTable.put(a.get(i).getExercise().getExerciseid(), list);
 		}
 		return hashTable;
+	}
+
+	@Override
+	public int getUserIdByUserName(String userName) {
+		User userToGet = userDAO.getUserIdByUserName(userName);
+		return userToGet.getUserid();
 	}
 
 }

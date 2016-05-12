@@ -18,5 +18,6 @@ public interface GameService {
 	int openNextExercise(int exerciseId,String username);
 	void saveScore(int exerciseid, String username, int star, String time);
 	String returnBaseOnExIdAndParam(int exerciseid, String param) ;
-	Hashtable<String, Comparable> getRecordByUserId(int userId);
+	Hashtable getRecordByUserId(int userId);
+	int getUserIdByUserName(String userName);
 }

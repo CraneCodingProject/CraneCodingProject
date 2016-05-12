@@ -1,48 +1,18 @@
-﻿/// <reference path="../../text.js" />
-'use strict';
-
+﻿'use strict';
 angular.module('MainPage')
-
     .controller('MainPageController',
     ['$rootScope', '$scope', '$routeParams', '$route', '$window', '$location', '$interval', '$cookieStore', '$http', 'lstExercisesApi', 'testCodeApi', 'getTestCaseApi', 'lstCommandsApi', 'submitRecordApi', 'userHistoryApi', 'exerciseApi', 'transferData',
         function ($rootScope, $scope, $routeParams, $route, $window, $location, $interval, $cookieStore, $http, lstExercisesApi, testCodeApi, getTestCaseApi, lstCommandsApi, submitRecordApi, userHistoryApi, exerciseApi, transferData) {
-            console.log('chay lai controller');
-            // set username
-
-
-            /*lstExercisesApi.getAllexerciseByUserName($rootScope.globals.currentUser.username)
-            .success(
-                function (data) {
-                    $scope.lstExercises = data;
-                }
-            );*/
-            /**
-            *   Get userName then get getAllexerciseByUserName(userName)
-            
-            lstExercisesApi.getAllexerciseByUserName(userName)
-            .success(
-                function (data) {
-                    $scope.lstExercises = data;
-                }
-            );
-            
-            */
-            /**
-            *   Load list user's exercise 
-            */
-            // lstExercisesApi.success(function (data) { $scope.lstExercises = data });
-
-            var trung_gian = 0;
-            var trung_gian_tam = 0;
-            $scope.chosenExerciseNumber = -1; // so quan trong--> xac dinh nguoi choi dang choi o bai may : session
-
             /**
                 to set ditry : $scope.demoForm.$setDirty();
                 to set Pristine :$scope.demoForm.$setPristine();
                 to check dirty : $scope.demoForm.$dirty return true/false
                 to check Pristine : $scope.demoForm.$Pristine return true/false
             */
-
+            var trung_gian = 0;
+            var trung_gian_tam = 0;
+            $scope.chosenExerciseNumber = -1; // so quan trong--> xac dinh nguoi choi dang choi o bai may : session
+           
             /**
             *   setup time run
             */
@@ -51,10 +21,7 @@ angular.module('MainPage')
             homePagecontroller.timer = { time: (new Date()).setHours(0, 0, 0, 0), startTime: "", interval: 10 };
             homePagecontroller.timerProcess;
             /*----------------------------------------------------------*/
-
-
             $scope.gotoHomePage = function () {
-                //$window.location.href = 'Homepage.html';
                 $location.path('/home');
             }
             /*----------------------------------------------------------*/
@@ -70,9 +37,6 @@ angular.module('MainPage')
             }
             /*----------------------------------------------------------*/
 
-
-            /*----------------------------------------------------------*/
-
             /**
             *   Start do exercise and start run time
             *   Reset time
@@ -86,7 +50,6 @@ angular.module('MainPage')
                 // set form dirty
                 $scope.demoForm.$setDirty();
                 $('#startModal').modal('hide');
-                console.log('check dirtyL:' + $scope.demoForm.$dirty);
             }
             /*----------------------------------------------------------*/
 
@@ -124,7 +87,7 @@ angular.module('MainPage')
             }
             RegisterInterval(ClockTick, homePagecontroller.clock.interval);
             /*----------------------------------------------------------*/
-
+            
             /**
             *   Test code 
             *   GetCode(parameter) --> run code and get user's code result ---> request to server (exerciseId,parameter)
@@ -147,7 +110,7 @@ angular.module('MainPage')
             /*----------------------------------------------------------*/
 
             /**
-            *   Get code
+            *   Get code to SUBMIT and TEST
             */
             function getCODE(inputParameterToTest) {
                 //inputParameterToTest = jsonResult.inp;
@@ -178,7 +141,7 @@ angular.module('MainPage')
                 });//"S=" + inputParameterToTest + ";
                 //CODE = CODE + "S=" + inputParameterToTest + ";return S; }catch(err){return null;} } document.write(MATH(" + inputParameterToTest + "));</script>";
                 CODE = CODE + "}catch(err){return null;} } document.write(MATH(" + inputParameterToTest + "));</script>";
-                console.log('CODE:' + CODE);
+                // console.log('CODE:' + CODE);
                 var ifr = document.getElementById("result");
                 var ifrw = (ifr.contentWindow) ? ifr.contentWindow : (ifr.contentDocument.document) ? ifr.contentDocument.document : ifr.contentDocument;
                 ifrw.document.open();
@@ -205,15 +168,11 @@ angular.module('MainPage')
                         //time : homePagecontroller.timer.time
                         $scope.time = homePagecontroller.timer.time;
                         $interval.cancel(homePagecontroller.timerProcess);
-                        console.log('____________________________Exerciseid: ' + Exerciseid);
                         getTestCaseApi.getTestCaseSubmit(Exerciseid)
                             .then(
                             //success
                             function (response) {
                                 var dataNumberToNumber = response.data;
-                                console.log(response.data);
-                                //dataNumberToNumber = "[{"inp":"1", "outp":"1"},{"inp":"4", "outp":"2"},{"inp":"3", "outp":"3"}]";
-                                //var a="[{'inp":"1", "outp":"1"},{"inp":"4", "outp":"2"},{"inp":"3", "outp":"3"}]";
                                 $('#testCaseSubmit').empty();
                                 $('#submitModal .modal-footer').find('#userRecord').remove();
 
@@ -243,16 +202,12 @@ angular.module('MainPage')
 
                                 });
                                 setTimeout(function () {
-                                    // $('#submitModal .modal-footer').append('<h3 style="float: left;"> Time :{{' + time + '|date:\'mm:ss:sss\'}}" <i class="fa fa-cog fa-spin" style="padding: 4px;"></i>' + (sumTestCases - falseTestCase) + '/' + sumTestCases + ' with <i class="fa fa-clock-o fa-spin" style="padding: 4px;"></i>' + new Number(0.1 * (timePerformance / sumTestCases)).toPrecision(4) + ' seconds.</h3>');
                                     $('#submitModal .modal-footer').append('<h3 id="userRecord"><i class="fa fa-cog fa-spin" style="padding: 4px;"></i>' + (sumTestCases - falseTestCase) + '/' + sumTestCases + ' with <i class="fa fa-clock-o fa-spin" style="padding: 4px;"></i>' + new Number(0.1 * (timePerformance / sumTestCases)).toPrecision(4) + ' seconds.</h3>');
                                 }, 200 * (sumTestCases + 1));
-
                                 // submit to server : 
-                                // exerciseId, userName, passCase, Exercisestatus, time
                                 submitRecordApi.submitRecord(Exerciseid, $rootScope.globals.currentUser.username, (sumTestCases - falseTestCase), $scope.time)
                                     .then(
                                     function (response) {
-                                        console.log('phat_submitRecordApi: ' + response.data.result);
                                         $scope.submitResult = response.data;
                                         if (response.data.result == true) {
                                             $('#btnPassExerciseSubmitModal').html('Do next');
@@ -265,19 +220,20 @@ angular.module('MainPage')
                             },
                             //error
                             function (response) {
+                                alert("OOP...! Some errors happent...!");
                             }
                             );
                     }
                     else {
-
+                        alert("OOP...! Some errors happent...!");              
                     }
                 }
                 catch (exception) {
+                    alert("OOP...! Some errors happent...!");
                 }
-
             }
             /*----------------------------------------------------------*/
-
+            
             /**
             *   User's record history
             *   username --> server --> get  exerciseName, stars, time of username
@@ -302,7 +258,6 @@ angular.module('MainPage')
             $scope.doNextorReTryExercise = function () {
                 $scope.demoForm.$setPristine();
                 if ($scope.submitResult.result) {
-                    console.log("pass: " + $scope.submitResult.result + ' ' + $scope.submitResult.exerciseId);
                     //load list allexercise...
 
                     //directive to next exercise
@@ -310,50 +265,10 @@ angular.module('MainPage')
                 }
                 else {
                     $route.reload();
-                    console.log($scope.submitResult.result + ' ' + $scope.submitResult.exerciseId);
                 }
             }
             /*----------------------------------------------------------*/
-
-            /**
-            *   Route Change
-            *   When route changed...do some stuff
-            *   Get route's path : $location.path()
-            */
-            // $scope.$on('$routeChangeSuccess', function () {
-            //$('#dropArea').empty();
-            //if ($location.path() == '/') {
-            //    homePagecontroller.transferData = '';
-            //    homePagecontroller.timerReset();
-            //    $interval.cancel(homePagecontroller.timerProcess);
-            //    //out code : set dirty form = false 
-            //    //$timeout(function () {
-            //    //    $scope.demoForm.testFormRequire.$dirty = true;
-            //    //}, 0);
-            //}
-            //else {
-            //    console.log($location.path());
-            //    var res = $location.path().split("/");
-            //    $scope.chosenExerciseNumber = res[3];
-            //    trung_gian = res[3];
-            //    $('.chosenExercise').find('i').remove();
-            //    /*-------- 
-            //        set timOut boi vi append chay truoc  "$scope.chosenExerciseNumber = trung_gian;"
-            //        Luong chay :
-            //        append --> $scope.chosenExerciseNumber ----> setTimeOut cho append
-            //    --------*/
-            //    setTimeout(function () { $('.chosenExercise').append('<i style="float:right" class="fa fa-arrow-right"></i>') }, 100);
-
-
-            //    homePagecontroller.transferData = transferData;
-            //    //show start after change route
-            //    $('#startModal').modal('show');
-            //}
-            ////newer: set dirty form = false
-            //setTimeout(function () { $scope.demoForm.$setPristine(); }, 0);
-            //  });
-            /*----------------------------------------------------------*/
-
+            
             /**
             *   Open Rule and guider modal.   
             */
@@ -364,27 +279,30 @@ angular.module('MainPage')
                     });
             }
             /*----------------------------------------------------------*/
-
-            /*------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-            //get cookie. 
+            
+            /**
+            *   get cookie (user Account).  
+            */
             $rootScope.globals = $cookieStore.get('globals') || {};
             if ($rootScope.globals.currentUser) {
                 $scope.userName = $rootScope.globals.currentUser.username;
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
             }
             $scope.$on('$routeChangeStart', function (event, next, current) {
-                console.log('hidelldgdgdgllllll');
                 $('body').find('.modal-backdrop').each(function () {
-                    //$(this).hide();
                     $(this).remove();
-                    console.log('hide');
                 })
             });
+            /*----------------------------------------------------------*/
+            
+            /**
+            *   Route Change
+            *   When route changed...do some stuff
+            *   Get route's path : $location.path()
+            */
             $scope.$on('$routeChangeSuccess', function (event, next, current) {
-                console.log('hidelllldgdgdgdgxxxxllll');
                 $('body').find('.modal-backdrop').each(function () {
                     $(this).remove();
-                    console.log('hide');
                 })
                 if ($location.path() == '/admin/developer/cranecodingteam') {
                     $location.path('/admin/developer/cranecodingteam');
@@ -400,7 +318,6 @@ angular.module('MainPage')
                                 $scope.lstExercises = data;
                             }
                             );
-                        console.log('phat depo : ' + $rootScope.globals.currentUser.username);
                         $('#dropArea').empty();
                         if ($location.path() == '/') {
                             homePagecontroller.transferData = '';
@@ -413,7 +330,6 @@ angular.module('MainPage')
                                 .then(
                                 function (response) {
                                     if (response.data == 'null') {
-                                        console.log('null data : ' + response.data);
                                         $location.path('/');
                                     }
                                     else {
@@ -427,7 +343,7 @@ angular.module('MainPage')
                                             append --> $scope.chosenExerciseNumber ----> setTimeOut cho append
                                         --------*/
                                         setTimeout(function () { $('.chosenExercise').append('<i style="float:right" class="fa fa-arrow-right"></i>') }, 50);
-                                        console.log('response data success data1 : ' + response.data.exerciseId);
+                                        // console.log('response data success data1 : ' + response.data.exerciseId);
                                         homePagecontroller.exerciseData = response.data;
                                         //homePagecontroller.transferData = transferData;
                                     }
@@ -445,29 +361,23 @@ angular.module('MainPage')
                     }
                 }
             });
+            /*----------------------------------------------------------*/
+            
             /**
             *    Click 'Yes' event to start do exercise --> open 'Start' modal
             *    If user click 'Yes'    -->  Stop time if time is running
             *                           -->  go to exercise/exerciseId
             */
             $scope.directToAnotherExercise = function (dataExerciseIdDirect) {
-                //$("#validateChangeExerciseModel").modal({ backdrop: "false" });
                 $scope.demoForm.$setPristine();
                 /* Stop time */
-                console.log('directToAnotherExercise');
                 if (homePagecontroller.timerProcess) {
                     $interval.cancel(homePagecontroller.timerProcess);
                 }
-                //$("#validateChangeExerciseModel").hide();
-                //$("#validateChangeExerciseModel").modal('hide');
-                // $stateProvide.transitionTo("/exercise/" + dataExerciseIdDirect + "/" + trung_gian);
                 $location.url("/exercise/" + dataExerciseIdDirect + "/" + trung_gian);
-                // $('#startModal').modal('show');
-                //$location.url("/exercise/" + dataExerciseIdDirect + "/" + trung_gian);
             }
         }])
-
-
+            /*----------------------------------------------------------*/
     .factory('lstExercisesApi', ['$http',
         function ($http) {
             $http.getAllexerciseByUserName = function (userName) {
@@ -477,17 +387,6 @@ angular.module('MainPage')
             }
             return $http;
         }
-
-        //sercive get all exercise by username
-
-        //function ($http) {
-        //    $http.getAllexerciseByUserName = function (userName) {
-        //        return $http({
-        //            url: '/api/exercise/getallexercise?username=' + userName
-        //        })
-        //    }
-        //    return $http;
-        //}
     ])
     .factory('exerciseApi', ['$http',
         function ($http) {
@@ -506,7 +405,6 @@ angular.module('MainPage')
                 var parameter = { param: inputParameter, exerciseid: exerciseId };
                 var config = { params: parameter };
                 return $http.get('/api/exercise/testcode', config);
-                //.then(function (response) { console.log("chay qua day ne!!!" + response.data); response.data; });
             }
             return $http;
         }
@@ -514,7 +412,6 @@ angular.module('MainPage')
     .factory('getTestCaseApi', ['$http',
         function ($http) {
             $http.getTestCaseSubmit = function (exerciseId) {
-                console.log('phat heo ' + exerciseId);
                 var parameter = { exerciseid: exerciseId };
                 var config = { params: parameter };
                 return $http.get('/api/exercise/gettestcases', config)
@@ -579,8 +476,6 @@ angular.module('MainPage')
             return $http;
         }
     ])
-
-
     .directive('exerciseInfo', ['exerciseHintImgApi', function (exerciseHintImgApi) {
         return {
             restrict: 'AECM',
@@ -591,11 +486,9 @@ angular.module('MainPage')
             link:
             function (info, element, attrs) {
                 info.getHint = function (params) {
-                    console.log("log : " + params);
                     exerciseHintImgApi.getExerciseHintImg(params)
                         .then(
                         function (response) {
-                            console.log("log1 : " + response.data.result);
                             info.hintCodeImg = response.data.result;
                         },
                         function (response) {
@@ -607,9 +500,6 @@ angular.module('MainPage')
             }
         }
     }])
-
-
-
     .directive('rulesModal', function () {
         return {
             restrict: 'E',
@@ -636,4 +526,4 @@ angular.module('MainPage')
         transferData.NameExercise_dataTransfer = 'Default';
         //transferData.Code_dataTransfer = 'Default';
     })
-    ;
+;

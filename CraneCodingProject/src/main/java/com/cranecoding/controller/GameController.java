@@ -67,7 +67,8 @@ public class GameController {
 	}
 
 	@RequestMapping(value = "/api/exercise/record", method = RequestMethod.GET)
-	public @ResponseBody Hashtable<String, Comparable> record(@RequestParam("userId")int userId){
+	public @ResponseBody Hashtable record(@RequestParam("userName")String userName){
+		int userId = gameService.getUserIdByUserName(userName);
 		return gameService.getRecordByUserId(userId);
 	}
 
@@ -79,8 +80,6 @@ public class GameController {
 		informationToReturn.put("result","http://thuvienanhdep.net/wp-content/uploads/2015/09/bo-suu-tap-nhung-hinh-anh-de-thuong-dang-yeu-cua-hot-girl-anh-the-14.jpg");
 		informationToReturn.put("message",":))");
 		return informationToReturn;
-
 	}
-	
 	
 }
