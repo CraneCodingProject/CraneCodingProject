@@ -1,4 +1,9 @@
  $(document).ready(function () {
+      /**
+       * 
+       * When load  Hide all pop-up, modal
+       */
+      
       $('#loginForm').hide();
       $('#commandBlockModal').hide();
       $('#videoTutorialModal').hide();

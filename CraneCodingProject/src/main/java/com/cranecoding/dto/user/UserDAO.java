@@ -17,7 +17,7 @@ public interface UserDAO extends CrudRepository<User, Integer> {
 	@Query(value = "select * from user where username = :username", nativeQuery=true)
 	User getUserIdByUserName(@Param("username") String username);
 	
-	@Query(value ="select * from user where username = :username and email = :email", nativeQuery =true) 
+	@Query(value ="select * from user where username = :username or email = :email", nativeQuery =true) 
 	List<User> getUserListByUserNameAndEmail(@Param("username") String username, @Param("email") String email);
 	
 	@Query(value ="select * from user where userid = :userId", nativeQuery = true)
