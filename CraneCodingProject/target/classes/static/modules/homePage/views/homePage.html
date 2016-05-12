@@ -25,7 +25,8 @@
             <form name="form" role="form" ng-show="!showForm">
                 <div class="form-group">
                     <label for="username">User name</label>
-                    <input id="input-form" type="text" name="username" id="username" class="form-control" ng-model="username" required />
+                    <input ng-minlength="8" id="input-form" type="text" name="username" id="username" class="form-control" ng-model="username" required />
+                    <span ng-show="form.username.$error.minlength" class="help-block">User name is more than 8.</span></br>
                     <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">User name is required</span>
                 </div>
                 <div class="form-group">
@@ -34,7 +35,7 @@
                     <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
                     <span ng-show="form.password.$error.minlength" class="help-block">Password is more than 8.</span>
                 </div>
-                <div ng-show="error" class="alert-danger">{{error}}</div>
+                <div ng-show="error" class="help-block">{{error}}</div>
                 <div class="form-group">
                     
                    <button  type= "button" id="loginFacebook" >
@@ -161,7 +162,7 @@
         <div class="inner">
 
           <!-- Site Logo -->
-          <a href="index-2.html" class="site-logo">
+          <a href class="site-logo">
             <img src="img/logo.png" alt="Metheor">
           </a><!-- .site-logo -->
           
@@ -196,7 +197,7 @@
 
           <!-- Toolbar -->
           <div class="toolbar">   
-            <a ng-show="!logout" class="btn btn-sm btn-primary btn-icon-left" id="btn-sign-in">
+            <a ng-show="!logout" class="btn btn-sm btn-primary btn-icon-left" ng-click="openSignInModel()" id="btn-sign-in">
               <strong>Sign in</strong>
             </a>
             <a ng-show="logout" class="btn btn-sm btn-primary btn-icon-left" id="btn-sign-out">
@@ -220,11 +221,11 @@
           <img src="img/home/intro/logo.png" alt="Metheor">
         </div><!-- .intro-logo -->
         <p class="text-light opacity-50">Prepare your self and become a master of Crane Coding</p>
-        <ul class="sharing-links light-skin space-bottom">
+       <!-- <ul class="sharing-links light-skin space-bottom">
           <li><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i>6 358</a></li>
           <li><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i>8 242</a></li>
           <li><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i>5 176</a></li>
-        </ul><!-- .sharing-links -->
+        </ul> .sharing-links -->
       </div><!-- .container -->
       
       <!-- Remove class ".layer-parallax" to disable mouse parallax effect on screens. -->
@@ -236,7 +237,7 @@
       <span class="inner-shadow"></span>
     </section><!-- .intro-section -->
 
-    <!-- Market Buttons -->
+    <!-- Market Buttons --
     <section class="fw-section bg-white padding-top-3x padding-bottom-3x" id="markets">
       <div class="container text-center">
         <h6 class="text-thin">Application available on:</h6>
@@ -246,12 +247,12 @@
         <div class="market-counter">
           <span>133K</span>
           downloads
-        </div><!-- .market-counter -->
-      </div><!-- .container -->
-    </section><!-- .fw-section.bg-white -->
+        </div>!-- .market-counter --
+      </div>!-- .container --
+    </section>!-- .fw-section.bg-white -->
 
     <!-- Features -->
-    <section class="fw-section bg-white border-top padding-top-3x padding-bottom-3x">
+    <section id="lesson" class="fw-section bg-white border-top padding-top-3x padding-bottom-3x">
       <div class="container">
         <h2 class="block-title text-center">Lesson
           <small>This is all the basic code statement. Learn it and you will pass all the test.</small>
@@ -324,7 +325,7 @@
     </section>
 
     <!-- Video Popup -->
-    <section class="fw-section parallax text-center padding-top-3x padding-bottom-3x" style="background-image: url(img/home/video-bg.jpg);" data-stellar-background-ratio="0.65">
+    <section id="tutorial" class="fw-section parallax text-center padding-top-3x padding-bottom-3x" style="background-image: url(img/home/video-bg.jpg);" data-stellar-background-ratio="0.65">
       <span class="overlay" style="opacity: .78;"></span>
       <div class="container padding-top-3x padding-bottom-3x">
         <!-- Remove ".light-skin" class to alter appearance. -->
@@ -487,7 +488,7 @@
         <div class="copyright">
           <div class="inner">
             <div class="column">
-              <a href="index-2.html" class="site-logo">
+              <a href class="site-logo">
                 <img src="img/logo.png" alt="Metheor">
               </a>
               <span class="copy-text">&copy; 2015. All rights reserved</span>

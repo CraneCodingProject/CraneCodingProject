@@ -15,7 +15,7 @@
 }
 #registedForm input {
     margin-bottom: 0px;
-    height: 3vw;
+    height: 2vw;
 }
 #registedForm label {
 	margin-bottom : 0px;
@@ -25,11 +25,11 @@
 }
 #loginForm{
 	margin-bottom: 0px;
-    height: 3vw;
+    height: 2vw;
 }
 .form-group input {
 	margin-bottom: 0px;
-	height: 3vw;
+	height: 2vw;
 }
 
 /*  CommandDetailModal   */

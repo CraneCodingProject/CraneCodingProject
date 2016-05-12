@@ -15,10 +15,18 @@ angular.module('CrainCoding', [
     'ngCookies'
 ])
 
+/*.config(["$locationProvider", function($locationProvider) {
+  $locationProvider.html5Mode(true); // remove # in url
+}])*/
+
 .config(['$routeProvider', 'unsavedWarningsConfigProvider', function ($routeProvider, unsavedWarningsConfigProvider) {
     $routeProvider
         .when('/home', {
             controller: 'HomePageController',
+            templateUrl: 'modules/homePage/views/homePage.html'
+        })
+        .when('/home/#:abc',{
+        	controller: 'HomePageController',
             templateUrl: 'modules/homePage/views/homePage.html'
         })
         .when('/', {

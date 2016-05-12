@@ -1,4 +1,9 @@
  $(document).ready(function () {
+      /**
+       * 
+       * When load  Hide all pop-up, modal
+       */
+      
       $('#loginForm').hide();
       $('#commandBlockModal').hide();
       $('#videoTutorialModal').hide();
@@ -13,10 +18,10 @@
  
  
  
-  $('#btn-sign-in').click(function(){
-		$('#loginForm').show();
-		console.log('khfdahjfbdafbdbf');
-	}); 
+  // $('#btn-sign-in').click(function(){
+	// 	$('#loginForm').show();
+	// 	console.log('khfdahjfbdafbdbf');
+	// }); 
   
   $('#btn-sign-out').click(function(){
 		$('#logoutModal').show();

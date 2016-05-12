@@ -13,10 +13,10 @@
  
  
  
-  $('#btn-sign-in').click(function(){
-		$('#loginForm').show();
-		console.log('khfdahjfbdafbdbf');
-	}); 
+  // $('#btn-sign-in').click(function(){
+	// 	$('#loginForm').show();
+	// 	console.log('khfdahjfbdafbdbf');
+	// }); 
   
   $('#btn-sign-out').click(function(){
 		$('#logoutModal').show();

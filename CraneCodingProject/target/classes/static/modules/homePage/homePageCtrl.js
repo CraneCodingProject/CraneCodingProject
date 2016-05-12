@@ -8,6 +8,23 @@ angular.module('HomePage')
         // reset login status
        // $scope.logout = false;
         $rootScope.globals = $cookieStore.get('globals') || {};
+        
+        function initialCondition(){
+            $scope.username = null;
+            $scope.password = null;
+            $scope.lastname = null;
+            $scope.usermail = null;
+            $scope.password = null;
+            $scope.rePassword = null;
+        }
+        
+        $scope.openSignInModel = function(){
+            initialCondition();
+            $('#loginForm').show();
+            $scope.showForm = false;
+        }
+        
+        
         if ($rootScope.globals.currentUser) {
             $scope.logout = true;
         }
@@ -47,7 +64,6 @@ angular.module('HomePage')
             }
         }
         $scope.register = function () {
-
             registerAccApi.registerNewAcc($scope.username,$scope.firstname,$scope.lastname,$scope.usermail, $scope.password)
             .then(
                 function (response) {
@@ -64,7 +80,7 @@ angular.module('HomePage')
                         },2000);
                     }
                     else{
-                    	console.log(' callback true_dang ky fail con me no');
+                    	console.log('callback true_dang ky fail con me no');
                         $scope.registerFalse = response.data.message;
                         $scope.registerSuccess=false;
                         $scope.dataLoading = false;
@@ -115,7 +131,6 @@ angular.module('HomePage')
         return $http;
     }
 ])
-
 .factory('lstCommandsApi', ['$http',
      function($http) {
 		$http.getLstCommands = function() {
@@ -124,5 +139,4 @@ angular.module('HomePage')
 		return $http;
 	}
 ])
-
 ;
