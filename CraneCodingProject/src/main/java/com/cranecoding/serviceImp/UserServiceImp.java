@@ -38,6 +38,7 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public boolean checkIsUserNameExsit(UserDTO userRegister) {
+		boolean chec=userDao.getUserListByUserNameAndEmail(userRegister.getUsername(), userRegister.getUsermail()).isEmpty();
 		if (userDao.getUserListByUserNameAndEmail(userRegister.getUsername(), userRegister.getUsermail()).isEmpty()) {
 			return true;
 		}
