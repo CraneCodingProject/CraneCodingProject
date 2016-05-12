@@ -1,5 +1,8 @@
 package com.cranecoding.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.neo4j.cypher.internal.compiler.v2_1.perty.docbuilders.toStringDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cranecoding.dto.exercise.ExerciseDTO;
+import com.cranecoding.model.Exercise;
 import com.cranecoding.service.AdminService;
 
 @Controller
@@ -33,5 +37,20 @@ public class AdminController {
 		return adminService.deleteExercise(exerciseId);
 	}
 	
+	private ExerciseDTO convertToExerciseDTO(Exercise exercise) {
+		ExerciseDTO exerciseDto = new ExerciseDTO(exercise.getExerciseid(), exercise.getExercisename(),
+				exercise.getExercisecontent(), exercise.getExerciseanswer(), exercise.getPseudocode());
+		return exerciseDto;
+	}
+
+	@RequestMapping(value = "/api/admin/getAllExercise", method = RequestMethod.GET)
+	public @ResponseBody List<ExerciseDTO> getAllExercise(){
+		List<Exercise> exerToProcess = adminService.getAllExercise();
+		List<ExerciseDTO> listExerciseDTOs = new ArrayList<>();
+		for (Exercise exercise : exerToProcess) {
+			listExerciseDTOs.add(convertToExerciseDTO(exercise));
+		}
+		return listExerciseDTOs;
+	}
 	
 }

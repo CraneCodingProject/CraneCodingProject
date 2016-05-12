@@ -15,4 +15,7 @@ public interface ExerciseDAO extends CrudRepository<Exercise, Integer> {
 
 	@Query(value = "select * from exercise where exerciseid = :idExercise", nativeQuery = true)
 	Exercise getExerciseById(@Param("idExercise") int idExercise);
+
+	@Query(value = "select * from exercise", nativeQuery = true)
+	List<Exercise> getAllExercise();
 }

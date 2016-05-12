@@ -1,5 +1,7 @@
 package com.cranecoding.serviceImp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,11 @@ public class AdminServiceIml implements AdminService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<Exercise> getAllExercise() {
+		return exerciseDAO.getAllExercise();
 	}
 	
 }

@@ -23,12 +23,13 @@ public class ExerciseDTO {
 		this.exerciseAnswer = exerciseAnswer;
 	}
 
-	public ExerciseDTO(int idExcercise, String exerciseName, String exerciseContent, String exerciseAnswer) {
+	public ExerciseDTO(int idExcercise, String exerciseName, String exerciseContent, String exerciseAnswer, String pseudoCode) {
 		super();
 		this.idExercise = idExcercise;
 		this.exerciseName = exerciseName;
 		this.exerciseContent = exerciseContent;
 		this.exerciseAnswer = exerciseAnswer;
+		this.pseudoCode = pseudoCode;
 	}
 
 	public int getIdExercise() {

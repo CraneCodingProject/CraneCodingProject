@@ -116,7 +116,7 @@ public class GameServiceImp implements GameService {
 
 	private ExerciseDTO convertToExerciseDTO(Exercise exercise) {
 		ExerciseDTO exerciseDto = new ExerciseDTO(exercise.getExerciseid(), exercise.getExercisename(),
-				exercise.getExercisecontent(), exercise.getExerciseanswer());
+				exercise.getExercisecontent(), exercise.getExerciseanswer(), exercise.getPseudocode());
 		return exerciseDto;
 	}
 
