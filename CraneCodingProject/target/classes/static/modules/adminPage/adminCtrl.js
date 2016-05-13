@@ -8,6 +8,7 @@ angular.module('AdminPage')
             $scope.loginSuccess = false;
             $scope.checkAdmin = false;
             initialCondition();
+            var tesCases = [];
             //$scope.idExercise = null;
             function initialCondition() {
                 $scope.idExercise = null;
@@ -15,6 +16,37 @@ angular.module('AdminPage')
                 $scope.exerciseContent = null;
                 $scope.exerciseAnswer = null;
                 $scope.exercisePseducode = null;
+                $scope.testCases =[];
+                tesCases = [];
+            }
+            function setCase(input,output){
+                var oneCase = { input , output };
+                return oneCase;
+            }
+            function setTestCase(){
+            	tesCases = [];
+                
+                // $scope.testCases.push(setCase($scope.inp1,$scopWe.out1));
+                // $scope.testCases.push(setCase($scope.inp2,$scope.out2));
+                // $scope.testCases.push(setCase($scope.inp3,$scope.out3));
+                // $scope.testCases.push(setCase($scope.inp4,$scope.out4));
+                // $scope.testCases.push(setCase($scope.inp5,$scope.out5));
+                // $scope.testCases.push(setCase($scope.inp6,$scope.out6));
+                // $scope.testCases.push(setCase($scope.inp7,$scope.out7));
+                // $scope.testCases.push(setCase($scope.inp8,$scope.out8));
+                // $scope.testCases.push(setCase($scope.inp9,$scope.out9));
+                // $scope.testCases.push(setCase($scope.inp10,$scope.out10));
+                tesCases.push(setCase($scope.inp1,$scope.out1));
+                tesCases.push(setCase($scope.inp2,$scope.out2));
+                tesCases.push(setCase($scope.inp3,$scope.out3));
+                tesCases.push(setCase($scope.inp4,$scope.out4));
+                tesCases.push(setCase($scope.inp5,$scope.out5));
+                tesCases.push(setCase($scope.inp6,$scope.out6));
+                tesCases.push(setCase($scope.inp7,$scope.out7));
+                tesCases.push(setCase($scope.inp8,$scope.out8));
+                tesCases.push(setCase($scope.inp9,$scope.out9));
+                tesCases.push(setCase($scope.inp10,$scope.out10));
+                return tesCases;
             }
             $scope.adminLogin = function (acc, pass) {
                 if (acc = "admin" && pass == "admin") {
@@ -52,7 +84,10 @@ angular.module('AdminPage')
                 $scope.exerciseForm.$setPristine();
             }
             $scope.createOrUpdateExercise = function () {
-                createUpdateExercise.createOrUpdateExercise($scope.idExercise, $scope.exerciseName, $scope.exerciseContent, $scope.exerciseAnswer, $scope.exercisePseducode)
+                $scope.testCases = setTestCase();
+                console.log(setTestCase());
+                console.log($scope.testCases);
+                createUpdateExercise.createOrUpdateExercise($scope.idExercise, $scope.exerciseName, $scope.exerciseContent, $scope.exerciseAnswer, $scope.exercisePseducode,$scope.testCases)
                     .then(
                     function (response) {
                         //success --> reload lst
@@ -144,13 +179,14 @@ angular.module('AdminPage')
     .factory('createUpdateExercise',
     ['$http',
         function ($http) {
-            $http.createOrUpdateExercise = function (exerciseId, exerciseName, exerciseContent, exerciseAnswer, exercisePseudocode) {
+            $http.createOrUpdateExercise = function (exerciseId, exerciseName, exerciseContent, exerciseAnswer, exercisePseudocode,exerciseTestCases) {
                 var exerciseInfo = {
                     idExercise: exerciseId,
                     exerciseName: exerciseName,
                     exerciseContent: exerciseContent,
                     exerciseAnswer: exerciseAnswer,
-                    pseudoCode: exercisePseudocode
+                    pseudoCode: exercisePseudocode,
+                    exerciseTestCases : exerciseTestCases
                 };
                 console.log(exerciseInfo);
                 return $http.post('/api/admin/createOrUpdate', exerciseInfo);

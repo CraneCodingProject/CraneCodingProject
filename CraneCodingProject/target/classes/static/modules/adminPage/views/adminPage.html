@@ -114,6 +114,91 @@ label.control-label {
                         placeholder="Exercise-pseducode"></input>
                     <span class="messageRequiredForm" ng-show="exerciseForm.exercisePseducode.$dirty && exerciseForm.exercisePseducode.$error.required">This field is required.</span>
                 </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label class="control-label">Exercise's Test cases:</label>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp1">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out1">
+                            </td>
+                        </tr>
+                        <tr>
+                           	<td>
+                                <input type="number" required ng-model = "inp2">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out2">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp3">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp4">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out4">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp5">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out5">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp6">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out6">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp7">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out7">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp8">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out8">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp9">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out9">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" required ng-model = "inp10">
+                            </td>
+                            <td>
+                                <input type="number" required ng-model = "out10">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <div class="form-group" style="float: right;">
                     <button ng-click="createOrUpdateExercise()" ng-disabled="exerciseForm.$invalid" ng-hide="idExercise" type="button"  class="btn btn-danger">Create</button>
                     <button ng-click="createOrUpdateExercise()" ng-disabled	="!exerciseForm.$dirty || exerciseForm.$invalid" ng-show="idExercise" type="button" class="btn btn-danger">Update</button>
