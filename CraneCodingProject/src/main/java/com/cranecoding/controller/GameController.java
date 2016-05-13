@@ -67,7 +67,7 @@ public class GameController {
 	}
 
 	@RequestMapping(value = "/api/exercise/record", method = RequestMethod.GET)
-	public @ResponseBody Hashtable record(@RequestParam("userName")String userName){
+	public @ResponseBody Hashtable record(@RequestParam("username")String userName){
 		int userId = gameService.getUserIdByUserName(userName);
 		return gameService.getRecordByUserId(userId);
 	}

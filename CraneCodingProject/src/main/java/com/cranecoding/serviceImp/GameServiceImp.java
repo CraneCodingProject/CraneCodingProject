@@ -206,13 +206,21 @@ public class GameServiceImp implements GameService {
 	@Override
 	public Hashtable getRecordByUserId(int userId) {
 		Hashtable hashTable = new Hashtable<>();
+		List<Hashtable> hashS = new ArrayList<>();
 		List<Score> a = scoreDAO.getRecordByUserId(userId);
 		for (int i = 0 ; i < a.size() ; i++) {
-			List<Double> list = new ArrayList<>();
-			list.add((double) a.get(i).getStar());
-			list.add(a.get(i).getTime());
-			hashTable.put(a.get(i).getExercise().getExerciseid(), list);
+			Hashtable hash = new Hashtable<>();
+			hash.put("star",(double) a.get(i).getStar());
+			hash.put("time",a.get(i).getTime());
+//			List<Double> list = new ArrayList<>();
+//			list.add((double) a.get(i).getStar());
+//			list.add(a.get(i).getTime());
+			hash.put("exerciseName",a.get(i).getExercise().getExercisename());
+			
+			hashS.add(hash);
+			
 		}
+		hashTable.put("record",hashS);
 		return hashTable;
 	}
 

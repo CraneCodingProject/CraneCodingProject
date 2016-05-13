@@ -239,9 +239,10 @@ angular.module('MainPage')
             *   username --> server --> get  exerciseName, stars, time of username
             */
             $scope.showUserHistory = function (username) {
+                console.log(username);
                 userHistoryApi.getUserHistory(username)
                     .then(function (response) {
-                        $scope.userRecordsHistory = response.data;
+                        $scope.userRecordsHistory = response.data.record;
                     });
             }
             /*----------------------------------------------------------*/
@@ -447,7 +448,7 @@ angular.module('MainPage')
             $http.getUserHistory = function (username) {
                 var parameter = { username: username };
                 var config = { params: parameter };
-                return $http.get('/api/exercise/history', config);
+                return $http.get('api/exercise/record', config);
             }
             return $http;
         }

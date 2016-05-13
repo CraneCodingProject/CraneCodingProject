@@ -3,6 +3,8 @@ package com.cranecoding.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hornetq.utils.json.JSONArray;
+import org.hornetq.utils.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +25,16 @@ public class AdminController {
 	
 	@RequestMapping(value = "/api/admin/createOrUpdate", method = RequestMethod.POST)
 	public @ResponseBody boolean createExercise(@RequestBody ExerciseDTO exerciseInfo){
+		
 		try{
+			System.out.println("phat"+exerciseInfo.getExerciseTestCase());
+			JSONArray mJsonArray = new JSONArray(exerciseInfo.getExerciseTestCase());
+			JSONObject mJsonObject = new JSONObject();
+			for (int i = 0; i < mJsonArray.length(); i++) {
+			    mJsonObject = mJsonArray.getJSONObject(i);
+			    System.out.println(mJsonObject.get("inp"));
+			    System.out.println(mJsonObject.get("out"));
+			}
 			String exId = String.valueOf(exerciseInfo.getIdExercise());
 			return adminService.updateExercise(exerciseInfo);
 		}
