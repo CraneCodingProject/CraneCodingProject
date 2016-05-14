@@ -18,6 +18,26 @@ angular.module('AdminPage')
                 $scope.exercisePseducode = null;
                 $scope.testCases =[];
                 tesCases = [];
+                $scope.inp1 = null;
+                $scope.inp2 = null;
+                $scope.inp3 = null;
+                $scope.inp4 = null;
+                $scope.inp5 = null;
+                $scope.inp6 = null;
+                $scope.inp7 = null;
+                $scope.inp8 = null;
+                $scope.inp9 = null;
+                $scope.inp10 = null;
+                $scope.out1 = null;
+                $scope.out2 = null;
+                $scope.out3 = null;
+                $scope.out4 = null;
+                $scope.out5 = null;
+                $scope.out6 = null;
+                $scope.out7 = null;
+                $scope.out8 = null;
+                $scope.out9 = null;
+                $scope.out10 = null;
             }
             function setCase(input,output){
                 var oneCase = { input , output };
@@ -25,17 +45,6 @@ angular.module('AdminPage')
             }
             function setTestCase(){
             	tesCases = [];
-                
-                // $scope.testCases.push(setCase($scope.inp1,$scopWe.out1));
-                // $scope.testCases.push(setCase($scope.inp2,$scope.out2));
-                // $scope.testCases.push(setCase($scope.inp3,$scope.out3));
-                // $scope.testCases.push(setCase($scope.inp4,$scope.out4));
-                // $scope.testCases.push(setCase($scope.inp5,$scope.out5));
-                // $scope.testCases.push(setCase($scope.inp6,$scope.out6));
-                // $scope.testCases.push(setCase($scope.inp7,$scope.out7));
-                // $scope.testCases.push(setCase($scope.inp8,$scope.out8));
-                // $scope.testCases.push(setCase($scope.inp9,$scope.out9));
-                // $scope.testCases.push(setCase($scope.inp10,$scope.out10));
                 tesCases.push(setCase($scope.inp1,$scope.out1));
                 tesCases.push(setCase($scope.inp2,$scope.out2));
                 tesCases.push(setCase($scope.inp3,$scope.out3));
@@ -100,10 +109,11 @@ angular.module('AdminPage')
                                 function (response) {
                                     console.log('fail');
                                 });
+                                alert("Success...!");
                             initialCondition();
                         }
                         else {
-                            console.log("OOP..! Response: " + response.data);
+                            alert("OOP..! Some things happent: Error~response : Create or update " + response.data);
                         }
                     },
                     function (response) {
@@ -112,13 +122,10 @@ angular.module('AdminPage')
                         console.log($scope.exerciseContent);
                         console.log($scope.exerciseAnswer);
                         console.log($scope.exercisePseducode);
-                        console.log('fail :(');
+                        alert("OOP..! Some things happent: Error~response 404");
                     }
                     );
             }
-            // $scope.createExercise = function(){
-
-            // }
             $scope.addNewExercise = function () {
                 $scope.idExercise = null;
                 //$scope.exerciseForm.$dirty = false;
@@ -141,14 +148,15 @@ angular.module('AdminPage')
                                     function (response) {
                                         console.log('fail');
                                     });
+                                    alert("Success...!");
                                 initialCondition();
                             }
                             else {
-                                console.log("OOP..! Response: " + response.data);
+                                alert("OOP..! Some things happent: Error~response : Create or update " + response.data);
                             }
                         },
                         function (response) {
-                            console.log("OOP..! Response: " + response.data);
+                           alert("OOP..! Some things happent: Error~response 404");
                         }
                         );
                 }
