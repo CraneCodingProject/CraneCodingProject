@@ -12,6 +12,12 @@ public class TestCaseDTO {
 		this.exerciseId = exerciseId;
 	}
 
+	public TestCaseDTO(String input, String output) {
+		this.input = input;
+		this.output = output;
+	}
+	public TestCaseDTO(){}
+
 	public String getInput() {
 		return input;
 	}

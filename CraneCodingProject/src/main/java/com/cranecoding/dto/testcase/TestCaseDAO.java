@@ -13,5 +13,4 @@ public interface TestCaseDAO extends CrudRepository<Exercise, Integer> {
 	
 	@Query(value = "select * from test_case where exercise_exerciseid = :exerciseId", nativeQuery=true)
 	List<TestCase> getListCaseByExerciseId(@Param("exerciseId") int exerciseId);
-
 }

@@ -121,8 +121,7 @@ public class GameServiceImp implements GameService {
 	}
 
 	private TestCaseDTO converToTestCaseDTO(TestCase caseToGet) {
-		TestCaseDTO caseDto = new TestCaseDTO(caseToGet.getInnput(), caseToGet.getOutput(),
-				caseToGet.getExercise().getExerciseid());
+		TestCaseDTO caseDto = new TestCaseDTO(caseToGet.getInnput(), caseToGet.getOutput());
 		return caseDto;
 	}
 
