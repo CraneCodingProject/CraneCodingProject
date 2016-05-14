@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cranecoding.dto.exercise.ExerciseDAO;
 import com.cranecoding.dto.exercise.ExerciseDTO;
-import com.cranecoding.dto.exercise.wrapper;
 import com.cranecoding.dto.testcase.TestCaseDAO;
 import com.cranecoding.dto.testcase.TestCaseDTO;
 import com.cranecoding.model.Exercise;

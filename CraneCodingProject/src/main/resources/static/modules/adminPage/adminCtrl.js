@@ -11,7 +11,7 @@ angular.module('AdminPage')
             var tesCases = [];
             //$scope.idExercise = null;
             function initialCondition() {
-                $scope.idExercise = null;
+                $scope.idExercise =null;
                 $scope.exerciseName = null;
                 $scope.exerciseContent = null;
                 $scope.exerciseAnswer = null;
@@ -187,6 +187,8 @@ angular.module('AdminPage')
                     exerciseAnswer: exerciseAnswer,
                     pseudoCode: exercisePseudocode,
                     exerciseTestCases : exerciseTestCases
+//                    input1:$scope.inp1,
+//                    output1:$scope.out1
                 };
                 console.log(exerciseInfo);
                 return $http.post('/api/admin/createOrUpdate', exerciseInfo);
