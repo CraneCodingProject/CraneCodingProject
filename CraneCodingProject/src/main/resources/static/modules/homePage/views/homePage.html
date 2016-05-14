@@ -45,7 +45,7 @@
                     <div style="float:right;">
                     	<a href type="button" ng-click="showForm = !showForm" >Register</a>
                     	<button id="btnLogin" type="submit" ng-click="login()" data-dismiss="modal" ng-disabled="form.$invalid || dataLoading" class="btn btn-sm btn-primary btn-icon-left">
-                    		Login
+                    		Log in
                     	</button>
                     </div>
                 </div>
@@ -116,6 +116,20 @@
         <img class="img_homepage" ng-src="{{commandSrc}}">
     </div>
 </div>
+
+
+<div class="modal fade" id="loginFacebookModal" role="dialog">
+    <div class="modal-content">
+    	<div class="modal-header">
+    	 	<button type="button" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>
+    		<h2>Alert</h2>
+    	</div>
+    	<div class="modal-body" style="height:100%;" align="center">
+        	<p style="color : red;">This feature is under construction.</p>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="videoTutorialModal" role="dialog" style="display:block; padding-right:0px;">
     <div class="modal-header">
         <button type="button" onclick="stopTutorialVideo()" class="close" data-dismiss="modal" style="color:#202e51">&times;</button>

@@ -9,6 +9,7 @@
       $('#videoTutorialModal').hide();
       $('#logoutModal').hide();
       $('#CommandDetailModal').hide();
+      $('#loginFacebookModal').hide();
   });
   $('.box-with-icon.text-center').click(function(){
 	  $('#CommandDetailModal').show();
@@ -22,7 +23,10 @@
 	// 	$('#loginForm').show();
 	// 	console.log('khfdahjfbdafbdbf');
 	// }); 
-  
+  $('#loginFacebook').click(function(){
+	  $('#loginFacebookModal').show();
+	  $('#loginForm').hide();
+  })
   $('#btn-sign-out').click(function(){
 		$('#logoutModal').show();
 		console.log('khfdahjfbdafbdbf');
@@ -33,12 +37,14 @@
       $('#videoTutorialModal').hide();
       $('#logoutModal').hide();
       $('#CommandDetailModal').hide();
+      $('#loginFacebookModal').hide();
   });
   $('#closeModal').click(function(){
     $('#loginForm').hide();
       $('#commandBlockModal').hide();
       $('#videoTutorialModal').hide();
       $('#logoutModal').hide();
+      $('#loginFacebookModal').hide();
   });
   var video = 'http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=0';
   function stopTutorialVideo () {

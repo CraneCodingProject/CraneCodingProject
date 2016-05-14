@@ -75,11 +75,19 @@ public class GameController {
 	@RequestMapping(value = "/api/exercise/hint", method = RequestMethod.GET)
 	public @ResponseBody Hashtable<String, Comparable> hintImg(@RequestParam("exerciseid")int exerciseid){
 		//return gameService.getRecordByUserId(userId);
+		try{
 		System.out.println("exerciseid:"+exerciseid);
 		Hashtable informationToReturn = new Hashtable();
 		informationToReturn.put("result","http://thuvienanhdep.net/wp-content/uploads/2015/09/bo-suu-tap-nhung-hinh-anh-de-thuong-dang-yeu-cua-hot-girl-anh-the-14.jpg");
 		informationToReturn.put("message",":))");
 		return informationToReturn;
+		}
+		catch(Exception E){
+			Hashtable informationToReturn = new Hashtable();
+			informationToReturn.put("result","");
+			informationToReturn.put("message","OOP...Something happent.!");
+			return informationToReturn;
+		}
 	}
 	
 }
