@@ -79,12 +79,11 @@ public class GameServiceImp implements GameService {
 	}
 
 	@Override
-	public List<TestCase> getTestCaseByExerciseId(int exerciseId) {
-		// List<TestCaseDTO> listTestCaseToReturn = new ArrayList<>();
-		// for (TestCase caseResult :
-		// testCaseDao.getListCaseByExerciseId(exerciseId))
-		// listTestCaseToReturn.add(converToTestCaseDTO(caseResult));
-		return testCaseDao.getListCaseByExerciseId(exerciseId);
+	public List<TestCaseDTO> getTestCaseByExerciseId(int exerciseId) {
+		List<TestCaseDTO> listTestCaseToReturn = new ArrayList<>();
+		for (TestCase caseResult :	testCaseDao.getListCaseByExerciseId(exerciseId))
+		listTestCaseToReturn.add(converToTestCaseDTO(caseResult));
+		return listTestCaseToReturn;
 	}
 
 	@Override
@@ -106,11 +105,20 @@ public class GameServiceImp implements GameService {
 
 	@Override
 	public void saveScore(int exerciseid, String username, int star, String time) {
+		System.out.println(exerciseid + "_"+username+"_"+star+"_"+time);
 		Score currentExercise = scoreDAO
 				.getScoreByUserIdAndExerciseId(userDAO.getUserIdByUserName(username).getUserid(), exerciseid);
+		
+		System.out.println("currentExercise" + currentExercise.getExercise());
+		System.out.println("currentExercise" + currentExercise.getTime());
+		
 		currentExercise.setStar(star);
 		double timeToSave = Double.parseDouble(time);
 		currentExercise.setTime(timeToSave);
+		System.out.println("currentExercise" + currentExercise.getExercise());
+		System.out.println("currentExercise" + currentExercise.getTime());
+		System.out.println("currentExercise" + currentExercise.getUser());
+
 		scoreDAO.save(currentExercise);
 	}
 
@@ -121,7 +129,7 @@ public class GameServiceImp implements GameService {
 	}
 
 	private TestCaseDTO converToTestCaseDTO(TestCase caseToGet) {
-		TestCaseDTO caseDto = new TestCaseDTO(caseToGet.getInnput(), caseToGet.getOutput());
+		TestCaseDTO caseDto = new TestCaseDTO(caseToGet.getInnput(), caseToGet.getOutput(), caseToGet.getExercise().getExerciseid());
 		return caseDto;
 	}
 

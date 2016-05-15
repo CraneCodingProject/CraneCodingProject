@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cranecoding.dto.exercise.ExerciseDTO;
+import com.cranecoding.dto.testcase.TestCaseDTO;
 import com.cranecoding.model.TestCase;
 import com.cranecoding.service.GameService;
 import com.cranecoding.service.UserService;
@@ -39,7 +40,7 @@ public class GameController {
 	}
 
 	@RequestMapping(value = "/api/exercise/gettestcases", method = RequestMethod.GET)
-	public @ResponseBody List<TestCase> getTestCase(HttpServletRequest request,
+	public @ResponseBody List<TestCaseDTO> getTestCase(HttpServletRequest request,
 			@RequestParam("exerciseid") int exerciseid) {
 		return gameService.getTestCaseByExerciseId(exerciseid);
 	}
@@ -48,6 +49,10 @@ public class GameController {
 	public @ResponseBody Hashtable<String, Comparable> submitExercise(HttpServletRequest request,
 			@RequestParam("exerciseid") int exerciseid, @RequestParam("username") String username,
 			@RequestParam("star") int star, @RequestParam("time") String time) {
+		System.out.println("exerciseid"+exerciseid);
+		System.out.println("username"+username);
+		System.out.println("star"+star);
+		System.out.println("time"+time);
 		Hashtable informationToReturn = new Hashtable();
 		if (star > 5) {
 			gameService.saveScore(exerciseid,username,star,time);
@@ -78,7 +83,7 @@ public class GameController {
 		try{
 		System.out.println("exerciseid:"+exerciseid);
 		Hashtable informationToReturn = new Hashtable();
-		informationToReturn.put("result","http://thuvienanhdep.net/wp-content/uploads/2015/09/bo-suu-tap-nhung-hinh-anh-de-thuong-dang-yeu-cua-hot-girl-anh-the-14.jpg");
+		informationToReturn.put("result","http://www.upsieutoc.com/images/2016/05/15/dat.jpg");
 		informationToReturn.put("message",":))");
 		return informationToReturn;
 		}

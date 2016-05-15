@@ -6,7 +6,7 @@ public class TestCaseDTO {
 	private int exerciseId;
 
 	public TestCaseDTO(String input, String output, int exerciseId) {
-		super();
+		
 		this.input = input;
 		this.output = output;
 		this.exerciseId = exerciseId;

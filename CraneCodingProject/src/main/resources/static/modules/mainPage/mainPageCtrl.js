@@ -175,29 +175,36 @@ angular.module('MainPage')
                                 var dataNumberToNumber = response.data;
                                 $('#testCaseSubmit').empty();
                                 $('#submitModal .modal-footer').find('#userRecord').remove();
-
+                                console.log('jsonResult '+ dataNumberToNumber[0].input);
+                                console.log('jsonResult '+ dataNumberToNumber[0].output);
                                 var test = true;
                                 var sumTestCases = 0;
                                 var falseTestCase = 0;
                                 var timePerformance = 0;
+                                
+                                
+                                
+                                
+                                
                                 $.each(dataNumberToNumber, function (index, jsonResult) {
                                     sumTestCases++;
-                                    var getCodeJsToTest = getCODE(jsonResult[1]);
+                                    console.log('jsonResult '+jsonResult.input);
+                                    var getCodeJsToTest = getCODE(jsonResult.input);
                                     var start = new Date().getMilliseconds();
-                                    var getCodeJsToTest = getCODE(jsonResult[1]);
+                                    var getCodeJsToTest = getCODE(jsonResult.input);
 
                                     timePerformance = timePerformance + (new Date().getMilliseconds() - start);
 
                                     var statusCase = "<i style='color:#2BC430;font-size: xx-large;' class='fa fa-check'></i>";
 
-                                    if (getCodeJsToTest != jsonResult[2]) {
+                                    if (getCodeJsToTest != jsonResult.output) {
                                         test = false;
                                         falseTestCase++;
                                         statusCase = "<i style='color:#C42B2B;font-size: xx-large;' class='fa fa-times'></i>";
                                     }
 
                                     setTimeout(function () {
-                                        $('#testCaseSubmit').append('<tr><td>' + jsonResult[1] + '</td><td>' + getCodeJsToTest + '</td><td>' + jsonResult[2] + '</td><td>' + statusCase + '</td></tr>');//<td>' + timePerformance + '</td>
+                                        $('#testCaseSubmit').append('<tr><td>' + jsonResult.input + '</td><td>' + getCodeJsToTest + '</td><td>' + jsonResult.output + '</td><td>' + statusCase + '</td></tr>');//<td>' + timePerformance + '</td>
                                     }, 200 * sumTestCases);
 
                                 });

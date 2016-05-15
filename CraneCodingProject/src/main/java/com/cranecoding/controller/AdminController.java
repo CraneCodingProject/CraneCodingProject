@@ -40,9 +40,7 @@ public class AdminController {
 			//ta get dc rồi á nghe. tụi m làm tiếp cái insert testcase vào. tối ni có.
 			String exId = String.valueOf(exerciseInfo.getIdExercise());
 			List <TestCaseDTO> lst = exerciseInfo.getExerciseTestCases();
-			for(int i =0; i < lst.size() ; i++){
-				System.out.println("abc "+lst.get(i).getInput());
-			}
+			
 			return adminService.updateExercise(exerciseInfo);
 		}
 		catch(Exception E){

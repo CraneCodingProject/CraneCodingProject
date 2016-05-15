@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('AdminPage')
-    //demo VSC
+    // demo VSC
     .controller('AdminPageController',
-    ['$scope', '$rootScope', '$location', '$timeout', '$window', 'createUpdateExercise', 'getAllExercises', 'deleteExercise',
-        function ($scope, $rootScope, $location, $timeout, $window, createUpdateExercise, getAllExercises, deleteExercise) {
+    ['$scope', '$rootScope', '$location', '$timeout', '$window', 'createUpdateExercise', 'getAllExercises', 'deleteExercise','getAllTestCaseApi',
+        function ($scope, $rootScope, $location, $timeout, $window, createUpdateExercise, getAllExercises, deleteExercise, getAllTestCaseApi) {
             $scope.loginSuccess = false;
             $scope.checkAdmin = false;
             initialCondition();
             var tesCases = [];
-            //$scope.idExercise = null;
+            // $scope.idExercise = null;
             function initialCondition() {
                 $scope.idExercise =null;
                 $scope.exerciseName = null;
@@ -66,16 +66,13 @@ angular.module('AdminPage')
                     $scope.checkAdmin = true;
                 }
                 /*
-                // $http.post('/api/admin/authentication', { username: acc, password: pass })
-                //     .success(function (response) {
-                //         $scope.loginSuccess = true;
-                // })
-                // .error(function(response){
-                // 	console.log('fali');
-                //     $scope.checkAdmin = true;
-                //     $scope.loginSuccess = false;
-                // });
-                */
+				 * // $http.post('/api/admin/authentication', { username: acc,
+				 * password: pass }) // .success(function (response) { //
+				 * $scope.loginSuccess = true; // }) //
+				 * .error(function(response){ // console.log('fali'); //
+				 * $scope.checkAdmin = true; // $scope.loginSuccess = false; //
+				 * });
+				 */
             }
             getAllExercises.getAllExercises().then(
                 function (response) {
@@ -91,6 +88,20 @@ angular.module('AdminPage')
                 $scope.exerciseAnswer = exerciseAnswer || '';
                 $scope.exercisePseducode = exercisePseudocode || '';
                 $scope.exerciseForm.$setPristine();
+                console.log(idExercise);
+                
+                getAllTestCaseApi.getAllTestCase(idExercise)
+                .then(
+                	function(response){
+                		console.log("phat"+response.data[0].input);
+                		console.log("phat"+response.data[0].output);
+                		console.log("phat"+response.data[0].exerciseId);
+                        
+                	},
+                	function(response){
+                		console.log('fail');
+                	}
+                );
             }
             $scope.createOrUpdateExercise = function () {
                 $scope.testCases = setTestCase();
@@ -99,7 +110,7 @@ angular.module('AdminPage')
                 createUpdateExercise.createOrUpdateExercise($scope.idExercise, $scope.exerciseName, $scope.exerciseContent, $scope.exerciseAnswer, $scope.exercisePseducode,$scope.testCases)
                     .then(
                     function (response) {
-                        //success --> reload lst
+                        // success --> reload lst
                         if (response.data) {
                             getAllExercises.getAllExercises().then(
                                 function (response) {
@@ -128,7 +139,7 @@ angular.module('AdminPage')
             }
             $scope.addNewExercise = function () {
                 $scope.idExercise = null;
-                //$scope.exerciseForm.$dirty = false;
+                // $scope.exerciseForm.$dirty = false;
                 $scope.exerciseName = null;
                 $scope.exerciseContent = null;
                 $scope.exerciseAnswer = null;
@@ -170,20 +181,13 @@ angular.module('AdminPage')
             }
         }]
     )
-    /*.factory('createExercise',
-        ['$http',
-        function($http){
-            $http.createNewExercise = function(exerciseName, exerciseContent, exerciseCode) {
-                var exerciseInfo = {
-                    exercisename : exerciseName,
-                    exercisecontent : exerciseContent,
-                    exercisecode : exerciseCode
-                };
-                return $http.post('/api/admin/create',exerciseInfo);
-            }
-            return $http;
-        }]
-    )*/
+    /*
+	 * .factory('createExercise', ['$http', function($http){
+	 * $http.createNewExercise = function(exerciseName, exerciseContent,
+	 * exerciseCode) { var exerciseInfo = { exercisename : exerciseName,
+	 * exercisecontent : exerciseContent, exercisecode : exerciseCode }; return
+	 * $http.post('/api/admin/create',exerciseInfo); } return $http; }] )
+	 */
     .factory('createUpdateExercise',
     ['$http',
         function ($http) {
@@ -195,8 +199,8 @@ angular.module('AdminPage')
                     exerciseAnswer: exerciseAnswer,
                     pseudoCode: exercisePseudocode,
                     exerciseTestCases : exerciseTestCases
-//                    input1:$scope.inp1,
-//                    output1:$scope.out1
+// input1:$scope.inp1,
+// output1:$scope.out1
                 };
                 console.log(exerciseInfo);
                 return $http.post('/api/admin/createOrUpdate', exerciseInfo);
@@ -225,13 +229,16 @@ angular.module('AdminPage')
             return $http;
         }]
     )
-    // .factory('getAllExercises',
-    // ['$http',
-    //     function ($http) {
-    //         $http.getAllExercises = function () {
-    //             return $http.get('/api/exercise/getallexercises?username=thanhphat');
-    //         }
-    //         return $http;
-    //     }]
-    // )
-    ;
+    .factory('getAllTestCaseApi',
+    ['$http',
+        function ($http){
+    	$http.getAllTestCase = function(exerciseId){
+            console.log("fac"+exerciseId);
+    		var parameter = { exerciseid: exerciseId };
+            var config = { params: parameter };
+            return $http.get('/api/exercise/gettestcases', config);
+    	}
+    	return $http;
+    	}
+    ])
+;
