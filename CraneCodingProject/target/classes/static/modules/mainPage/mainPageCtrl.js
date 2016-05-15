@@ -115,7 +115,7 @@ angular.module('MainPage')
             function getCODE(inputParameterToTest) {
                 //inputParameterToTest = jsonResult.inp;
                 $('#result').removeAttr('src');
-                var CODE = "<script>function MATH (input) { try{ ";
+                var CODE = "<script>function MATH (n) { try{ ";
                 demRunFor = 0;
                 $('#dropArea .topdown').map(function () {
                     switch ($(this).attr('name')) {
@@ -182,27 +182,33 @@ angular.module('MainPage')
                                 var falseTestCase = 0;
                                 var timePerformance = 0;
                                 
-                                
-                                
-                                
-                                
                                 $.each(dataNumberToNumber, function (index, jsonResult) {
                                     sumTestCases++;
                                     console.log('jsonResult '+jsonResult.input);
-                                    var getCodeJsToTest = getCODE(jsonResult.input);
+                                    //var getCodeJsToTest = getCODE(jsonResult.input);
                                     var start = new Date().getMilliseconds();
                                     var getCodeJsToTest = getCODE(jsonResult.input);
 
                                     timePerformance = timePerformance + (new Date().getMilliseconds() - start);
 
                                     var statusCase = "<i style='color:#2BC430;font-size: xx-large;' class='fa fa-check'></i>";
-
-                                    if (getCodeJsToTest != jsonResult.output) {
-                                        test = false;
-                                        falseTestCase++;
-                                        statusCase = "<i style='color:#C42B2B;font-size: xx-large;' class='fa fa-times'></i>";
+                                    if(isNaN(getCodeJsToTest)){
+                                        getCodeJsToTest = "null";
                                     }
-
+                                    if(jsonResult.output=="null" || getCodeJsToTest=="null"){
+                                        if (getCodeJsToTest != jsonResult.output) {
+                                            test = false;
+                                            falseTestCase++;
+                                            statusCase = "<i style='color:#C42B2B;font-size: xx-large;' class='fa fa-times'></i>";
+                                        }
+                                    }
+                                    else{
+                                        if (parseFloat(getCodeJsToTest) != parseFloat(jsonResult.output)) {
+                                            test = false;
+                                            falseTestCase++;
+                                            statusCase = "<i style='color:#C42B2B;font-size: xx-large;' class='fa fa-times'></i>";
+                                        }
+                                    }
                                     setTimeout(function () {
                                         $('#testCaseSubmit').append('<tr><td>' + jsonResult.input + '</td><td>' + getCodeJsToTest + '</td><td>' + jsonResult.output + '</td><td>' + statusCase + '</td></tr>');//<td>' + timePerformance + '</td>
                                     }, 200 * sumTestCases);

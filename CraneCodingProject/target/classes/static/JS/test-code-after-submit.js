@@ -39,7 +39,7 @@ function testCODE() {
 }
 function getCodeJsToTest(inputParameterToTest){
 	$('#result').removeAttr('src');
-	var CODE = "<script>function MATH (n) { var S; ";
+	var CODE = "<script>function MATH (n) {  ";
 	demRunFor=0;
 	$('#dropArea .topdown').map(function(){
 	    switch ($(this).attr('name')) {
@@ -63,7 +63,7 @@ function getCodeJsToTest(inputParameterToTest){
 	$('input').map(function(){
 		$(this).data('pass',false);
 	});
-	CODE = CODE + "S=" + inputParameterToTest + "; return S; } document.write(MATH(" + inputParameterToTest + "));</script>";
+	CODE = "} document.write(MATH(" + inputParameterToTest + "));</script>";
 	var ifr = document.getElementById("result");
 	var ifrw = (ifr.contentWindow) ? ifr.contentWindow : (ifr.contentDocument.document) ? ifr.contentDocument.document : ifr. contentDocument;
 	ifrw.document.open();

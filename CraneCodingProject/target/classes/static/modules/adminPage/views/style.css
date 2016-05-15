@@ -1,4 +1,9 @@
-
+#Exercise-content{
+    height: 10vw;
+}
+textarea#Exercise-answer {
+    height: 25vw;
+}
 #adminLoginForm {
     width: 30%;
     position: absolute;

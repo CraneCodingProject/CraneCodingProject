@@ -245,7 +245,6 @@ function returnExecute(command){
 	return command.data('command')+" "+command.find('input').val()+";";
 }
 function btnEventAddMoreCaseInSwitchCase(id){
-	//alert('#addmorecase'+id);
 	$('#addmorecase'+id).prepend(
 		"<li class='in-switch caseClass' data-command='case' name='case' data-pass='false'>"
           +"case '<input data-pass='false' type='text' style='width:30px'></input>' :"
@@ -255,11 +254,9 @@ function btnEventAddMoreCaseInSwitchCase(id){
     );
 }
 function dataTypeNumberExecute(command) {
-    console.log("fuck you bitch");
     var i = 0;
 	var code=command.data('command')+ " ";
 	command.find('input').each(function () {
-	    console.log("fuck you bitch2");
 		if(i==0){
 			if($(this).data("pass")==false){
 				code=code+$(this).val();
@@ -278,7 +275,6 @@ function dataTypeNumberExecute(command) {
 }
 function stringExecute(command){
 	var i=0;
-	console.log("abababab");
 	var code=command.data('command')+" ";
 	console.log("abababab:"+code);
 	command.find('input').each(function(){
