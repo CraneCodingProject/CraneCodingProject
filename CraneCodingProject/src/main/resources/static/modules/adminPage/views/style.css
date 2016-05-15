@@ -1,0 +1,39 @@
+
+#adminLoginForm {
+    width: 30%;
+    position: absolute;
+    top: 20%;
+    left: 35%;
+    background: #31708F;
+    border: 1px solid #337AB7;
+    border-radius: 4px;
+    color: #fff;
+}
+label.control-label {
+    padding-bottom: 1vw; 
+}
+
+.col-lg-9.col-md-9.col-sm-9.col-xs-9 {
+    border-left: 1px solid #CCCCCC;
+    padding-left: 20px;
+}
+.list-group-item{
+	border: none;	
+	color: #4F7DA5;
+}
+.glyphicon:hover {
+	color : #0088FF;
+	cursor : pointer;
+}
+.messageRequiredForm {
+    color : red;
+}
+#exerciseForm .form-group {
+    margin-bottom: 0px; 
+}
+.list-group {
+    padding-left: 0;
+    margin-bottom: 20px;
+    max-height: 40vw;
+    overflow: scroll;
+}

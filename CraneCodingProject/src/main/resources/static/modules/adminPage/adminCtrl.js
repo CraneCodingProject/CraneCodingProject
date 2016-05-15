@@ -108,13 +108,30 @@ angular.module('AdminPage')
                 getAllTestCaseApi.getAllTestCase(idExercise)
                 .then(
                 	function(response){
-                		console.log("phat"+response.data[0].input);
-                		console.log("phat"+response.data[0].output);
-                		console.log("phat"+response.data[0].exerciseId);
+                        $scope.inp1 = response.data[0].input;
+                        $scope.inp2 = response.data[1].input;
+                        $scope.inp3 = response.data[2].input;
+                        $scope.inp4 = response.data[3].input;
+                        $scope.inp5 = response.data[4].input;
+                        $scope.inp6 = response.data[5].input;
+                        $scope.inp7 = response.data[6].input;
+                        $scope.inp8 = response.data[7].input;
+                        $scope.inp9 = response.data[8].input;
+                        $scope.inp10 = response.data[9].input;
                         
+                        $scope.out1 = response.data[0].output;
+                        $scope.out2 = response.data[1].output;
+                        $scope.out3 = response.data[2].output;
+                        $scope.out4 = response.data[3].output;
+                        $scope.out5 = response.data[4].output;
+                        $scope.out6 = response.data[5].output;
+                        $scope.out7 = response.data[6].output;
+                        $scope.out8 = response.data[7].output;
+                        $scope.out9 = response.data[8].output;
+                        $scope.out10 = response.data[9].output;
                 	},
                 	function(response){
-                		console.log('fail');
+                        initialCondition();
                 	}
                 );
             }
@@ -133,7 +150,7 @@ angular.module('AdminPage')
 
                                 },
                                 function (response) {
-                                    console.log('fail');
+                                     alert('OOP..! Some things happent: Error~response 404');
                                 });
                                 alert("Success...!");
                             initialCondition();
@@ -214,8 +231,6 @@ angular.module('AdminPage')
                     exerciseAnswer: exerciseAnswer,
                     pseudoCode: exercisePseudocode,
                     exerciseTestCases : exerciseTestCases
-// input1:$scope.inp1,
-// output1:$scope.out1
                 };
                 console.log(exerciseInfo);
                 return $http.post('/api/admin/createOrUpdate', exerciseInfo);

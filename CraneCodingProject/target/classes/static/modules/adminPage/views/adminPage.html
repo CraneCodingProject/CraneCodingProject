@@ -1,59 +1,6 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 <link href="css/font-awesome-4.5.0/css/font-awesome.min.css" rel ="stylesheet">
-<style>
-#adminLoginForm {
-    width: 30%;
-    position: absolute;
-    top: 20%;
-    left: 35%;
-    background: #31708F;
-    border: 1px solid #337AB7;
-    border-radius: 4px;
-    color: #fff;
-}
-label.control-label {
-    padding-bottom: 1vw; 
-}
-/*#exerciseForm{
-    background: #F7C4C4;
-    border-radius: 4px;
-    border: 1px solid #EA9393;
-}*/
-/*.col-lg-9.col-md-9.col-sm-9.col-xs-9{
-     background: #F7C4C4;
-    border-radius: 4px;
-    border: 1px solid #EA9393;
-}
-.col-lg-3.col-md-3.col-sm-3.col-xs-3{
-     background: #F7C4C4;
-    border-radius: 4px;
-    border: 1px solid #EA9393;
-}*/
-.col-lg-9.col-md-9.col-sm-9.col-xs-9 {
-    border-left: 1px solid #CCCCCC;
-    padding-left: 20px;
-}
-.list-group-item{
-	border: none;	
-	color: #4F7DA5;
-}
-.glyphicon:hover {
-	color : #0088FF;
-	cursor : pointer;
-}
-.messageRequiredForm {
-    color : red;
-}
-#exerciseForm .form-group {
-    margin-bottom: 0px; 
-}
-.list-group {
-    padding-left: 0;
-    margin-bottom: 20px;
-    max-height: 40vw;
-    overflow: scroll;
-}
-</style>
+<link href="/modules/adminPage/views/style.css" rel ="stylesheet">
 <div class="container" ng-hide="loginSuccess">
     <div class="row">
         <h1>AdminPage</h1>
@@ -123,6 +70,14 @@ label.control-label {
                 <div class="form-group" style="margin-bottom: 10px;">
                     <label class="control-label">Exercise's Test cases:</label>
                     <table>
+                        <tr>
+                            <td>
+                                <h2>Input</h2>
+                            </td>
+                            <td>
+                                <h2>Output</h2>
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <input type="text" required ng-model = "inp1">
