@@ -3,8 +3,8 @@
 angular.module('AdminPage')
     // demo VSC
     .controller('AdminPageController',
-    ['$scope', '$rootScope', '$location', '$timeout', '$window', 'createUpdateExercise', 'getAllExercises', 'deleteExercise','getAllTestCaseApi',
-        function ($scope, $rootScope, $location, $timeout, $window, createUpdateExercise, getAllExercises, deleteExercise, getAllTestCaseApi) {
+    ['$scope', '$rootScope', '$location', '$timeout', '$window', 'createUpdateExercise', 'getAllExercises', 'deleteExercise','getAllTestCaseApi','getAdminAccountApi',
+        function ($scope, $rootScope, $location, $timeout, $window, createUpdateExercise, getAllExercises, deleteExercise, getAllTestCaseApi,getAdminAccountApi) {
             $scope.loginSuccess = false;
             $scope.checkAdmin = false;
             initialCondition();
@@ -65,6 +65,21 @@ angular.module('AdminPage')
                 else {
                     $scope.checkAdmin = true;
                 }
+                
+                getAdminAccountApi.getAdminAccount(acc,pass)
+                .then(
+                    function(response){
+                        if(response.data.result){
+                            $scope.loginSuccess = true;
+                            initialCondition();
+                        }
+                    },
+                    function(response){
+                        alert('Connect to server fail.');
+                    }
+                );    
+                
+                
                 /*
 				 * // $http.post('/api/admin/authentication', { username: acc,
 				 * password: pass }) // .success(function (response) { //
@@ -232,13 +247,26 @@ angular.module('AdminPage')
     .factory('getAllTestCaseApi',
     ['$http',
         function ($http){
-    	$http.getAllTestCase = function(exerciseId){
-            console.log("fac"+exerciseId);
-    		var parameter = { exerciseid: exerciseId };
-            var config = { params: parameter };
-            return $http.get('/api/exercise/gettestcases', config);
+            $http.getAllTestCase = function(exerciseId){
+                console.log("fac"+exerciseId);
+                var parameter = { exerciseid: exerciseId };
+                var config = { params: parameter };
+                return $http.get('/api/exercise/gettestcases', config);
+            }
+    	    return $http;
     	}
-    	return $http;
-    	}
+    ])
+    .factory('getAdminAccountApi',
+    ['$http',
+        function($http){
+            $http.getAdminAccount = function(adminname,adminpass){
+                var adminacc = {
+                    username : adminname,
+                    password : adminpass
+                };
+                return  $http.post('/api/admin/adminAccount',adminacc);
+            }
+            return $http;
+        }
     ])
 ;
