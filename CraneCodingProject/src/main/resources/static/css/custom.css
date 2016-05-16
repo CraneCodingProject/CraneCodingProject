@@ -888,6 +888,9 @@ ol.vertical li {
         color: white;
         background-color: #D05E5E;
     }
+    #btnTest[disabled] {
+    	background-color: #D1D4D4;
+	}
 
     .modal-backdrop, .modal-backdrop.fade.in {
         background: url('src/img/urlBackground.png') no-repeat 0 0 scroll;

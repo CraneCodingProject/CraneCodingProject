@@ -18,13 +18,18 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="text-align:center">
                     <p>Please enter input here:</p>
                     <div class="input-group">
-                        <!--id="inputParameter"--><input type="number" ng-model="inputParameterToTest" class="form-control" style="height: 30px;" placeholder="Ex: number,array,string..." />
-                        <span class="input-group-btn">
+                        <!--id="inputParameter"-->
+                        <form  name="testForm" style="display: table;">
+                            <input type="number" ng-model="inputParameterToTest" class="form-control" style="height: 30px;" placeholder="Ex: number..." required name="inputTest"
+                                maxlength=""4" ng-maxlength="4" />
+                            <span class="input-group-btn">
                             <!--id="btnTest"-->
-                            <button id="btnTest" type="button" ng-click="testCodeBeforeSubmit(inputParameterToTest,homePagecontroller.exerciseData.idExercise)">
-                                <i class="fa fa-arrow-right"></i>
-                            </button>
-                        </span>
+                                <button ng-disabled="testForm.inputTest.$error.required || testForm.inputTest.$error.maxlength" id="btnTest" type="button" ng-click="testCodeBeforeSubmit(inputParameterToTest,homePagecontroller.exerciseData.idExercise)">
+                                    <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </span>
+                        </form>
+
                     </div>
                     </br>
                     <h4 style='float:left;'>function Math({{inputParameterToTest}})<h4>
@@ -384,5 +389,3 @@
 <script src="JS/LIB/additional-methods.min.js"></script>
 <script src="JS/convert-to-code.js"></script>
 <script src="JS/LIB/beauty.js"></script>
-
-
