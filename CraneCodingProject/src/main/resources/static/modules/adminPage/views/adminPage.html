@@ -34,7 +34,7 @@
                 <div class="list-group-item" ng-repeat="exercise in lstExercises">
                     <div class="input-group">
                     	<span style="font-size : 20px; padding-right : 2px;" ng-click="deleteExercise(exercise.idExercise)" class="input-group-btn glyphicon glyphicon-trash" aria-hidden="true"></span>
-                        <button ng-click="exerciseDetails(exercise.idExercise,exercise.exerciseName,exercise.exerciseContent,exercise.exerciseAnswer,exercise.exerciseContent)"
+                        <button ng-click="exerciseDetails(exercise.idExercise,exercise.exerciseName,exercise.exerciseContent,exercise.exerciseAnswer,exercise.pseudoCode)"
                             type="button" class="list-group-item">
                             {{exercise.exerciseName}}
                         </button>
