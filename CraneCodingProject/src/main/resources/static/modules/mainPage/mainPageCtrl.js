@@ -175,8 +175,8 @@ angular.module('MainPage')
                                 var dataNumberToNumber = response.data;
                                 $('#testCaseSubmit').empty();
                                 $('#submitModal .modal-footer').find('#userRecord').remove();
-                                console.log('jsonResult '+ dataNumberToNumber[0].input);
-                                console.log('jsonResult '+ dataNumberToNumber[0].output);
+                                // console.log('jsonResult '+ dataNumberToNumber[0].input);
+                                // console.log('jsonResult '+ dataNumberToNumber[0].output);
                                 var test = true;
                                 var sumTestCases = 0;
                                 var falseTestCase = 0;
@@ -184,7 +184,7 @@ angular.module('MainPage')
                                 
                                 $.each(dataNumberToNumber, function (index, jsonResult) {
                                     sumTestCases++;
-                                    console.log('jsonResult '+jsonResult.input);
+                                    // console.log('jsonResult '+jsonResult.input);
                                     //var getCodeJsToTest = getCODE(jsonResult.input);
                                     var start = new Date().getMilliseconds();
                                     var getCodeJsToTest = getCODE(jsonResult.input);
@@ -252,7 +252,6 @@ angular.module('MainPage')
             *   username --> server --> get  exerciseName, stars, time of username
             */
             $scope.showUserHistory = function (username) {
-                console.log(username);
                 userHistoryApi.getUserHistory(username)
                     .then(function (response) {
                         $scope.userRecordsHistory = response.data.record;

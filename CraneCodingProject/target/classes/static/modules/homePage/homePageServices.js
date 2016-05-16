@@ -24,11 +24,11 @@ angular.module('HomePage')
              ----------------------------------------------*/
             $http.post('/api/exercise/authentication', { username: username, password: password })
                 .success(function (response) {
-                    console.log('success');
+                    // console.log('success');
                     callback(response);
                 })
                 .error(function(response){
-                	console.log('fali');
+                	alert('OOP...! Some things happent. Error : 404 not found.');
                 });
 
         };

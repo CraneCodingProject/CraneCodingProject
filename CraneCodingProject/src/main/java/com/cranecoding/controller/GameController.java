@@ -81,11 +81,12 @@ public class GameController {
 	public @ResponseBody Hashtable<String, Comparable> hintImg(@RequestParam("exerciseid")int exerciseid){
 		//return gameService.getRecordByUserId(userId);
 		try{
-		System.out.println("exerciseid:"+exerciseid);
-		Hashtable informationToReturn = new Hashtable();
-		informationToReturn.put("result","http://www.upsieutoc.com/images/2016/05/15/dat.jpg");
-		informationToReturn.put("message",":))");
-		return informationToReturn;
+			ExerciseDTO exercise=gameService.getExerciseById(exerciseid);
+			System.out.println("exerciseid:"+exerciseid);
+			Hashtable informationToReturn = new Hashtable();
+			informationToReturn.put("result",exercise.getPseudoCode());
+			informationToReturn.put("message",":))");
+			return informationToReturn;
 		}
 		catch(Exception E){
 			Hashtable informationToReturn = new Hashtable();

@@ -6,6 +6,9 @@
     margin-bottom: 5px;
     overflow: auto;
     cursor: all-scroll;
+    /* background-color: #171616;
+    background: url("src/img/js_32.png") no-repeat fixed center;
+    border: 5px solid #354551; */
 }
 
 #dragArea {

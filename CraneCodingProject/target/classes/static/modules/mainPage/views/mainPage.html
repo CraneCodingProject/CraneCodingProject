@@ -140,8 +140,8 @@
                     <tbody id="userHistory">
                         <tr ng-repeat="recordHistory in userRecordsHistory">
                             <th>{{recordHistory.exerciseName}}</th>
-                            <th>{{recordHistory.time}}</th>
                             <th>{{recordHistory.star}}</th>
+                            <th>{{recordHistory.time | date :'mm:ss'}}</th>
                         </tr>
                     </tbody>
                 </table>
@@ -265,49 +265,51 @@
         <!--<div ng-view></div>-->
         <div id="lstCommandBlock" class="col-md-3 col-sm-3 col-xs-3">
             <ol id="dragArea" class="vertical">
-                <li class="topdown whileClass" name="while" data-command="while" data-pass="false" style="">
-                    <div class="alert">
-                        while
-                        <input data-pass="false" type="text" size="" >
-                    </div>
-                    <ol class="while-ol"></ol>
-                </li>
+                
                 <li class="topdown var" data-pass="false" name="var" data-command="var" style="">
                     <div class="alert">
                         var
-                        <input data-pass="false" type="text"  />;
+                        <input data-pass="false" type="text"  />
                     </div>
                 </li>
-                <li class="topdown int" data-pass="false" name="int" data-command="var" style="">
+                <!-- <li class="topdown int" data-pass="false" name="int" data-command="var" style="">
                     <div class="alert">
                         int
                         <input data-pass="false" type="text"  >
                         =
                         <input type="number" class="validate" data-pass="false"  name="intInput" />;
                     </div>
-                </li>
-                <li class="topdown double" data-pass="false" name="double" data-command="var" style="">
+                </li> -->
+                <!-- <li class="topdown double" data-pass="false" name="double" data-command="var" style="">
                     <div class="alert">
                         double
                         <input data-pass="false" type="text"  >
                         =
                         <input type="number" class="validate" name="doubleInput" data-pass="false"   />;
                     </div>
-                </li>
-                <li class="topdown string" data-pass="false" name="string" data-command="var" style="">
+                </li> -->
+                <!-- <li class="topdown string" data-pass="false" name="string" data-command="var" style="">
                     <div class="alert">
                         string
                         <input data-pass="false" type="text"  >
                         = "
                         <input type="text" name="stringInput" data-pass="false"   />";
                     </div>
-                </li>
+                </li> -->
                 <li class="topdown array" data-pass="false" name="array" data-command="var" style="">
                     <div class="alert">
                         array
                         <input data-pass="false" type="text"  >
                         = [
-                        <input type="text" name="arrayInput" data-pass="false" type="text"  > ];
+                        <input type="text" name="arrayInput" data-pass="false" type="text"  > ]
+                    </div>
+                </li>
+                <li class="topdown" data-pass="false" name="gan" style="">
+                    <div class="alert">
+                        assign
+                        <input data-pass="false" type="text"  >
+                        =
+                        <input data-pass="false" type="text"  >
                     </div>
                 </li>
                 <li class="topdown if" data-pass="false" name="if" data-command="if" style="">
@@ -317,19 +319,18 @@
                     </div>
                     <ol class="if-ol"></ol>
                 </li>
-                <li class="topdown" data-pass="false" name="gan" style="">
+                <li class="topdown elseClass" data-pass="false" data-command="else" name="else">
                     <div class="alert">
-                        assign
-                        <input data-pass="false" type="text"  >
-                        =
-                        <input data-pass="false" type="text"  >;
+                        else
+                        <ol class="else-ol"></ol>
                     </div>
                 </li>
-                <li class="topdown" data-pass="false" data-command="return" name="return" style="">
+                <li class="topdown whileClass" name="while" data-command="while" data-pass="false" style="">
                     <div class="alert">
-                        return
-                        <input data-pass="false" type="text"  >
+                        while
+                        <input data-pass="false" type="text" size="" >
                     </div>
+                    <ol class="while-ol"></ol>
                 </li>
                 <li class="topdown forClass" id="for-command" data-pass="false" data-command="for" name="for" data-droptime="" style="">
                     <div class="alert">
@@ -340,12 +341,7 @@
                     </div>
                     <ol class="for-ol"></ol>
                 </li>
-                <li class="topdown elseClass" data-pass="false" data-command="else" name="else">
-                    <div class="alert">
-                        else
-                        <ol class="else-ol"></ol>
-                    </div>
-                </li>
+                
                 <li class="alert topdown switchcase" data-droptime="" data-pass="false" data-command="switchcase" name="switchcase">
                     <p>
                         switch (
@@ -363,6 +359,12 @@
                         </ul>
                         <a id="btnAddCaseInSwitch" type="button" onclick="btnEventAddMoreCaseInSwitchCase(id)" class="classAddCaseInSwitchCommand"><i class="fa fa-plus-square"></i></a>
                     </p>
+                </li>
+                <li class="topdown" data-pass="false" data-command="return" name="return" style="">
+                    <div class="alert">
+                        return
+                        <input data-pass="false" type="text"  >
+                    </div>
                 </li>
             </ol>
         </div>

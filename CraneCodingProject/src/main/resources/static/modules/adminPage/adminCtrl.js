@@ -94,7 +94,7 @@ angular.module('AdminPage')
                     $scope.lstExercises = response.data;
                 },
                 function (response) {
-                    console.log('fail');
+                    // console.log('fail');
                 });
             $scope.exerciseDetails = function (idExercise, exerciseName, exerciseContent, exerciseAnswer, exercisePseudocode) {
                 $scope.idExercise = idExercise || '';
@@ -103,7 +103,7 @@ angular.module('AdminPage')
                 $scope.exerciseAnswer = exerciseAnswer || '';
                 $scope.exercisePseducode = exercisePseudocode || '';
                 $scope.exerciseForm.$setPristine();
-                console.log(idExercise);
+                // console.log(idExercise);
                 
                 getAllTestCaseApi.getAllTestCase(idExercise)
                 .then(
@@ -137,8 +137,8 @@ angular.module('AdminPage')
             }
             $scope.createOrUpdateExercise = function () {
                 $scope.testCases = setTestCase();
-                console.log(setTestCase());
-                console.log($scope.testCases);
+                // console.log(setTestCase());
+                // console.log($scope.testCases);
                 createUpdateExercise.createOrUpdateExercise($scope.idExercise, $scope.exerciseName, $scope.exerciseContent, $scope.exerciseAnswer, $scope.exercisePseducode,$scope.testCases)
                     .then(
                     function (response) {
@@ -160,11 +160,11 @@ angular.module('AdminPage')
                         }
                     },
                     function (response) {
-                        console.log($scope.idExercise);
-                        console.log($scope.exerciseName);
-                        console.log($scope.exerciseContent);
-                        console.log($scope.exerciseAnswer);
-                        console.log($scope.exercisePseducode);
+                        // console.log($scope.idExercise);
+                        // console.log($scope.exerciseName);
+                        // console.log($scope.exerciseContent);
+                        // console.log($scope.exerciseAnswer);
+                        // console.log($scope.exercisePseducode);
                         alert("OOP..! Some things happent: Error~response 404");
                     }
                     );
@@ -189,7 +189,7 @@ angular.module('AdminPage')
                                         $scope.lstExercises = response.data;
                                     },
                                     function (response) {
-                                        console.log('fail');
+                                         alert("OOP..! Some things happent: Error~response 404");
                                     });
                                     alert("Success...!");
                                 initialCondition();
@@ -232,7 +232,7 @@ angular.module('AdminPage')
                     pseudoCode: exercisePseudocode,
                     exerciseTestCases : exerciseTestCases
                 };
-                console.log(exerciseInfo);
+                // console.log(exerciseInfo);
                 return $http.post('/api/admin/createOrUpdate', exerciseInfo);
             }
             return $http;
@@ -242,7 +242,7 @@ angular.module('AdminPage')
     ['$http',
         function ($http) {
             $http.deleteExercise = function (exerciseId) {
-                console.log(typeof exerciseId);
+                // console.log(typeof exerciseId);
                 var parameter = { exerciseid: exerciseId };
                 var config = { params: parameter };
                 return $http.get('/api/admin/delete', config);
@@ -263,7 +263,7 @@ angular.module('AdminPage')
     ['$http',
         function ($http){
             $http.getAllTestCase = function(exerciseId){
-                console.log("fac"+exerciseId);
+                // console.log("fac"+exerciseId);
                 var parameter = { exerciseid: exerciseId };
                 var config = { params: parameter };
                 return $http.get('/api/exercise/gettestcases', config);
