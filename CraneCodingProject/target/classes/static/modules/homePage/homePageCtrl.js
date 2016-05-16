@@ -153,7 +153,7 @@ angular.module('HomePage')
          */
         $scope.getDetailCommand = function(element){
         	$('#commandContentId_Homepage').empty();
-        	console.log(element);
+        	// console.log(element);
         	lstCommandsApi.getLstCommands()
         	.then(
         		function(response){
@@ -179,7 +179,7 @@ angular.module('HomePage')
     .factory('registerAccApi', ['$http',
         function ($http) {
             $http.registerNewAcc = function (username,firstname,lastname,usermail, password) {
-                console.log(password + ' username : ' + username);
+                // console.log(password + ' username : ' + username);
                 var userAcc = {
                     username: username,
                     firstname:firstname,
