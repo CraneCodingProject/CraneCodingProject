@@ -505,7 +505,7 @@ angular.module('MainPage')
                             info.hintCodeImg = response.data.result;
                         },
                         function (response) {
-                            alert("Can't connect to server. Check your connection.");
+                            alert("Choose one exercise.");
                         }
                         );
                 }
